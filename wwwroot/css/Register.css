@@ -1,0 +1,95 @@
+﻿body, html {
+    height: 110%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('../Image/main.png'); /* Replace with your image URL */
+    background-size: cover;
+    background-position: center;
+}
+
+.signup-container {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    border-radius: 12px; /* More rounded corners */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 500px; /* Increased width for better usability */
+}
+
+h2 {
+    text-align: center;
+    color: #333; /* Darker title */
+    margin-bottom: 20px;
+    font-size: 24px; /* Larger font size */
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 16px; /* Space between form groups */
+}
+
+label {
+    display: block;
+    margin-bottom: 4px; /* Reduced space between label and input */
+    font-weight: bold;
+}
+
+.form-input {
+    width: 95%; /* Full width */
+    padding: 14px; /* Increased padding */
+    border: 1px solid #ccc;
+    border-radius: 6px; /* More rounded borders */
+    background-color: #f9f9f9; /* Light background for inputs */
+    transition: border-color 0.3s;
+}
+
+    .form-input:focus {
+        border-color: #007bff; /* Blue border on focus */
+        outline: none;
+    }
+
+button.submit-button {
+    width: 100%;
+    padding: 14px; /* Increased padding for button */
+    background-color: #4CAF50; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    border-radius: 6px; /* More rounded corners */
+    cursor: pointer;
+    font-size: 16px; /* Larger font size for button */
+    transition: background-color 0.3s;
+}
+
+    button.submit-button:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.forget-password {
+    color: #007bff; /* Link color */
+    text-decoration: none;
+    margin-top: 10px; /* Space above the link */
+}
+
+    .forget-password:hover {
+        text-decoration: underline;
+    }
+
+@media (max-width: 450px) {
+    .signup-container {
+        width: 90%; /* Responsive width */
+    }
+}

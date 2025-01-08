@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GuideMe</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+
+    <script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+
+    <style>
+        * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        }
+
+        body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        }
+
+        .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #4CAF50;
+        padding: 15px 20px;
+        }
+
+        .logo img {
+        height: 40px;
+        }
+
+        .navbar-nav {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+        }
+
+        .navbar-nav li {
+        position: relative;
+        }
+
+        .navbar-nav a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        transition: color 0.3s;
+        }
+
+        .navbar-nav a:hover {
+        color: #ddd;
+        }
+
+        .profile-dropdown button {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        }
+
+        .profile-img {
+        width: 30px;
+        height: 30px; 
+        border-radius: 50%;
+        object-fit: cover; 
+        display: block; 
+        }
+
+        .dropdown-menu {
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        }
+
+        .profile-dropdown:hover .dropdown-menu {
+        display: block;
+        }
+
+        .dropdown-menu a {
+        display: block;
+        padding: 10px 15px;
+        color: #333;
+        text-decoration: none;
+        }
+
+        .dropdown-menu a:hover {
+        background-color: #f1f1f1;
+        }
+
+        .container {
+        padding: 20px;
+        }
+
+        h2 {
+        margin-bottom: 15px;
+        }
+
+        form {
+        margin: 20px 0;
+        }
+
+        form input[type="text"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: calc(100% - 130px);
+        }
+
+        form button {
+        padding: 10px 15px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        }
+
+        form button:hover {
+        background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("Admin"))
+        {
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="/Image/Logo.png" alt="logo" />
+                </div>
+                <ul class="navbar-nav">
+                    <li><a href="#">Home</a></li>
+                    <li><a asp-action="ViewUser" asp-controller="Admin">ViewUser</a></li>
+                    <li><a asp-action="HandleEvent" asp-controller="Admin">HandleEvent</a></li>
+                    <li><a asp-action="ModerateContent" asp-controller="Admin">ModerateContent</a></li>
+                    <li class="profile-dropdown">
+                        <button type="button" id="ProfileImgButton" class="flex items-center">
+                            <img class="profile-img"
+                                 src="@ViewBag.image"
+                                 alt="Profile Image" />
+                        </button>
+                        <div id="dropdownNavbar" class="dropdown-menu hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                            <a asp-action="ProfileUpdate" asp-controller="Home">Edit Profile</a>
+                            <a asp-action="ChangePassword" asp-controller="Authentication">Change Password</a>
+                            <a asp-action="SignOut" asp-controller="Authentication">Sign out</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </nav>
+
+        }
+        
+        else
+        {
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="/Image/Logo.png" alt="logo" />
+                </div>
+                <ul class="navbar-nav">
+                    <li><a href="#">Home</a></li>
+                    <li><a asp-action="Locations" asp-controller="Geographic">Location</a></li>
+                    <li><a asp-action="Weather" asp-controller="Geographic">Weather</a></li>
+                    <li class="profile-dropdown">
+                        <button type="button" id="ProfileImgButton" class="flex items-center">
+                            <img class="profile-img"
+                                 src="@ViewBag.image"
+                                 alt="Profile Image" />
+                        </button>
+                        <div id="dropdownNavbar" class="dropdown-menu hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                            <a asp-action="ProfileUpdate" asp-controller="Home">Edit Profile</a>
+                            <a asp-action="ChangePassword" asp-controller="Authentication">Change Password</a>
+                            <a asp-action="SignOut" asp-controller="Authentication">Sign out</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </nav>
+        }
+    }
+
+    
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/Home/ProfilePhoto',
+                method: 'GET',
+                success: function (html) {
+                    const imageElement = $(html).find('img');
+                    if (imageElement.length) {
+                        const imageSrc = imageElement.attr('src');
+                        $('#ProfileImage').attr('src', imageSrc);
+                    } else {
+                        console.warn("No image found.");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Failed:", status, error);
+                }
+            });
+        });
+    </script>
+     
+</body>
+</html>

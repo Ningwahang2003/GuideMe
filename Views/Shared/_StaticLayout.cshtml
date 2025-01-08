@@ -1,0 +1,122 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+   <style>
+
+   body {
+       font-family: Arial, sans-serif;
+       margin: 0;
+       padding: 0;
+   }
+
+   .nav {
+       border-bottom: 1px solid #e0e0e0;
+       position: fixed;
+       width: 100%;
+       z-index: 20;
+       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+   }
+
+
+   .nav-container {
+       background-color: #4a4a4a !important; /* Change background color to #4a4a4a */
+       height: 50px;
+       max-width: 2200px;
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       padding: 16px;
+       margin: auto;
+    }
+
+   .logo {
+        margin: 0;
+        padding: 20px;
+   }
+
+    .logo img {
+        height: 75px;
+        width: auto;
+        margin-right: 120px;
+        display: block;
+    }
+
+    .nav-link {
+         display: flex;
+    }
+
+    .nav-link a {
+         margin: 0 15px;
+         text-decoration: none;
+         color: white !important;
+         transition: color 0.3s;
+    }
+
+    .nav-link a:hover {
+       color: #007BFF;
+    }
+
+    .authorization-button {
+        display: flex;
+        align-items: center;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+     .authorization-button a {
+         background-color: #007BFF;
+         color: white;
+         padding: 10px 15px;
+         border-radius: 5px;
+         text-decoration: none;
+         margin-left: 10px;
+         transition: background-color 0.3s;
+     }
+
+    .authorization-button a:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+    </style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="/Image/Logo.png" alt="logo" />
+            </div>
+
+            <div class="nav-link">
+                <a href="#">Destination</a>
+                <a href="#">Accommodation</a>
+                <a href="#">About Us</a>
+                <a href="#">Contact Us</a>
+             </div>
+              
+             
+              <div class="authorization-button">
+
+                  <a asp-action="Register" asp-controller="Home" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Sign Up</a>
+                      
+                  <a asp-action="LogIn" asp-controller="Authentication" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Log In</a>
+              </div>            
+        </div>
+     </nav>
+
+    <div class="p-30 sm:ml-64">
+        @RenderBody()
+    </div>
+</body>
+</html>
+
+
+
+
+

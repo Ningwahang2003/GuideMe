@@ -1,0 +1,30 @@
+﻿@model UserEdit
+
+@{
+    ViewData["Title"] = "LogIn";
+    Layout = "_StaticLayout";
+}
+
+<link rel="stylesheet" href="~/css/LogIn.css" />
+
+<div class="login-container">
+    <h2>LOG IN</h2>
+    <form asp-action="LogIn">
+        <div asp-validation-summary="ModelOnly"></div>
+
+        <div class="mb-5">
+            <label asp-for="Email" class="block mb-2 text-sm font-medium"></label>
+            <input asp-for="Email" type="text" id="email" required />
+            <span asp-validation-for="Email" class="text-red-700"></span>
+        </div>
+
+        <div class="mb-5">
+            <label asp-for="Password" class="block mb-2 text-sm font-medium"></label>
+            <input asp-for="Password" type="password" id="password" required />
+            <span asp-validation-for="Password" class="text-red-700"></span>
+        </div>
+
+        <button type="submit">Submit</button>
+        <a asp-action="ForgetPassword">Forget Password?</a>
+    </form>
+</div>

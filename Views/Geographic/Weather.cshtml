@@ -1,0 +1,51 @@
+﻿@model List<GuideMe.Models.WeatherForecast>
+
+@{
+    ViewData["Title"] = "Weather Data";
+}
+
+<link rel="stylesheet" href="/css/weather.css">
+
+<div class="main-container">
+    <h1>5-Day Weather Forecast</h1>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+        TempData["Error"] = null;
+    }
+
+    <form asp-action="Weather" asp-controller="Geographic" method="get">
+        <label for="location">Enter Location:</label>
+        <input type="text" id="location" name="location" required>
+        <button type="submit">Find Weather</button>
+    </form>
+
+    @if (Model != null && Model.Any())
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Temperature (°C)</th>
+                    <th>Condition</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var forecast in Model)
+                {
+                    <tr>
+                        <td>@(forecast.CreatedAt?.ToString("MMM d, HH:mm tt") ?? "N/A")</td>
+                        <td>@forecast.Temperature</td>
+                        <td>@forecast.Condition</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+

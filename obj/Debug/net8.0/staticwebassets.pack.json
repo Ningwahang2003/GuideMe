@@ -1,0 +1,453 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\GuideMe.bundle.scp.css",
+      "PackagePath": "staticwebassets\\GuideMe.a4rspd5ilm.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\Image\\Kathmandu.png",
+      "PackagePath": "staticwebassets\\Image\\Kathmandu.png"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\Image\\Logo.png",
+      "PackagePath": "staticwebassets\\Image\\Logo.png"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\Image\\Pokhara.png",
+      "PackagePath": "staticwebassets\\Image\\Pokhara.png"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\Image\\Scan.png",
+      "PackagePath": "staticwebassets\\Image\\Scan.png"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\Image\\Screenshot 2024-12-19 152646.png",
+      "PackagePath": "staticwebassets\\Image\\Screenshot 2024-12-19 152646.png"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\Image\\Screenshot 2024-12-30 190909.png",
+      "PackagePath": "staticwebassets\\Image\\Screenshot 2024-12-30 190909.png"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\Image\\Search.png",
+      "PackagePath": "staticwebassets\\Image\\Search.png"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\Image\\facebook.png",
+      "PackagePath": "staticwebassets\\Image\\facebook.png"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\Image\\main.png",
+      "PackagePath": "staticwebassets\\Image\\main.png"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\Image\\twitter.png",
+      "PackagePath": "staticwebassets\\Image\\twitter.png"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\Image\\youtube.png",
+      "PackagePath": "staticwebassets\\Image\\youtube.png"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\UserFile\\UserFilea351f389-af83-4919-8047-5ad941af5b12.jpg",
+      "PackagePath": "staticwebassets\\UserFile\\UserFilea351f389-af83-4919-8047-5ad941af5b12.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\UserFile\\UserFilea959041a-970b-4e67-9f48-1d6a4177b233.JPEG",
+      "PackagePath": "staticwebassets\\UserFile\\UserFilea959041a-970b-4e67-9f48-1d6a4177b233.JPEG"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\UserFile\\default-profile.png",
+      "PackagePath": "staticwebassets\\UserFile\\default-profile.png"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\css\\LogIn.css",
+      "PackagePath": "staticwebassets\\css\\LogIn.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\css\\Register.css",
+      "PackagePath": "staticwebassets\\css\\Register.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\css\\StaticPage.css",
+      "PackagePath": "staticwebassets\\css\\StaticPage.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\css\\weather.css",
+      "PackagePath": "staticwebassets\\css\\weather.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\gmaps.js\\gmaps.js",
+      "PackagePath": "staticwebassets\\gmaps.js\\gmaps.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\gmaps.js\\gmaps.min.js",
+      "PackagePath": "staticwebassets\\gmaps.js\\gmaps.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\gmaps.js\\gmaps.min.js.map",
+      "PackagePath": "staticwebassets\\gmaps.js\\gmaps.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\gomaps\\bower.json",
+      "PackagePath": "staticwebassets\\gomaps\\bower.json"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\gomaps\\dist\\gomaps.js",
+      "PackagePath": "staticwebassets\\gomaps\\dist\\gomaps.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\gomaps\\dist\\gomaps.min.js",
+      "PackagePath": "staticwebassets\\gomaps\\dist\\gomaps.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\gomaps\\gomaps.js",
+      "PackagePath": "staticwebassets\\gomaps\\gomaps.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\gomaps\\gruntfile.js",
+      "PackagePath": "staticwebassets\\gomaps\\gruntfile.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\gomaps\\package.json",
+      "PackagePath": "staticwebassets\\gomaps\\package.json"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\gomaps\\readme.md",
+      "PackagePath": "staticwebassets\\gomaps\\readme.md"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\jquery\\jquery.js",
+      "PackagePath": "staticwebassets\\jquery\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\jquery\\jquery.min.js",
+      "PackagePath": "staticwebassets\\jquery\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\jquery\\jquery.min.map",
+      "PackagePath": "staticwebassets\\jquery\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\jquery\\jquery.slim.js",
+      "PackagePath": "staticwebassets\\jquery\\jquery.slim.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\jquery\\jquery.slim.min.js",
+      "PackagePath": "staticwebassets\\jquery\\jquery.slim.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\jquery\\jquery.slim.min.map",
+      "PackagePath": "staticwebassets\\jquery\\jquery.slim.min.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\tailwindcss\\base.css",
+      "PackagePath": "staticwebassets\\tailwindcss\\base.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\tailwindcss\\base.min.css",
+      "PackagePath": "staticwebassets\\tailwindcss\\base.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\tailwindcss\\components.css",
+      "PackagePath": "staticwebassets\\tailwindcss\\components.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\tailwindcss\\components.min.css",
+      "PackagePath": "staticwebassets\\tailwindcss\\components.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\tailwindcss\\tailwind-dark.css",
+      "PackagePath": "staticwebassets\\tailwindcss\\tailwind-dark.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\tailwindcss\\tailwind-dark.min.css",
+      "PackagePath": "staticwebassets\\tailwindcss\\tailwind-dark.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\tailwindcss\\tailwind-experimental.css",
+      "PackagePath": "staticwebassets\\tailwindcss\\tailwind-experimental.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\tailwindcss\\tailwind-experimental.min.css",
+      "PackagePath": "staticwebassets\\tailwindcss\\tailwind-experimental.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\tailwindcss\\tailwind.css",
+      "PackagePath": "staticwebassets\\tailwindcss\\tailwind.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\tailwindcss\\tailwind.min.css",
+      "PackagePath": "staticwebassets\\tailwindcss\\tailwind.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\tailwindcss\\utilities.css",
+      "PackagePath": "staticwebassets\\tailwindcss\\utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\Dhara\\Desktop\\FYP\\GuideMe\\wwwroot\\tailwindcss\\utilities.min.css",
+      "PackagePath": "staticwebassets\\tailwindcss\\utilities.min.css"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.GuideMe.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.GuideMe.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.GuideMe.props",
+      "PackagePath": "build\\GuideMe.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.GuideMe.props",
+      "PackagePath": "buildMultiTargeting\\GuideMe.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.GuideMe.props",
+      "PackagePath": "buildTransitive\\GuideMe.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

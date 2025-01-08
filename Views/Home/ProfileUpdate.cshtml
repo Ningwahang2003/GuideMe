@@ -1,0 +1,144 @@
+﻿@model UserEdit
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f4f8;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+    }
+
+    .profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 40px;
+    }
+
+    .profile img {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        margin-bottom: 15px;
+    }
+
+    .profile h1 {
+        margin-bottom: 10px;
+        font-size: 28px;
+        color: #007BFF;
+    }
+
+     .profile p {
+         font-size: 18px;
+         color: #666;
+     }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="file"] {
+        width: 100%;
+        padding: 12px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus {
+        border-color: #007BFF;
+        outline: none;
+     }
+
+    input[type="submit"] {
+        padding: 12px 25px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+       background-color: #0056b3;
+    }
+
+    .relative {
+        position: relative;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    label {
+        position: absolute;
+        top: -10px;
+        left: 10px;
+        font-size: 14px;
+        color: #007BFF;
+    }
+</style>
+
+<div class="container">
+    <div class="profile">
+        <img class="max-w-4 h-44 mb-3 rounded-full shadow-lg" src="~/UserFile/@Model.UserImage" />
+        <h1 class="mb">@Model.Name</h1>
+        <p class="mb">@Model.Email</p>
+    </div>
+
+    <div class="form">
+        <form asp-action="ProfileUpdate" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly"></div>
+            <input asp-for="UserId" hidden />
+            <input asp-for="UserImage" hidden />
+            <input asp-for="Role" hidden />
+            <input asp-for="Password" hidden />
+
+            <div class="relative">
+                <label asp-for="Name" class="absolute"></label>
+                <input asp-for="Name" type="text" placeholder="Name" />
+            </div>
+
+            <div class="relative">
+                <label asp-for="Email" class="absolute"></label>
+                <input asp-for="Email" type="email" placeholder="Email" />
+            </div>
+
+            <div class="relative">
+                <label asp-for="UserFile" class="absolute"></label>
+                <input asp-for="UserFile" type="file" />
+            </div>
+
+            <div class="mb-2">
+                <input type="submit" value="Update" />
+            </div>
+        </form>
+    </div>
+</div>

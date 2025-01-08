@@ -1,0 +1,83 @@
+﻿@model UserEdit
+
+@{
+
+    ViewData["Title"] = "Verify Token";
+    Layout = "_StaticLayout";
+}
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        background-image: url('../Image/main.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        font-family: Arial, sans-serif;
+        margin: 0; 
+        padding: 0;
+        width: 100%;
+        height: 100vh;
+    }
+
+    .vt {
+        max-width: 400px;
+        margin: 100px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    input[type="text"], input[type="submit"] {
+        width: 100%; 
+        padding: 10px; 
+        margin-bottom: 10px; 
+        border: 1px solid #ced4da; 
+        border-radius: 4px; 
+    }
+
+    input[type="text"]:focus {
+        border-color: #80bdff;
+        outline: none;
+    }
+
+    input[type="submit"] {
+        background-color: #28a745;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #218838; 
+     }
+
+    span {
+        color: red;
+        font-size: 14px;
+    }
+</style>
+
+<div class=" vt">
+    <form asp-action="VerifyToken">
+        <input asp-for="Email" type="hidden" />
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="token">
+            <h1 class="tok">Token </h1>
+            <input asp-for="EmailToken" type="text" />
+            <label asp-for ="EmailToken">
+                </label>
+                <span asp-validation-for="EmailToken"></span>
+        </div>
+        <div class="vts">
+            <input type="submit"></input>
+        </div>
+    </form>
+</div>

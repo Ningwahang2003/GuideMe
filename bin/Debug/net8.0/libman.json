@@ -1,0 +1,23 @@
+{
+  "version": "3.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "tailwindcss@2.2.19",
+      "destination": "wwwroot/tailwindcss/"
+    },
+    {
+      "library": "gmaps.js@0.4.25",
+      "destination": "wwwroot/gmaps.js/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "gomaps@1.0.9",
+      "destination": "wwwroot/gomaps/"
+    },
+    {
+      "library": "jquery@3.7.1",
+      "destination": "wwwroot/jquery/"
+    }
+  ]
+}

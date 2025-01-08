@@ -1,0 +1,128 @@
+﻿@model List<GuideMe.Models.Location>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: #007bff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        form input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+        }
+
+        form button {
+           padding: 10px 20px;
+           background-color: #007bff;
+           color: #fff;
+           border: none;
+           border-radius: 5px;
+           cursor: pointer;
+           font-size: 16px;
+           margin-left: 10px;
+        }
+
+        form button:hover {
+           background-color: #0056b3;
+        }
+
+        .results {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .result-item {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            width: 80%;
+            max-width: 900px;
+        }
+
+        .result-item iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .result-item strong {
+            font-size: 18px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .no-results {
+            color: #ff5733;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Location Search</h2>
+    </header>
+
+    <form method="get" action="@Url.Action("Locations", "Geographic")">
+        <input type="text" id="search" name="search" placeholder="Enter a city or address" required />
+        <button type="submit">Search</button>
+    </form>
+
+    <div class="results">
+        <h2>Search Results</h2>
+
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var location in Model)
+            {
+                <div class="result-item">
+                    @location.LocationName
+                    <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=@(location.Longitude-0.05),@(location.Latitude-0.05),@(location.Longitude+0.05),@(location.Latitude+0.05)&layer=mapnik"
+                            width="100%"
+                            height="600px"
+                            frameborder="0"
+                            style="border:0"
+                            allowfullscreen>
+                    </iframe>
+
+
+
+                </div>
+            }
+        }
+        else
+        {
+            <p class="no-results">No locations found.</p>
+        }
+    </div>
+</body>
+</html>

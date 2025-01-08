@@ -1,0 +1,55 @@
+﻿@model UserEdit
+
+@{
+    ViewData["Title"] = "Sign Up";
+    Layout = "_StaticLayout";
+}
+
+<link rel="stylesheet" href="~/css/Register.css" />
+
+<div class="signup-container">
+    <h2>SIGN UP</h2>
+    <form asp-action="Register" enctype="multipart/form-data">
+        <div class="form-content">
+            <div asp-validation-summary="ModelOnly" class="text-red-700 mb-4"></div>
+
+            <div class="form-group">
+                <label asp-for="UserFile" class="font-medium">User Image</label>
+                <input asp-for="UserFile" type="file" class="form-input" required />
+                <span asp-validation-for="UserFile" class="text-red-700"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="font-medium">Name</label>
+                <input asp-for="Name" type="text" class="form-input" required />
+                <span asp-validation-for="Name" class="text-red-700"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="font-medium">Email</label>
+                <input asp-for="Email" type="email" class="form-input" required />
+                <span asp-validation-for="Email" class="text-red-700"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password" class="font-medium">Password</label>
+                <input asp-for="Password" type="password" class="form-input" required />
+                <span asp-validation-for="Password" class="text-red-700"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Role" class="font-medium">Role</label>
+                <select asp-for="Role" class="form-input" required>
+                    <option value="">Select Role</option>
+                    <option value="User">User</option>
+                    <option value="Admin">Admin</option>
+                </select>
+                <span asp-validation-for="Role" class="text-red-700"></span>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="submit-button">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
