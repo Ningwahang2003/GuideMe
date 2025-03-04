@@ -7,16 +7,14 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <!-- Load jQuery Validation (core first, then additional methods) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"></script>
 
-    <script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <!-- Load jQuery Validation Unobtrusive -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
 
 
     <style>
@@ -36,7 +34,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #4CAF50;
+        background-color: black;
         padding: 15px 20px;
         }
 
@@ -149,9 +147,11 @@
                     <img src="/Image/Logo.png" alt="logo" />
                 </div>
                 <ul class="navbar-nav">
-                    <li><a href="#">Home</a></li>
+                    <li><a asp-action="Index" asp-controller="Admin">Home</a></li>
                     <li><a asp-action="ViewUser" asp-controller="Admin">ViewUser</a></li>
-                    <li><a asp-action="HandleEvent" asp-controller="Admin">HandleEvent</a></li>
+                    <li><a asp-action="UrbanTreasures" asp-controller="Contribution">UrbanTreasures</a></li>
+                    <li><a asp-action="ManageEventRequest" asp-controller="Admin">HandleEvent</a></li>
+                    <li><a asp-action="ViewWeeklyContest" asp-controller="Admin">ManageContest</a></li>
                     <li><a asp-action="ModerateContent" asp-controller="Admin">ModerateContent</a></li>
                     <li class="profile-dropdown">
                         <button type="button" id="ProfileImgButton" class="flex items-center">
@@ -178,9 +178,13 @@
                     <img src="/Image/Logo.png" alt="logo" />
                 </div>
                 <ul class="navbar-nav">
-                    <li><a href="#">Home</a></li>
+                    <li><a asp-action="Index" asp-controller="Home">Home</a></li>
                     <li><a asp-action="Locations" asp-controller="Geographic">Location</a></li>
                     <li><a asp-action="Weather" asp-controller="Geographic">Weather</a></li>
+                    <li><a asp-action="Index" asp-controller="GroupFormation">Group</a></li>
+                    <li><a asp-action="GroupChat" asp-controller="GroupFormation">Chatroom</a></li>
+                    <li><a asp-action="ViewEvent" asp-controller="Contribution">Event</a></li>
+                    <li><a asp-action="UrbanTreasures" asp-controller="Contribution">UrbanTreasures</a></li>
                     <li class="profile-dropdown">
                         <button type="button" id="ProfileImgButton" class="flex items-center">
                             <img class="profile-img"
@@ -188,11 +192,13 @@
                                  alt="Profile Image" />
                         </button>
                         <div id="dropdownNavbar" class="dropdown-menu hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                            <a asp-action="GetUserPosts" asp-controller="UserContent">Profile</a>
                             <a asp-action="ProfileUpdate" asp-controller="Home">Edit Profile</a>
                             <a asp-action="ChangePassword" asp-controller="Authentication">Change Password</a>
                             <a asp-action="SignOut" asp-controller="Authentication">Sign out</a>
                         </div>
-                    </li>
+                    </li> 
+                    <li><a asp-action="Index" asp-controller="Notification">Notifications</a></li>
 
                 </ul>
             </nav>

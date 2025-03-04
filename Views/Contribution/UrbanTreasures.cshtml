@@ -1,0 +1,106 @@
+﻿@using System.Security.Claims
+@model GuideMe.Models.UrbanTreasureEdit
+
+<link rel="stylesheet" href="~/css/urbantreasure.css" />
+
+@{
+    ViewData["Title"] = "Urban Treasures";
+    bool isAdmin = User.IsInRole("Admin");
+    var userId = User.FindFirstValue(ClaimTypes.Name);
+}
+
+<div class="urban-container">
+    <h2 class="urban-title">
+        Wander Around Nepal: <br /> A Museum at Your Fingertips!
+        @if (isAdmin)
+        {
+            <div class="admin-panel">
+                <a asp-controller="Admin" asp-action="ManageForm" class="btn btn-manage">Manage Provinces</a>
+            </div>
+        }
+        <div class="contribute-section">
+            <button class="btn btn-contribute" onclick="toggleContributionForm()">Contribute</button>
+        </div>
+    </h2>
+
+
+    <!-- Contribution Form (Initially Hidden) -->
+    <div id="contribution-form" class="urban-form-overlay d-none">
+        <div class="urban-form">
+            <button class="close-btn" onclick="toggleContributionForm()">×</button>
+            <h3 class="form-title">Contribute to Urban Treasures</h3>
+            <form asp-action="UrbanTreasures" method="post" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label asp-for="Title" class="form-label">Title</label>
+                    <input asp-for="Title" class="form-control" required></input>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Location" class="form-label">Location</label>
+                    <input asp-for="Location" class="form-control" required></input>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProvinceId" class="form-label">Province</label>
+                    <select asp-for="ProvinceId" class="form-control" required>
+                        <option value="">Select a Province</option>
+                        @foreach (var province in ViewBag.Provinces as List<GuideMe.Models.Province>)
+                        {
+                            <option value="@province.ProvinceId">@province.ProvinceName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Upload Images</label>
+                    <div id="image-upload-container">
+                        <input name="UrbanImage" type="file" class="form-control" />
+                    </div>
+                    <button type="button" class="btn btn-add-image" onclick="addImageField()">+</button>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Description" class="form-label">Description</label>
+                    <textarea asp-for="Description" class="form-control" rows="3" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Province List -->
+    <div class="province-list">
+        <h3 class="section-title">Provinces</h3>
+        <div class="row">
+            @foreach (var province in ViewBag.Provinces as List<GuideMe.Models.Province>)
+            {
+                <div class="col-md-4">
+                    <a asp-controller="Contribution" asp-action="ProvinceContribution" asp-route-id="@province.ProvinceId" class="province-card" style="background-image: url('@province.ProvinceImage');">
+                        <div class="province-content">
+                            <h5 class="province-name">@province.ProvinceName</h5>
+                            <p class="province-description">@province.ProvinceDescription</p>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleContributionForm() {
+        const formOverlay = document.getElementById("contribution-form");
+        formOverlay.classList.toggle("d-none");
+    }
+
+    function addImageField() {
+        const container = document.getElementById('image-upload-container');
+        const newInput = document.createElement('input');
+        newInput.type = 'file';
+        newInput.name = 'UrbanImage';
+        newInput.className = 'form-control';
+        container.appendChild(newInput);
+    }
+</script>

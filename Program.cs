@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace GuideMe
 {
@@ -25,6 +26,7 @@ namespace GuideMe
             builder.Services.AddHttpClient();
             builder.Services.AddDbContext<GuideMeContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DbConn")));
+
             builder.Services.AddDataProtection();
 
 
@@ -35,6 +37,19 @@ namespace GuideMe
             {
                 a.IdleTimeout = TimeSpan.FromMinutes(1);
                 a.Cookie.HttpOnly = true;
+            });
+
+            builder.Services.AddSignalR();
+
+            builder.Services.Configure<FormOptions>(options =>
+            {
+                options.MultipartBodyLengthLimit = 1_000_000_000; // 1GB
+            });
+
+            // Configure Kestrel to allow large request body sizes
+            builder.WebHost.ConfigureKestrel(serverOptions =>
+            {
+                serverOptions.Limits.MaxRequestBodySize = 1_000_000_000; // 1GB
             });
 
             var app = builder.Build();
@@ -64,6 +79,8 @@ namespace GuideMe
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Static}/{action=Index}/{id?}");
+
+            app.MapHub<ChatHub>("/chatHub").RequireAuthorization();
 
             app.Run();
         }

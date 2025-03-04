@@ -1,0 +1,48 @@
+﻿@model IEnumerable<GuideMe.Models.Group>
+
+<h2>Available Groups</h2>
+
+<div class="text-end mb-3">
+    <a asp-controller="GroupFormation" asp-action="Create" class="btn btn-primary">
+        Create Group
+    </a>
+</div>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Travel Date</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var group in Model)
+    {
+        <tr>
+            <td>@group.Name</td>
+            <td>@group.Location</td>
+            <td>@group.TravelStartDate</td>
+            <td>@group.TravelEndDate</td>
+            <td>
+                @if (ViewData["JoinedGroups"] != null && ((List<int>)ViewData["JoinedGroups"]).Contains(group.GroupId))
+                {
+                    <a asp-action="Edit" asp-controller="GroupFormation" asp-route-groupId="@group.GroupId" class="btn btn-warning">
+                        Edit
+                    </a>
+
+                    <a asp-action="Leave" asp-controller="GroupFormation" asp-route-groupId="@group.GroupId">
+                        Leave
+                    </a>
+
+                }
+                else
+                {
+                    <form asp-action="Join" asp-controller="GroupFormation" method="post">
+                        <input type="hidden" name="groupId" value="@group.GroupId" />
+                        <button type="submit" class="btn btn-success">Join</button>
+                    </form>
+                }
+            </td>
+        </tr>
+    }
+</table>
+

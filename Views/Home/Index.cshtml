@@ -1,47 +1,110 @@
-﻿@Model 
+﻿@model GuideMe.Models.HomeViewModel
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<style>
-    #successMessage {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 1000;
-        transition: opacity 0.5s ease;
-    }
-
-    #successMessage {
-        background-color: white;
-        color: black;
-        border: 1px solid #d1d5db;
-        border-radius: 8px;
-        padding: 15px; 
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
-</style>
+<link rel="stylesheet" href="~/css/home.css" />
 
 @if (TempData["SuccessMessage"] != null)
 {
-    <div id="successMessage" class="fixed top-5 right-5 bg-white text-black border border-gray-300 rounded-lg shadow-lg p-4">
+    <div id="successMessage">
         @TempData["SuccessMessage"]
     </div>
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-
-    @if (ViewBag.LastLogin != null)
+<div id="event-container">
+    @foreach (var ev in Model.UpcomingEvents)
     {
-        <p>Last Login Date: @(ViewBag.LastLogin?.ToString("f") ?? "N/A")</p>
+        <div class="event-slide">
+            <h3>@ev.EventTitle</h3>
+            <p>@ev.EventDescription</p>
+            <p><strong>Starts:</strong> @ev.EventStartDate?.ToString("yyyy-MM-dd")</p>
+            <p><strong>Ends:</strong> @ev.EventEndDate?.ToString("yyyy-MM-dd")</p>
+            <p><strong>Time:</strong> @ev.EventTime</p>
+        </div>
     }
- 
 </div>
 
+<h2>Current Weekly Contest</h2>
+
+@if (Model.UpcomingContests.Any())
+{
+    var contest = Model.UpcomingContests.First();
+    var today = DateTime.UtcNow.Date;
+    var contestStartDate = contest.StartDate.Date;
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">@contest.ContestType</h5>
+            <p><strong>Start Date:</strong> @contest.StartDate.ToString("MM/dd/yyyy")</p>
+            <p><strong>End Date:</strong> @contest.EndDate.ToString("MM/dd/yyyy")</p>
+            <p><strong>Instructions:</strong> @contest.Instructions</p>
+
+            @if ((today - contestStartDate).TotalDays <= 1)
+            {
+                <a href="@Url.Action("ParticipateContest", "Home", new { contestId = contest.ContestId })">Participate</a>
+            }
+            else
+            {
+                <p><strong>Participation is closed.</strong></p>
+            }
+
+            <a href="@Url.Action("ViewContest", "Home", new { contestId = contest.ContestId })">View</a>
+        </div>
+    </div>
+}
+else
+{
+    <p>No active contests currently.</p>
+}
+
+
+@if (Model.Winner != null)
+{
+    <h3>Contest Winner: @Model.Winner.Name</h3>
+    <p>Congratulations to @Model.Winner.Name for winning the contest!</p>
+
+    <h4>Contest Entries:</h4>
+    <ul>
+        @foreach (var entry in Model.ContestEntries)
+        {
+            <li>
+                @entry.Title
+                @entry.Submission
+                @entry.Descriptions
+                <br />
+                Votes: @entry.VoteCount
+            </li>
+        }
+    </ul>
+}
 
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let slides = document.querySelectorAll('.event-slide');
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.style.display = 'none');
+            if (slides.length > 0) {
+                slides[index].style.display = 'block';
+            }
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+        }
+
+        if (slides.length > 0) {
+            showSlide(currentIndex);
+            setInterval(nextSlide, 3000); // Change event every 3 seconds
+        } else {
+            console.log("No upcoming events found.");
+        }
+    });
+
     // Automatically hide the success message after a few seconds
     window.onload = function() {
         const successMessage = document.getElementById("successMessage");

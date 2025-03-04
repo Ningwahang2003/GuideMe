@@ -1,0 +1,127 @@
+﻿body {
+    background: url('/Image/view.png') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding-top: 80px;
+}
+
+nav {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        padding: 10px 20px;
+        transition: 0.3s;
+    }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+        }
+
+.addcontest-form {
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    width: 600px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-top: 20px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 26px;
+    color: #222;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+    .form-group label {
+        font-weight: 600;
+        color: #555;
+    }
+
+.form-control {
+    background: #f8f9fa;
+    border: 1px solid #ccc;
+    padding: 12px;
+    font-size: 16px;
+    color: #333;
+    border-radius: 6px;
+    width: 100%;
+}
+
+    .form-control::placeholder {
+        color: #888;
+    }
+
+    .form-control:focus {
+        background: #fff;
+        outline: none;
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ff5722;
+    }
+
+select.form-control {
+    cursor: pointer;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background-color: black;
+    border: none;
+    color: white;
+}
+
+    .btn-primary:hover {
+        background: #e64a19;
+    }
+
+.btn-secondary {
+    background: transparent;
+    border: 2px solid #ff5722;
+    color: #ff5722;
+}
+
+    .btn-secondary:hover {
+        background: #ff5722;
+        color: white;
+    }
+
+.alert-success {
+    text-align: center;
+    background: rgba(76, 175, 80, 0.9);
+    padding: 10px;
+    border-radius: 6px;
+    color: white;
+}

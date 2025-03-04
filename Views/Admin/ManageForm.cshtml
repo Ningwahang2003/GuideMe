@@ -1,0 +1,63 @@
+﻿@model IEnumerable<GuideMe.Models.Province>
+
+@{
+    ViewData["Title"] = "Manage Form";
+}
+
+<link rel="stylesheet" href="~/css/ManageForms.css" />
+
+<div class="container">
+    <h2 class="text-center mb-4">Manage Provinces</h2>
+    <form asp-action="AddProvince" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="ProvinceName">Province</label>
+            <input type="text" name="ProvinceName" placeholder="Enter Province Name" required />
+          
+        </div>
+        <div>
+            <label for="ProvinceDescription">Description</label>
+            <textarea name="ProvinceDescription" placeholder="Enter Province Description"></textarea>
+        </div>
+        <div>
+            <label for="ProvinceImages">Province Image</label>
+            <input type="file" name="ProvinceImages" accept="image/*" />
+        </div>
+        <button type="submit">Add Province</button>
+    </form>
+
+    <h3 class="mt-5">Existing Provinces</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Province Name</th>
+                <th>Province Image</th>
+                <th>Province Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var province in Model)
+            {
+                <tr>
+                    <td>@province.ProvinceName</td>
+                    <td>
+                        <img src="@province.ProvinceImage" alt="Province Image" width="100" height="80" style="border-radius: 8px;" />
+                    </td>
+                    <td>@province.ProvinceDescription</td>
+                    <td>
+                        <form asp-action="DeleteProvince" method="post" onsubmit="return confirmDelete();">
+                            <input type="hidden" name="id" value="@province.ProvinceId" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this? It contains related contents.");
+    }
+</script>

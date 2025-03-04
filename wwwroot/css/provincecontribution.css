@@ -1,0 +1,120 @@
+﻿body {
+    background-color:aliceblue;
+    margin: 0;
+}
+
+.container {
+    max-width: 1200px; 
+    margin: auto;
+    padding: 20px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.list {
+    width: calc(50% - 10px); 
+    display: flex;
+    justify-content: center;
+}
+/
+.card {
+    width: 100%;
+    max-width: 550px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.scroll-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+    height: 300px;
+    position: relative;
+    border-bottom: 1px solid #ddd;
+    scroll-behavior: smooth;
+}
+
+    .scroll-container img {
+        flex: 0 0 100%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        scroll-snap-align: start;
+        transition: transform 0.3s ease-in-out;
+        cursor: pointer;
+    }
+
+
+.card-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.card-text {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.contribution-button:last-child {
+    margin-top: 20px;
+}
+
+.scroll-container img {
+    transition: transform 0.3s ease-in-out;
+}
+
+    .scroll-container img.enlarged {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 90vw;
+        height: 90vh;
+        object-fit: contain;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.8);
+    }
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .list {
+        width: 100%;
+    }
+}

@@ -1,0 +1,36 @@
+﻿@model List<GuideMe.Models.Event>
+
+<link rel="stylesheet" href="~/css/ManageEventRequests.css" />
+
+<div class="event-request-container">
+    <h2 class="event-request-title">Manage Event Requests</h2>
+
+    <table class="event-request-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var eventRequest in Model)
+            {
+                <tr>
+                    <td>@eventRequest.EventTitle</td>
+                    <td>@eventRequest.EventDescription</td>
+                    <td class="event-request-actions">
+                        <form asp-action="ApproveEventRequest" method="post" class="event-action-form">
+                            <input type="hidden" name="eventId" value="@eventRequest.EventId" />
+                            <button type="submit" class="approve-btn">Approve</button>
+                        </form>
+                        <form asp-action="RejectEventRequest" method="post" class="event-action-form">
+                            <input type="hidden" name="eventId" value="@eventRequest.EventId" />
+                            <button type="submit" class="reject-btn">Reject</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

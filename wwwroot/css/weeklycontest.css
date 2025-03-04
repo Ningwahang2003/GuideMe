@@ -1,0 +1,130 @@
+﻿body {
+    font-family: 'Poppins', sans-serif;
+    background: url('/Image/view.png') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+.weeklycontest {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    width: 80%;
+    max-width: 1000px;
+    margin: 50px auto;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+    .weeklycontest h2 {
+        font-size: 28px;
+        font-family: 'Bebas Neue', cursive;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .weeklycontest a {
+        display: inline-block;
+        margin-bottom: 20px;
+        padding: 10px 20px;
+        background: #ff5722;
+        color: white;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+        .weeklycontest a:hover {
+            background: #e64a19;
+        }
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .table th, .table td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #ddd;
+        font-size: 16px;
+    }
+
+    .table th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+
+    .table tr {
+        background-color: #fff;
+    }
+
+        .table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+    .table th:nth-child(1), .table td:nth-child(1) {
+        width: 25%;
+    }
+
+    .table th:nth-child(2), .table td:nth-child(2) {
+        width: 30%;
+    }
+
+    .table th:nth-child(3), .table td:nth-child(3) {
+        width: 20%;
+    }
+
+    .table th:nth-child(4), .table td:nth-child(4) {
+        width: 15%;
+    }
+
+    .table th:nth-child(5), .table td:nth-child(5) {
+        width: 10%;
+    }
+
+    .table td {
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 12px;
+    }
+
+        .table td:last-child {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+    .table td {
+        background: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .table tr:hover td {
+        background: rgba(255, 255, 255, 0.85);
+        box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1);
+    }
+
+@media screen and (max-width: 768px) {
+    .weeklycontest {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .table {
+        font-size: 14px;
+    }
+
+        .table th, .table td {
+            padding: 10px;
+        }
+
+    .weeklycontest a {
+        font-size: 14px;
+    }
+}

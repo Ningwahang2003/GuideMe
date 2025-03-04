@@ -1,0 +1,16 @@
+﻿@{
+    var groupId = (int)ViewData["GroupId"];
+}
+
+<h2>Leave Group</h2>
+
+<form asp-action="Leave" asp-controller="GroupFormation" method="post">
+    <input type="hidden" name="groupId" value="@groupId" 
+
+    <div class="form-group">
+        <label for="leaveReason">Reason for leaving:</label>
+        <textarea name="leaveReason" id="leaveReason" class="form-control" rows="3"></textarea>
+    </div>
+
+    <button type="submit">Leave</button>
+</form>

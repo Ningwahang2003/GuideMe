@@ -1,0 +1,38 @@
+﻿@model List<GuideMe.Models.Event>
+
+<link rel="stylesheet" href="~/css/ViewEvents.css" />
+
+<div class="view-event-container">
+
+    <h2 class="event-header">Join the Journey: <br /> Where Every Moment Tells a Story!</h2>
+
+    <div class="search-container">
+        <form asp-action="ViewEvent" method="get">
+            <input type="text" name="location" placeholder="Search by location">
+            <input type="date" name="date">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <div class="text-end">
+        <a asp-controller="Contribution" asp-action="CheckEventRequest" class="btn btn-primary">
+            Add Events
+        </a>
+    </div>
+
+    <h2 class="event"> All Events </h2>
+
+    <div class="event-container">
+        @foreach (var ev in Model)
+        {
+            <div class="event-card">
+                <h3>@ev.EventTitle</h3>
+                <p><strong>Location:</strong> @ev.EventLocation</p>
+                <p><strong>Start Date:</strong> @(ev.EventStartDate?.ToString("yyyy-MM-dd") ?? "N/A")</p>
+                <p><strong>End Date:</strong> @(ev.EventEndDate?.ToString("yyyy-MM-dd") ?? "N/A")</p>
+                <p><strong>Time:</strong> @ev.EventTime</p>
+                <p>@ev.EventDescription</p>
+            </div>
+        }
+    </div>
+</div>

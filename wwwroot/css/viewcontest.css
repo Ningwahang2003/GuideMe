@@ -1,0 +1,90 @@
+﻿.table-responsive {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.participant-card {
+    width: 45%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.participant-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.participant-description {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: #666;
+}
+
+.participant-images {
+    margin-bottom: 15px;
+    max-height: 600px; 
+    overflow-y: hidden;
+}
+
+    .participant-images.has-multiple-images {
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+    }
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.image-slide {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.participant-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.participant-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}
+
+
+.vote-section {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.vote-count {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }

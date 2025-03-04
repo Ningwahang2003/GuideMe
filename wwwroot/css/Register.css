@@ -2,7 +2,7 @@
     height: 110%;
     margin: 0;
     font-family: Arial, sans-serif;
-    background-image: url('../Image/main.png'); /* Replace with your image URL */
+    background-image: url('../Image/main.png');
     background-size: cover;
     background-position: center;
 }
@@ -14,16 +14,16 @@
     transform: translate(-50%, -50%);
     background: rgba(255, 255, 255, 0.95);
     padding: 25px;
-    border-radius: 12px; /* More rounded corners */
+    border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    width: 500px; /* Increased width for better usability */
+    width: 500px;
 }
 
 h2 {
     text-align: center;
-    color: #333; /* Darker title */
+    color: #333;
     margin-bottom: 20px;
-    font-size: 24px; /* Larger font size */
+    font-size: 24px;
 }
 
 .form-content {
@@ -32,43 +32,43 @@ h2 {
 }
 
 .form-group {
-    margin-bottom: 16px; /* Space between form groups */
+    margin-bottom: 16px;
 }
 
 label {
     display: block;
-    margin-bottom: 4px; /* Reduced space between label and input */
+    margin-bottom: 4px;
     font-weight: bold;
 }
 
 .form-input {
-    width: 95%; /* Full width */
-    padding: 14px; /* Increased padding */
+    width: 95%; 
+    padding: 14px;
     border: 1px solid #ccc;
-    border-radius: 6px; /* More rounded borders */
-    background-color: #f9f9f9; /* Light background for inputs */
+    border-radius: 6px;
+    background-color: #f9f9f9;
     transition: border-color 0.3s;
 }
 
     .form-input:focus {
-        border-color: #007bff; /* Blue border on focus */
+        border-color: #007bff;
         outline: none;
     }
 
 button.submit-button {
     width: 100%;
-    padding: 14px; /* Increased padding for button */
-    background-color: #4CAF50; /* Bootstrap primary color */
+    padding: 14px;
+    background-color: #4CAF50;
     color: white;
     border: none;
-    border-radius: 6px; /* More rounded corners */
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 16px; /* Larger font size for button */
+    font-size: 16px;
     transition: background-color 0.3s;
 }
 
     button.submit-button:hover {
-        background-color: #0056b3; /* Darker blue on hover */
+        background-color: #0056b3;
     }
 
 .form-actions {
@@ -79,9 +79,9 @@ button.submit-button {
 }
 
 .forget-password {
-    color: #007bff; /* Link color */
+    color: #007bff;
     text-decoration: none;
-    margin-top: 10px; /* Space above the link */
+    margin-top: 10px;
 }
 
     .forget-password:hover {
@@ -90,6 +90,6 @@ button.submit-button {
 
 @media (max-width: 450px) {
     .signup-container {
-        width: 90%; /* Responsive width */
+        width: 90%;
     }
 }

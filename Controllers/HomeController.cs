@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace GuideMe.Controllers
 {
@@ -23,20 +25,80 @@ namespace GuideMe.Controllers
             _env = env;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                var userIdClaim = User.FindFirst(ClaimTypes.Name)?.Value;
+            var today = DateTime.UtcNow;
 
-                if (int.TryParse(userIdClaim, out int userId))
+            var activeContest = _context.WeeklyContests.FirstOrDefault(c => c.Status == "Active");
+
+            if (activeContest != null)
+            {
+                if (today.Date > activeContest.EndDate.Date)
                 {
-                    var user = _context.Users.Find(userId); 
-                    ViewBag.LastLogin = user?.LastLogin; 
+                    if (activeContest.WinnerUserId == null)
+                    {
+                        var winningEntry = _context.ContestEntries.Where(e => e.ContestId == activeContest.ContestId).OrderByDescending(e => e.VoteCount).FirstOrDefault();
+
+                        if (winningEntry != null)
+                        {
+                            activeContest.WinnerUserId = winningEntry.UserId;
+
+                        }
+
+                    }
+
+                    activeContest.Status = "Inactive";
+                    _context.SaveChanges();
+
+                    var nextContest = _context.WeeklyContests.Where(c => c.Status == "Inactive").OrderBy(c => c.ContestId).FirstOrDefault();
+
+                    if (nextContest != null)
+                    {
+                        nextContest.Status = "Active";
+                        nextContest.StartDate = today.Date;
+                        nextContest.EndDate = today.Date.AddDays(6);
+                        _context.SaveChanges();
+                        activeContest = nextContest;
+                    }
                 }
             }
-            return View();
+            else
+            {
+                activeContest = _context.WeeklyContests.Where(c => c.Status == "Inactive").OrderBy(c => c.StartDate).FirstOrDefault();
+
+                if (activeContest != null)
+                {
+                    activeContest.Status = "Active";
+                    activeContest.StartDate = today.Date;
+                    activeContest.EndDate = today.Date.AddDays(6);
+                    _context.SaveChanges();
+                }
+            }
+
+            var winner = (activeContest != null && activeContest.WinnerUserId != null)
+            ? _context.Users.Where(u => u.UserId == activeContest.WinnerUserId).FirstOrDefault()
+            : null;
+
+            List<ContestEntry> contestEntries = new List<ContestEntry>();
+
+            if (activeContest != null)
+            {
+                contestEntries = _context.ContestEntries.Where(e => e.ContestId == activeContest.ContestId).ToList();
+            }
+
+
+            var homeViewModel = new HomeViewModel
+            {
+                UpcomingEvents = _context.Events.Where(e => e.EventStartDate >= today && e.IsAdded && !e.IsExpired).OrderBy(e => e.EventStartDate).Take(4).ToList(),
+
+                UpcomingContests = activeContest != null ? new List<WeeklyContest> { activeContest } : new List<WeeklyContest>()
+            };
+
+            return View(homeViewModel);
         }
+
+
 
         [HttpGet]
         public IActionResult Register() 
@@ -171,5 +233,152 @@ namespace GuideMe.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-    }   
+
+
+        /*WeeklyContest*/
+        [HttpGet]
+        public IActionResult ViewContest(int contestId)
+        {
+            var contestEntries = _context.ContestEntries.Where(e => e.ContestId == contestId).Include(e => e.User).ToList();
+
+            return View(contestEntries);
+        }
+
+        [HttpGet("participatecontest/{contestId}")]
+        public IActionResult ParticipateContest(int contestId)
+        {
+            ContestEntry contestEntry = new ContestEntry { ContestId = contestId };
+            return View(contestEntry);
+        }
+
+        [HttpPost("participatecontest/{contestId}")]
+        public IActionResult ParticipateContest(ContestEntry ce, IEnumerable<IFormFile> ContestImages)
+        {
+            if (ContestImages == null || ContestImages.Count() == 0)
+            {
+                ModelState.AddModelError("", "Please upload at least one image.");
+                return View("ParticipateContest", ce);
+            }
+            if (ContestImages.Count() > 5)
+            {
+                ModelState.AddModelError("", "You can only upload up to 5 images at a time.");
+                return View("ParticipateContest", ce);
+            }
+
+            List<string> images = new List<string>();
+            string[] allowedExtensions = { ".jpg", ".jpeg", ".png" };
+
+            // Loop through each uploaded image.
+            foreach (var image in ContestImages)
+            {
+                if (image.Length > 0)
+                {
+                    string extension = Path.GetExtension(image.FileName).ToLower();
+                    if (!allowedExtensions.Contains(extension))
+                    {
+                        ModelState.AddModelError("", "Only image files (.jpg, .jpeg, .png) are allowed.");
+                        return View("ParticipateContest", ce);
+                    }
+
+                    string filename = "ContestSubmission_" + Guid.NewGuid() + extension;
+                    string filepath = Path.Combine(_env.WebRootPath, "ContestSubmissions", filename);
+                    using (FileStream stream = new FileStream(filepath, FileMode.Create))
+                    {
+                        image.CopyTo(stream);
+                    }
+                    images.Add(filename);
+                }
+            }
+
+            var userIdClaim = User.FindFirstValue(ClaimTypes.Name);
+            if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int userId))
+            {
+                ModelState.AddModelError("", "Unable to determine the current user.");
+                return View("ParticipateContest", ce);
+            }
+
+            if (string.IsNullOrEmpty(ce.Title) || string.IsNullOrEmpty(ce.Descriptions) || ce.ContestId == 0 || !images.Any())
+            {
+                ModelState.AddModelError("", "All fields are required.");
+                return View("ParticipateContest", ce);
+            }
+
+            var contest = _context.WeeklyContests.FirstOrDefault(c => c.ContestId == ce.ContestId);
+            if (contest == null)
+            {
+                ModelState.AddModelError("", "Invalid contest.");
+                return View("ParticipateContest", ce);
+            }
+
+            var existingEntry = _context.ContestEntries.FirstOrDefault(e => e.ContestId == ce.ContestId && e.UserId == userId);
+            if (existingEntry != null)
+            {
+                ModelState.AddModelError("", "You have already participated in this contest.");
+                return View("ParticipateContest", ce);
+            }
+
+            ContestEntry entry = new ContestEntry
+            {
+                ContestId = ce.ContestId,
+                UserId = userId,
+                Submission = string.Join(",", images),
+                VoteCount = 0,
+                Title = ce.Title,
+                Descriptions = ce.Descriptions
+            };
+
+            _context.ContestEntries.Add(entry);
+            _context.SaveChanges();
+
+            TempData["SuccessMessage"] = "Your contest submission has been successfully uploaded!";
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Vote(int contestEntryId)
+        {
+            var contestEntry = _context.ContestEntries.FirstOrDefault(e => e.ContestEntryId == contestEntryId);
+            if (contestEntry == null)
+            {
+                TempData["ErrorMessage"] = "Contest entry not found.";
+                return RedirectToAction("ViewContest", new { contestId = 0 });
+            }
+
+            int contestId = contestEntry.ContestId;
+            var userIdClaim = User.FindFirstValue(ClaimTypes.Name);
+
+            if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int userId))
+            {
+                TempData["ErrorMessage"] = "Unable to determine the current user.";
+                return RedirectToAction("ViewContest", new { contestId = contestId });
+            }
+
+            var existingVoteInContest = _context.UserVotes.Any(v => v.UserId == userId && v.ContestEntry.ContestId == contestId);
+
+            if (existingVoteInContest)
+            {
+                TempData["ErrorMessage"] = "You have already voted in this contest.";
+                return RedirectToAction("ViewContest", new { contestId = contestId });
+            }
+
+            var userVote = new UserVote
+            {
+                UserId = userId,
+                ContestEntryId = contestEntryId,
+                VoteDate = DateTime.UtcNow
+            };
+
+            _context.UserVotes.Add(userVote);
+            contestEntry.VoteCount += 1;
+
+            _context.SaveChanges();
+
+            TempData["SuccessMessage"] = "Your vote has been recorded!";
+            return RedirectToAction("ViewContest", new { contestId = contestId });
+        }
+
+
+
+
+    }
 }

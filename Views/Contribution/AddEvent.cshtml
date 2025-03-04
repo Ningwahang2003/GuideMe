@@ -1,0 +1,42 @@
+﻿@model GuideMe.Models.Event
+
+<link rel="stylesheet" href="~/css/AddEvent.css" />
+
+<div class="event-form-container">
+    <form asp-action="AddEvent" enctype="multipart/form-data" method="post" class="event-form">
+
+        <h2 class="event-form-title">Add Event</h2>
+
+        <div class="form-group">
+            <label asp-for="EventTitle"></label>
+            <input asp-for="EventTitle" required />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="EventLocation"></label>
+            <input asp-for="EventLocation" required />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="EventStartDate"></label>
+            <input asp-for="EventStartDate" type="date" required />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="EventEndDate"></label>
+            <input asp-for="EventEndDate" type="date" required />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="EventTime"></label>
+            <input asp-for="EventTime" placeholder="07:00AM - 10:30PM" required />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="EventDescription">Description:</label>
+            <textarea asp-for="EventDescription" required></textarea>
+        </div>
+
+        <button type="submit">Add Event</button>
+    </form>
+</div>

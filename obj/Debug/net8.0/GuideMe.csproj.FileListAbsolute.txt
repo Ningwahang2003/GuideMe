@@ -33,8 +33,11 @@ C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\Microsoft.Extensions.Configu
 C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
 C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
 C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll
 C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
 C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\Microsoft.Identity.Client.dll
@@ -63,6 +66,7 @@ C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\System.Formats.Asn1.dll
 C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\System.IO.Pipelines.dll
 C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\System.Memory.Data.dll
+C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
 C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\System.Runtime.Caching.dll
 C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Dhara\Desktop\FYP\GuideMe\bin\Debug\net8.0\System.Security.Permissions.dll
@@ -155,6 +159,7 @@ C:\Users\Dhara\Desktop\FYP\GuideMe\obj\Debug\net8.0\GuideMe.csproj.CoreCompileIn
 C:\Users\Dhara\Desktop\FYP\GuideMe\obj\Debug\net8.0\GuideMe.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Dhara\Desktop\FYP\GuideMe\obj\Debug\net8.0\GuideMe.RazorAssemblyInfo.cache
 C:\Users\Dhara\Desktop\FYP\GuideMe\obj\Debug\net8.0\GuideMe.RazorAssemblyInfo.cs
+C:\Users\Dhara\Desktop\FYP\GuideMe\obj\Debug\net8.0\GuideMe.sourcelink.json
 C:\Users\Dhara\Desktop\FYP\GuideMe\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\Dhara\Desktop\FYP\GuideMe\obj\Debug\net8.0\scopedcss\bundle\GuideMe.styles.css
 C:\Users\Dhara\Desktop\FYP\GuideMe\obj\Debug\net8.0\scopedcss\projectbundle\GuideMe.bundle.scp.css

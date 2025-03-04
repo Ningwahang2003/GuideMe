@@ -1,0 +1,15 @@
+﻿@model GuideMe.Models.Event
+
+<link rel="stylesheet" href="~/css/RequestEvent.css" />
+
+<form asp-action="RequestEvent" enctype="multipart/form-data" method="post" class="event-form">
+    <h1 class="event"> Request Events</h1>
+
+    <label asp-for="EventTitle"> </label>
+    <input asp-for="EventTitle" required />
+
+    <label asp-for="EventDescription"> Description:</label>
+<textarea asp-for="EventDescription" required> </textarea>
+
+    <button type="submit"> Submit Request</button>
+</form>

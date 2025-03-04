@@ -35,7 +35,7 @@ namespace GuideMe.Controllers
                 return View();
             }
 
-            string apiKey = "AlzaSyxPxIDnKYGrHOVF9tA4ovMEM96Slhh46iN";
+            string apiKey = "AlzaSy8FoBHru-r3uLewYttBRj8_e5MpZoMpmLt";
             string apiUrl = $"https://maps.gomaps.pro/maps/api/geocode/json?address={search}&key={apiKey}";
 
             var response = await _httpClient.GetAsync(apiUrl);

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<GuideMe.Models.UserPost>
+
+@{
+    ViewData["Title"] = "My Posts";
+}
+
+<h2>My Posts</h2>
+
+<a asp-action="CreatePost" asp-controller="UserContent" class="btn btn-success mb-3">Create New Post</a>
+
+@if (!Model.Any())
+{
+    <p>You haven't posted anything yet. <a asp-action="CreatePost" asp-controller="UserContent">Create your first post</a>!</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var post in Model)
+        {
+            <div class="card-body">
+                @foreach (var mediaPath in post.MediaPath.Split(','))
+                {
+                    if (!string.IsNullOrEmpty(mediaPath))
+                    {
+                        if (mediaPath.EndsWith(".mp4") || mediaPath.EndsWith(".mov") || mediaPath.EndsWith(".avi"))
+                        {
+                            <video controls class="post-media">
+                                <source src="@mediaPath" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        }
+                        else
+                        {
+                            <img src="@mediaPath" alt="Post Image" class="post-media" />
+                        }
+                    }
+                }
+
+                <p class="mt-2"><strong>Caption:</strong> @post.Caption</p>
+                <p class="text-muted">Posted on: @post.CreatedAt.ToString("MMM dd, yyyy")</p>
+
+                @if (post.UserId == Convert.ToInt32(User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value))
+                {
+                    <form asp-action="DeletePost" asp-controller="UserContent" asp-route-id="@post.PostId" method="post" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                }
+            </div>
+                    
+        }
+
+    </div>
+}
+

@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Notifications";
+}
+
+<h2>Notifications</h2>
+
+<!-- Notification Pop-up -->
+@if (ViewBag.Notifications != null && ViewBag.Notifications.Count > 0)
+{
+    <div class="notification-container">
+        @foreach (var notification in ViewBag.Notifications)
+        {
+            <div class="notification-item @(notification.IsRead ? "read" : "unread")">
+                <p>@notification.Message</p>
+                <p class="timestamp">@notification.CreatedAt.ToString("g")</p>
+                @if (!notification.IsRead)
+                {
+                    <form action="@Url.Action("MarkAsRead", "Notification", new { notificationId = notification.NotificationId })" method="post">
+                        <button type="submit" class="mark-read-btn">Mark as Read</button>
+                    </form>
+
+                }
+            </div>
+        }
+    </div>
+}
+
+<style>
+    .notification-container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        width: 300px;
+        max-height: 80%;
+        overflow-y: auto;
+    }
+
+    .notification-item {
+        background-color: #f9f9f9;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+        .notification-item.unread {
+            font-weight: bold;
+            border-left: 4px solid #007bff;
+        }
+
+        .notification-item.read {
+            font-weight: normal;
+            opacity: 0.6;
+        }
+
+    .timestamp {
+        font-size: 0.8em;
+        color: #888;
+    }
+
+    .mark-read-btn {
+        background-color: #007bff;
+        color: #fff;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .mark-read-btn:hover {
+            background-color: #0056b3;
+        }
+</style>

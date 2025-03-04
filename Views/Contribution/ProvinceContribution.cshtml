@@ -1,0 +1,68 @@
+﻿@model GuideMe.Models.Province
+
+<link rel="stylesheet" href="~/css/provincecontribution.css" />
+
+<div class="container">
+
+    <h2 class="header">@Model.ProvinceName</h2>
+
+    <!-- Contributions List -->
+    <div class="row">
+        @if (Model.UrbanTreasures.Any())
+        {
+            @foreach (var contribution in Model.UrbanTreasures)
+            {
+                        <div class="list">
+                            <div class="card">
+                                <div class="scroll-container">
+                                    @foreach (var img in contribution.Image.Split(','))
+                                    {
+                                        <img src="@Url.Content("~/UrbanImage/" + img)" class="image" alt="Contribution Image">
+                                    }
+
+                                    <div class="overlay" id="overlay">
+                                        <span class="close-btn" id="close-btn">&times;</span>
+                                        <img id="enlarged-image" class="enlarged" alt="Enlarged Contribution Image">
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">By User: @contribution.User.Name</h5>
+                                    <p class="card-text">@contribution.Title</p>
+                                    <p class="card-text">@contribution.Location</p>
+                                    <p class="card-text">@contribution.Description</p>
+                                </div>
+                            </div>
+                        </div>
+            }
+        }
+        else
+        {
+                <div class="col-12">
+                    <p class="text-center">No contributions available for this province yet.</p>
+                </div>
+        }
+    </div>
+
+    <!-- Back Button -->
+    <div class="contribution-button">
+        <a asp-action="UrbanTreasures">Back to Provinces</a>
+    </div>
+</div>
+
+<script>
+    const overlay = document.getElementById('overlay');
+    const enlargedImage = document.getElementById('enlarged-image');
+    const closeBtn = document.getElementById('close-btn');
+
+    document.querySelectorAll('.scroll-container img').forEach(img => {
+        img.addEventListener('click', function () {
+            enlargedImage.src = this.src;
+            overlay.style.display = 'flex';
+        });
+    });
+
+    closeBtn.addEventListener('click', function () {
+        overlay.style.display = 'none';
+    });
+</script>
+

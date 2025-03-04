@@ -1,0 +1,72 @@
+﻿@model IEnumerable<GuideMe.Models.ContestEntry>
+
+<link rel="stylesheet" href="~/css/viewcontest.css" />
+@{
+    ViewBag.Title = "Contest Participants";
+}
+
+<h2>Contest Participants</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (!Model.Any())
+{
+    <p>No participants found for this contest.</p>
+}
+else
+{
+    <div class="table-responsive">
+        @foreach (var entry in Model)
+        {
+            <div class="participant-card">
+                <h3 class="participant-title">@entry.Title</h3>
+                <p class="participant-description">@entry.Descriptions</p>
+
+                <div class="participant-images">
+                    <div class="image-container">
+                        @{
+                            var imageFiles = entry.Submission.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                        }
+                        @foreach (var image in imageFiles)
+                        {
+                            <div class="image-slide">
+                                <img src="~/ContestSubmissions/@image" alt="Contest Image" class="participant-image" />
+                            </div>
+                        }
+                    </div>
+                    <h3 class="participant-name">@entry.User?.Name</h3>
+                </div>
+
+                <div class="vote-section">
+                    <p hidden class="vote-count">Votes: @entry.VoteCount</p>
+                    <form asp-action="Vote" method="post">
+                        <input type="hidden" name="contestEntryId" value="@entry.ContestEntryId" />
+                        <button type="submit" class="btn btn-primary">Vote</button>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+
+}
+
+<script>
+    document.querySelectorAll('.participant-images').forEach(function(imageContainer) {
+        var images = imageContainer.querySelectorAll('.participant-image');
+        if (images.length > 1) {
+            imageContainer.classList.add('has-multiple-images');
+        }
+    });
+</script>
+
