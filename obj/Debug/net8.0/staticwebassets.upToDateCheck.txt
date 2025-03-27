@@ -1,3 +1,4 @@
+wwwroot\ChatFiles\abeab4c4-c529-4f50-a41c-7e994a503fdc_Screenshot (2).png
 wwwroot\ContestSubmissions\ContestSubmission_15780325-49f3-405f-858f-9ace3415fbb4.png
 wwwroot\ContestSubmissions\ContestSubmission_4bde0ef7-ec2a-4aca-8645-10bb1a066be9.png
 wwwroot\ContestSubmissions\ContestSubmission_690e74c9-d84a-4db1-bfc6-5e9992776492.jpg

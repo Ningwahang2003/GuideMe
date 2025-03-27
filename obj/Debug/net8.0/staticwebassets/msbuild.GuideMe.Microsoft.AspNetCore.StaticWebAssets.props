@@ -1,5 +1,23 @@
 ﻿<Project>
   <ItemGroup>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ChatFiles\abeab4c4-c529-4f50-a41c-7e994a503fdc_Screenshot (2).png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>GuideMe</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/GuideMe</BasePath>
+      <RelativePath>ChatFiles/abeab4c4-c529-4f50-a41c-7e994a503fdc_Screenshot (2).png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>xmpnicg6a1</Fingerprint>
+      <Integrity>d5wdWF4spafh0YSWDgixDO5hX++9+khmDbeeBTcTF/o=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ChatFiles\abeab4c4-c529-4f50-a41c-7e994a503fdc_Screenshot (2).png'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ContestSubmissions\ContestSubmission_15780325-49f3-405f-858f-9ace3415fbb4.png'))">
       <SourceType>Package</SourceType>
       <SourceId>GuideMe</SourceId>
@@ -3648,8 +3666,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>jysfgglm96</Fingerprint>
-      <Integrity>pZ/plGVoidDmpujtNU/jG9iR7ztIojEReG6jB9YGkJY=</Integrity>
+      <Fingerprint>9kkdrohu4k</Fingerprint>
+      <Integrity>WZS8iU0LCTltVi9PLjYSM/PpRgHODZHVTsJ7e3046T0=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Video\map.mp4'))</OriginalItemSpec>
@@ -3666,8 +3684,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>nsdttnfvfd</Fingerprint>
-      <Integrity>F5QvXLj+OW0MTY2lEwGA4OmYA9+0+ThQd1RhfXQL9O4=</Integrity>
+      <Fingerprint>9lxlukdhqr</Fingerprint>
+      <Integrity>TVsBd2DIwhoYRJh9puv9hverrMiQ9Zcl5S2GWsyz/dk=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Video\weather.mp4'))</OriginalItemSpec>
