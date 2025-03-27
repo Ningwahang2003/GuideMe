@@ -1,145 +1,91 @@
-﻿@model List<GuideMe.Models.ChatMessage>
-@{
-    ViewData["Title"] = "Group Chat";
-    var groupId = ViewBag.GroupId ?? 0; 
-    var userName = User.Identity?.Name;
-}
-
-<h2>Group Chat</h2>
-
-<div class="chat-container">
-    <div class="members-list">
-        <h4>Group Members</h4>
-        @if (ViewBag.GroupMembers != null && ViewBag.GroupMembers.Any())
-        {
-            @foreach (var member in ViewBag.GroupMembers as List<GuideMe.Models.User>)
-            {
-                <div class="member-item">
-                    @member.Name
-                </div>
-            }
-        }
-        else
-        {
-            <p>No members found.</p>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.3/signalr.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
         }
 
-    </div>
+        #chatContainer {
+            width: 400px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
 
-    <div class="chat-box">
-        <div id="chatMessages">
-            @if (Model != null && Model.Any())
-            {
-                @foreach (var message in Model)
-                {
-                    <div>
-                        <strong>@message.User.Name:</strong> @message.MessageText
-                        <small>(@message.SentAt.ToString("hh:mm tt"))</small>
-                    </div>
-                }
-            }
-            else
-            {
-                <p>No messages yet.</p>
-            }
-        </div>
+        #chatMessages {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background: #fff;
+        }
 
+        input {
+            width: calc(100% - 60px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            background: #007bff;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="chatContainer">
+        <h2>Group Chat</h2>
+        <div id="chatMessages"></div>
         <input type="text" id="messageInput" placeholder="Type a message..." />
-        <button id="sendMessageBtn">Send</button>
+        <button onclick="sendMessage()">Send</button>
     </div>
-</div>
 
-<input type="hidden" id="groupId" value="@groupId" />
-<input type="hidden" id="userName" value="@userName" />
+    <script>
+        const groupId = @Model.GroupId;
+        const userId = @Model.UserId;
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
-<script>
-    var connection = new signalR.HubConnectionBuilder().withUrl("/groupChatHub").build();
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chatHub")
+            .build();
 
-    connection.start().then(() => {
-        let groupId = document.getElementById("groupId").value;
-        connection.invoke("JoinGroup", groupId);
-    }).catch(err => console.error(err.toString()));
+        connection.on("ReceiveMessage", function (senderId, message) {
+            let messageElement = document.createElement("div");
+            messageElement.textContent = senderId + ": " + message;
+            document.getElementById("chatMessages").appendChild(messageElement);
+        });
 
-    document.getElementById("sendMessageBtn").addEventListener("click", function () {
-        let message = document.getElementById("messageInput").value.trim();
-        let groupId = document.getElementById("groupId").value;
-        let userName = document.getElementById("userName").value;
-
-        if (message !== "") {
-            connection.invoke("SendMessage", parseInt(groupId), userName, message)
-                .catch(err => console.error(err.toString()));
-
+        async function sendMessage() {
+            let message = document.getElementById("messageInput").value;
+            await fetch("/Chat/SendMessage", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ groupId, message })
+            });
             document.getElementById("messageInput").value = "";
         }
-    });
 
-    connection.on("ReceiveMessage", function (userName, message, time) {
-        let chatDiv = document.getElementById("chatMessages");
-        let newMessage = document.createElement("div");
-        newMessage.innerHTML = `<strong>${userName}:</strong> ${message} <small>(${new Date(time).toLocaleTimeString()})</small>`;
-        chatDiv.appendChild(newMessage);
-    });
-</script>
-
-<style>
-    .chat-container {
-        display: flex;
-        justify-content: space-between;
-        padding: 20px;
-    }
-
-    .members-list {
-        width: 30%;
-        background-color: #f4f4f4;
-        padding: 15px;
-        border-radius: 5px;
-        height: 400px;
-        overflow-y: scroll;
-    }
-
-    .member-item {
-        padding: 10px;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .chat-box {
-        width: 65%;
-        margin-left: 20px;
-        background-color: #fff;
-        padding: 15px;
-        border-radius: 5px;
-        height: 400px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        border: 1px solid #ddd;
-    }
-
-    #chatMessages {
-        max-height: 350px;
-        overflow-y: auto;
-    }
-
-    input[type="text"] {
-        width: 100%;
-        padding: 10px;
-        margin-top: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-    }
-
-    button {
-        margin-top: 10px;
-        padding: 10px 15px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-        button:hover {
-            background-color: #45a049;
-        }
-</style>
+        connection.start().then(() => {
+            connection.invoke("JoinGroup", groupId);
+        });
+    </script>
+</body>
+</html>

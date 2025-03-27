@@ -1,7 +1,9 @@
-﻿using GuideMe.Models;
+﻿using GuideMe.Hubs;
+using GuideMe.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
@@ -11,10 +13,12 @@ namespace GuideMe.Controllers
     public class GroupFormationController : Controller
     {
         private readonly GuideMeContext _context;
+        private readonly IHubContext<ChatHub> _hubContext;
 
-        public GroupFormationController(GuideMeContext context)
+        public GroupFormationController(GuideMeContext context, IHubContext<ChatHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
         public async Task<IActionResult> Index()
@@ -30,7 +34,7 @@ namespace GuideMe.Controllers
             var joinedgroups = await _context.GroupMembers.Where(m => m.UserId == userId).Select(m => m.GroupId).ToListAsync();
             ViewData["JoinedGroups"] = joinedgroups;
 
-            var groups = await _context.Groups.ToListAsync();
+            var groups = await _context.Groups.Include(g => g.GroupMembers).ThenInclude(gm => gm.User).ToListAsync();
             return View(groups);
         }
 
@@ -61,7 +65,11 @@ namespace GuideMe.Controllers
 
             // Check if user is already in a group
             bool isInGroup = await _context.GroupMembers.AnyAsync(m => m.UserId == userId);
-            if (isInGroup) return BadRequest("You can only be in one group at a time.");
+            if (isInGroup)
+            {
+                TempData["ErrorMessage"] = "You can only be in one group at a time.";
+                return RedirectToAction("Index");
+            }
 
             Group groups = new()
             {
@@ -95,22 +103,23 @@ namespace GuideMe.Controllers
         public async Task<IActionResult> Join(int groupId)
         {
             var userIdString = User.FindFirstValue(ClaimTypes.Name);
-            if (userIdString == null) return Unauthorized();
+            if (userIdString == null || !int.TryParse(userIdString, out int userId))
+                return Unauthorized();
 
-            if (!int.TryParse(userIdString, out int userId))
-            {
-                return BadRequest("Invalid User ID.");
-            }
-
-            // Ensure user is not in another group
             bool isInGroup = await _context.GroupMembers.AnyAsync(m => m.UserId == userId);
-            if (isInGroup) return BadRequest("You can only join one group at a time.");
+            if (isInGroup)
+            {
+                TempData["ErrorMessage"] = "You can only join one group at a time.";
+                return RedirectToAction("Index");
+            }
 
             var group = await _context.Groups.FindAsync(groupId);
             if (group == null || !group.IsActive) return NotFound("Group not found or inactive.");
 
             var user = await _context.Users.FindAsync(userId);
             if (user == null) return NotFound("User not found.");
+
+
 
             var groupMember = new GroupMember
             {
@@ -122,6 +131,9 @@ namespace GuideMe.Controllers
 
             _context.GroupMembers.Add(groupMember);
             await _context.SaveChangesAsync();
+
+            await _hubContext.Clients.Group(groupId.ToString())
+                .SendAsync("UserJoined", userId, user.Name);
 
             return RedirectToAction("Index");
         }
@@ -264,88 +276,98 @@ namespace GuideMe.Controllers
         }
 
 
-
-        /*GroupChat*/
-        [HttpGet]
-        public async Task<IActionResult> GroupChat(int groupId)
+        [HttpPost]
+        public async Task<IActionResult> SendMessage(IFormFile[] files, string messageText, int groupId)
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.Name);
-            if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int userId))
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.Name));
+            var timestamp = DateTime.Now;
+
+            try
             {
-                ModelState.AddModelError("", "User identification failed.");
-                return View();
+                var attachmentPaths = new List<string>();
+                if (files != null && files.Length > 0)
+                {
+                    var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "ChatFiles");
+                    Directory.CreateDirectory(uploadPath);
+
+                    foreach (var file in files)
+                    {
+                        var uniqueFileName = $"{Guid.NewGuid()}_{file.FileName}";
+                        var filePath = Path.Combine(uploadPath, uniqueFileName);
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+                        attachmentPaths.Add($"/ChatFiles/{uniqueFileName}");
+                    }
+                }
+
+                // Create and save the chat message to database
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+                if (user == null) return NotFound("User not found");
+
+                var chatMessage = new ChatMessage
+                {
+                    GroupId = groupId,
+                    UserId = userId,
+                    MessageText = messageText ?? "",
+                    Attachment = string.Join(",", attachmentPaths),
+                    SentAt = timestamp
+                };
+
+                _context.ChatMessages.Add(chatMessage);
+                await _context.SaveChangesAsync();
+
+                // Get user image URL
+                string imageUrl = !string.IsNullOrEmpty(user.UserImage)
+                    ? $"/UserFile/{user.UserImage}"
+                    : "/UserFile/default-profile.png";
+
+                // Send the message through SignalR
+                await _hubContext.Clients.Group(groupId.ToString()).SendAsync("ReceiveMessage",
+                    groupId,
+                    user.Name,
+                    messageText,
+                    string.Join(",", attachmentPaths),
+                    timestamp,
+                    imageUrl);
+
+                return Ok(new
+                {
+                    success = true,
+                    message = "Message sent successfully"
+                });
             }
-
-            var isMember = await _context.GroupMembers
-                .AnyAsync(m => m.GroupId == groupId && m.UserId == userId);
-
-            if (!isMember)
+            catch (Exception ex)
             {
-                ModelState.AddModelError("", "You must be a member of this group to chat.");
-                return View();
+                return StatusCode(500, ex.Message);
             }
+        }
 
-            var groupMembers = await _context.GroupMembers
-                .Where(m => m.GroupId == groupId)
-                .Include(m => m.User)
-                .ToListAsync();
 
-            Console.WriteLine($"Group Members Count: {groupMembers.Count}");
-
-            if (groupMembers == null || !groupMembers.Any())
-            {
-                ViewBag.GroupMembers = new List<GuideMe.Models.User>();
-            }
-            else
-            {
-                ViewBag.GroupMembers = groupMembers.Select(m => m.User).ToList();
-            }
-
+        [HttpGet]
+        public async Task<IActionResult> GetMessages(int groupId)
+        {
             var messages = await _context.ChatMessages
                 .Where(m => m.GroupId == groupId)
-                .Include(m => m.User)
+                .Include(m => m.User)  // Include the User navigation property
                 .OrderBy(m => m.SentAt)
+                .Select(m => new
+                {
+                    messageId = m.ChatMessageId,
+                    userName = m.User.Name,
+                    messageText = m.MessageText,
+                    attachment = m.Attachment,
+                    sentAt = m.SentAt,
+                    userImageUrl = !string.IsNullOrEmpty(m.User.UserImage)
+                        ? $"/UserFile/{m.User.UserImage}"
+                        : "/UserFile/default-profile.jpg"
+                })
                 .ToListAsync();
 
-            return View(messages);
+            return Json(messages);
         }
-
-
-        [HttpPost]
-        public async Task<IActionResult> SendMessage(int groupId, string messageText)
-        {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.Name);
-            if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int userId))
-            {
-                ModelState.AddModelError("", "User identification failed.");
-                return RedirectToAction("GroupChat", new { groupId });
-            }
-
-            var isMember = await _context.GroupMembers
-                .AnyAsync(m => m.GroupId == groupId && m.UserId == userId);
-
-            if (!isMember)
-            {
-                ModelState.AddModelError("", "You must be a member of this group to send messages.");
-                return RedirectToAction("GroupChat", new { groupId });
-            }
-
-            var message = new ChatMessage
-            {
-                GroupId = groupId,
-                UserId = userId,
-                MessageText = messageText,
-                SentAt = DateTime.Now
-            };
-
-            _context.ChatMessages.Add(message);
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction("GroupChat", new { groupId });
-        }
-
-
-
 
     }
 }

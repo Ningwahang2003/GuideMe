@@ -1,8 +1,11 @@
-﻿@model IEnumerable<GuideMe.Models.UserPost>
+﻿@using System.Security.Claims
+@model List<GuideMe.Models.UserPost>
 
 @{
     ViewData["Title"] = "My Posts";
 }
+
+<link rel="stylesheet" href="~/css/getuserpost.css" />
 
 <h2>My Posts</h2>
 
@@ -14,19 +17,23 @@
 }
 else
 {
-    <div class="row">
-        @foreach (var post in Model)
-        {
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    <p>Current User ID: @userId</p>
+    <p>Total Posts: @Model.Count</p>
+
+    @foreach (var post in Model)
+    {
+        bool hasLiked = post.PostLikes.Any(l => l.UserId.ToString() == userId);
+        <div class="card mt-3">
             <div class="card-body">
-                @foreach (var mediaPath in post.MediaPath.Split(','))
-                {
-                    if (!string.IsNullOrEmpty(mediaPath))
+                <!-- Left Side - Media (Image/Video) -->
+                <div class="post-media-container">
+                    @foreach (var mediaPath in post.MediaPath.Split(',').Where(mp => !string.IsNullOrEmpty(mp)))
                     {
                         if (mediaPath.EndsWith(".mp4") || mediaPath.EndsWith(".mov") || mediaPath.EndsWith(".avi"))
                         {
                             <video controls class="post-media">
                                 <source src="@mediaPath" type="video/mp4">
-                                Your browser does not support the video tag.
                             </video>
                         }
                         else
@@ -34,21 +41,78 @@ else
                             <img src="@mediaPath" alt="Post Image" class="post-media" />
                         }
                     }
-                }
+                </div>
 
-                <p class="mt-2"><strong>Caption:</strong> @post.Caption</p>
-                <p class="text-muted">Posted on: @post.CreatedAt.ToString("MMM dd, yyyy")</p>
+                <!-- Right Side - Content (Caption, Likes, Comments, and Buttons) -->
+                <div class="post-content">
+                    <p><strong>Caption:</strong> @post.Caption</p>
+                    <p class="text-muted">Posted on: @post.CreatedAt.ToString("MMM dd, yyyy")</p>
 
-                @if (post.UserId == Convert.ToInt32(User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value))
-                {
-                    <form asp-action="DeletePost" asp-controller="UserContent" asp-route-id="@post.PostId" method="post" onsubmit="return confirm('Are you sure you want to delete this post?');">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                }
+                    <!-- Like Button -->
+                    <button class="btn like-btn @(hasLiked ? "btn-secondary" : "btn-primary")" data-post-id="@post.PostId">
+                        @(hasLiked ? "Unlike" : "Like")
+                    </button>
+
+                    <p><strong>Likes:</strong> <span id="like-count-@post.PostId">@post.PostLikes.Count()</span></p>
+
+                    <!-- Comments Section -->
+                    <div>
+                        <strong>Comments:</strong>
+                        <ul id="comment-list-@post.PostId">
+                            @foreach (var comment in post.UserComments.OrderByDescending(c => c.CreatedAt))
+                            {
+                                <li><strong>@comment.User?.Name:</strong> @comment.Content</li>
+                            }
+                        </ul>
+                    </div>
+
+                    <!-- Comment Input -->
+                    <textarea class="comment-content" data-post-id="@post.PostId" placeholder="Add a comment..." required></textarea>
+                    <button class="btn btn-info comment-btn" data-post-id="@post.PostId">Comment</button>
+
+                    <!-- Delete Button (Visible only if the user is the post owner) -->
+                    @if (post.UserId == Convert.ToInt32(User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value))
+                    {
+                        <form asp-action="DeletePost" asp-controller="UserContent" asp-route-id="@post.PostId" method="post" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    }
+                </div>
             </div>
-                    
-        }
-
-    </div>
+        </div>
+    }
 }
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(document).on("click", ".like-btn", function () {
+            var button = $(this);
+            var postId = button.data("post-id");
+            $.post("/UserContent/LikePost", { postId: postId }, function (res) {
+                if (res.success) {
+                    $("#like-count-" + postId).text(res.likeCount);
+                    button.text(res.isLiked ? "Unlike" : "Like").toggleClass("btn-primary btn-secondary");
+                }
+            }).fail(function () {
+                alert("Failed to process like.");
+            });
+        });
+
+        $(document).on("click", ".comment-btn", function () {
+            var button = $(this);
+            var postId = button.data("post-id");
+            var content = $(".comment-content[data-post-id='" + postId + "']").val();
+            $.post("/UserContent/CommentPost", { postId: postId, content: content }, function (res) {
+                if (res.success) {
+                    $("#comment-list-" + postId).prepend(
+                        `<li><strong>${res.userName}:</strong> ${res.content}</li>`
+                    );
+                    $(".comment-content[data-post-id='" + postId + "']").val("");
+                }
+            }).fail(function () {
+                alert("Failed to add comment.");
+            });
+        });
+    });
+</script>

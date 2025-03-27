@@ -1,7 +1,11 @@
 ﻿@using System.Security.Claims
 @model GuideMe.Models.UrbanTreasureEdit
 
-<link rel="stylesheet" href="~/css/urbantreasure.css" />
+<!-- Include Font Awesome for Icons -->
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="~/css/urbantreasure.css" />
+</head>
 
 @{
     ViewData["Title"] = "Urban Treasures";
@@ -12,36 +16,46 @@
 <div class="urban-container">
     <h2 class="urban-title">
         Wander Around Nepal: <br /> A Museum at Your Fingertips!
+
+        <!-- Admin Panel -->
         @if (isAdmin)
         {
             <div class="admin-panel">
-                <a asp-controller="Admin" asp-action="ManageForm" class="btn btn-manage">Manage Provinces</a>
+                <a asp-controller="Admin" asp-action="ManageForm" class="btn btn-manage">
+                    <i class="fas fa-cog"></i> Manage Provinces
+                </a>
             </div>
         }
+
+        <!-- Contribute Button -->
         <div class="contribute-section">
-            <button class="btn btn-contribute" onclick="toggleContributionForm()">Contribute</button>
+            <button class="btn btn-contribute" onclick="toggleContributionForm()">
+                <i class="fas fa-plus-circle"></i> Contribute
+            </button>
         </div>
     </h2>
-
 
     <!-- Contribution Form (Initially Hidden) -->
     <div id="contribution-form" class="urban-form-overlay d-none">
         <div class="urban-form">
-            <button class="close-btn" onclick="toggleContributionForm()">×</button>
+            <button class="close-btn" onclick="toggleContributionForm()">
+                <i class="fas fa-times-circle"></i>
+            </button>
             <h3 class="form-title">Contribute to Urban Treasures</h3>
             <form asp-action="UrbanTreasures" method="post" enctype="multipart/form-data">
 
                 <div class="form-group">
-                    <label asp-for="Title" class="form-label">Title</label>
+                    <label asp-for="Title" class="form-label"><i class="fas fa-heading"></i> Title</label>
                     <input asp-for="Title" class="form-control" required></input>
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="Location" class="form-label">Location</label>
+                    <label asp-for="Location" class="form-label"><i class="fas fa-map-marker-alt"></i> Location</label>
                     <input asp-for="Location" class="form-control" required></input>
                 </div>
+
                 <div class="form-group">
-                    <label asp-for="ProvinceId" class="form-label">Province</label>
+                    <label asp-for="ProvinceId" class="form-label"><i class="fas fa-map"></i> Province</label>
                     <select asp-for="ProvinceId" class="form-control" required>
                         <option value="">Select a Province</option>
                         @foreach (var province in ViewBag.Provinces as List<GuideMe.Models.Province>)
@@ -52,34 +66,37 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Upload Images</label>
+                    <label class="form-label"><i class="fas fa-images"></i> Upload Images</label>
                     <div id="image-upload-container">
                         <input name="UrbanImage" type="file" class="form-control" />
                     </div>
-                    <button type="button" class="btn btn-add-image" onclick="addImageField()">+</button>
+                    <button type="button" class="btn btn-add-image" onclick="addImageField()">
+                        <i class="fas fa-plus"></i>
+                    </button>
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="Description" class="form-label">Description</label>
+                    <label asp-for="Description" class="form-label"><i class="fas fa-align-left"></i> Description</label>
                     <textarea asp-for="Description" class="form-control" rows="3" required></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-submit">Submit</button>
+                <button type="submit" class="btn btn-submit">
+                    <i class="fas fa-paper-plane"></i> Submit
+                </button>
             </form>
         </div>
     </div>
 
-
     <!-- Province List -->
     <div class="province-list">
-        <h3 class="section-title">Provinces</h3>
+        <h3 class="section-title"><i class="fas fa-map-marked-alt"></i> Provinces</h3>
         <div class="row">
             @foreach (var province in ViewBag.Provinces as List<GuideMe.Models.Province>)
             {
                 <div class="col-md-4">
                     <a asp-controller="Contribution" asp-action="ProvinceContribution" asp-route-id="@province.ProvinceId" class="province-card" style="background-image: url('@province.ProvinceImage');">
                         <div class="province-content">
-                            <h5 class="province-name">@province.ProvinceName</h5>
+                            <h5 class="province-name"><i class="fas fa-map-marker-alt"></i> @province.ProvinceName</h5>
                             <p class="province-description">@province.ProvinceDescription</p>
                         </div>
                     </a>
@@ -89,6 +106,7 @@
     </div>
 </div>
 
+<!-- JavaScript for Form Toggle and Image Upload -->
 <script>
     function toggleContributionForm() {
         const formOverlay = document.getElementById("contribution-form");

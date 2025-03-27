@@ -4,48 +4,100 @@
     ViewData["Title"] = "Weather Data";
 }
 
-<link rel="stylesheet" href="/css/weather.css">
+<head>
+    <link rel="stylesheet" href="~/css/weather.css" asp-append-version="true">
+</head>
+
+<video autoplay loop muted playsinline id="background-video">
+    <source src="~/Video/weather.mp4" type="video/mp4">
+</video>
 
 <div class="main-container">
     <h1>5-Day Weather Forecast</h1>
 
     @if (TempData["Success"] != null)
     {
-        <div class="alert alert-success">@TempData["Success"]</div>
+        <div class="alert alert-success" id="successAlert">@TempData["Success"]</div>
     }
-    @if (TempData["Error"] != null)
+    @if (TempData["Error"] != null && !string.IsNullOrEmpty(Context.Request.Query["location"]))
     {
-        <div class="alert alert-danger">@TempData["Error"]</div>
+        <div class="alert alert-danger" id="errorAlert">@TempData["Error"]</div>
         TempData["Error"] = null;
     }
 
-    <form asp-action="Weather" asp-controller="Geographic" method="get">
+    <form asp-action="Weather" asp-controller="Geographic" method="get" onsubmit="return validateForm()">
         <label for="location">Enter Location:</label>
-        <input type="text" id="location" name="location" required>
+        <input type="text" id="location" name="location">
         <button type="submit">Find Weather</button>
+        <div class="alert alert-danger" id="formErrorAlert" style="display: none;">Please enter a location</div>
     </form>
 
     @if (Model != null && Model.Any())
     {
-        <table>
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Temperature (°C)</th>
-                    <th>Condition</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var forecast in Model)
-                {
-                    <tr>
-                        <td>@(forecast.CreatedAt?.ToString("MMM d, HH:mm tt") ?? "N/A")</td>
-                        <td>@forecast.Temperature</td>
-                        <td>@forecast.Condition</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <div class="weather-cards">
+            @foreach (var forecast in Model)
+            {
+                <div class="weather-card">
+                    <div class="weather-date">
+                        <i class="fas fa-calendar-alt"></i>
+                        @(forecast.CreatedAt?.ToString("MMM d, HH:mm tt") ?? "N/A")
+                    </div>
+                    <div class="weather-icon">
+                        @{
+                            var iconClass = forecast.Condition?.ToLower() switch
+                            {
+                                var c when c.Contains("sun") => "fas fa-sun sunny",
+                                var c when c.Contains("cloud") => "fas fa-cloud cloudy",
+                                var c when c.Contains("rain") => "fas fa-cloud-rain rainy",
+                                var c when c.Contains("storm") => "fas fa-bolt stormy",
+                                _ => "fas fa-cloud"
+                            };
+                        }
+                        <i class="@iconClass"></i>
+                    </div>
+                    <div class="weather-temp">@forecast.Temperature</div>
+                    <div class="weather-condition">
+                        <i class="fas fa-info-circle"></i>
+                        @forecast.Condition
+                    </div>
+                </div>
+            }
+        </div>
     }
-</div>
+
+@section Scripts {
+    <script>
+        function validateForm() {
+            const location = document.getElementById('location').value;
+            const formErrorAlert = document.getElementById('formErrorAlert');
+
+            if (!location.trim()) {
+                formErrorAlert.style.display = 'block';
+                setTimeout(function() {
+                    formErrorAlert.style.opacity = '0';
+                    setTimeout(() => {
+                        formErrorAlert.style.display = 'none';
+                        formErrorAlert.style.opacity = '1';
+                    }, 600);
+                }, 3000);
+                return false;
+            }
+            return true;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (document.querySelector('.weather-cards')) {
+                document.body.classList.add('has-results');
+            }
+
+            const successAlert = document.getElementById('successAlert');
+            if (successAlert) {
+                setTimeout(function() {
+                    successAlert.style.opacity = '0';
+                    setTimeout(() => successAlert.remove(), 600);
+                }, 3000);
+            }
+        });
+    </script>
+}
 

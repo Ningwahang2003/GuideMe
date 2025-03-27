@@ -11,7 +11,9 @@ public partial class ChatMessage
 
     public int UserId { get; set; }
 
-    public string MessageText { get; set; } = null!;
+    public string MessageText { get; set; }
+
+    public string? Attachment { get; set; }
 
     public DateTime SentAt { get; set; }
 

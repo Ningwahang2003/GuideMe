@@ -2,78 +2,135 @@
     ViewBag.Title = "Notifications";
 }
 
-<h2>Notifications</h2>
-
-<!-- Notification Pop-up -->
-@if (ViewBag.Notifications != null && ViewBag.Notifications.Count > 0)
-{
-    <div class="notification-container">
-        @foreach (var notification in ViewBag.Notifications)
-        {
-            <div class="notification-item @(notification.IsRead ? "read" : "unread")">
+<div class="notification-container">
+    <h2><i class="fas fa-bell"></i> Notifications</h2>
+    @foreach (var notification in ViewBag.Notifications)
+    {
+        <div class="notification-item @(notification.IsRead ? "read" : "unread")">
+            <i class="notification-icon @(notification.IsRead ? "fas fa-check-circle read-icon" : "fas fa-envelope unread-icon")"></i>
+            <div class="notification-message">
                 <p>@notification.Message</p>
-                <p class="timestamp">@notification.CreatedAt.ToString("g")</p>
-                @if (!notification.IsRead)
-                {
-                    <form action="@Url.Action("MarkAsRead", "Notification", new { notificationId = notification.NotificationId })" method="post">
-                        <button type="submit" class="mark-read-btn">Mark as Read</button>
-                    </form>
-
-                }
             </div>
-        }
-    </div>
-}
+            <p class="timestamp"><i class="fas fa-clock"></i> @notification.CreatedAt.ToString("g")</p>
+            @if (!notification.IsRead)
+            {
+                <form action="@Url.Action("MarkAsRead", "Notification", new { notificationId = notification.NotificationId })" method="post">
+                    <button type="submit" class="mark-read-btn"><i class="fas fa-check"></i> Mark as Read</button>
+                </form>
+            }
+        </div>
+    }
+</div>
+
+<!-- FontAwesome for Icons -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 
 <style>
+    /* Global Styles */
+    body {
+        font-family: 'Bebas Neue', cursive;
+    }
+
+    /* Centering and Styling the Heading */
+    h2 {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    /* Notification Container */
     .notification-container {
         position: fixed;
-        top: 50%;
+        top: 30%;
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: #fff;
-        padding: 20px;
+        padding: 25px;
+        border-radius: 12px;
         border: 1px solid #ccc;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
-        width: 300px;
-        max-height: 80%;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        z-index: 900; /* Lower than navbar */
+        width: 1400px;
+        max-height: 85%;
         overflow-y: auto;
     }
 
+    /* Notification Item */
     .notification-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         background-color: #f9f9f9;
-        margin-bottom: 10px;
-        padding: 10px;
-        border-radius: 5px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+        padding: 18px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-size: 17px;
+        width: 100%;
+        box-sizing: border-box;
     }
 
+        /* Unread Notification */
         .notification-item.unread {
             font-weight: bold;
-            border-left: 4px solid #007bff;
+            border-left: 6px solid #007bff;
+            background-color: #eaf2ff;
         }
 
+        /* Read Notification */
         .notification-item.read {
             font-weight: normal;
-            opacity: 0.6;
+            opacity: 0.7;
         }
 
-    .timestamp {
-        font-size: 0.8em;
-        color: #888;
+    /* Notification Message */
+    .notification-message {
+        flex: 2;
+        padding-right: 10px;
     }
 
+    /* Center Timestamp Vertically */
+    .timestamp {
+        font-size: 14px;
+        color: #777;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Mark as Read Button */
     .mark-read-btn {
         background-color: #007bff;
         color: #fff;
-        padding: 5px 10px;
+        padding: 7px 14px;
         border: none;
-        border-radius: 5px;
+        border-radius: 6px;
         cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s;
+        flex: 0.5;
+        text-align: right;
     }
 
         .mark-read-btn:hover {
             background-color: #0056b3;
         }
+
+    /* Notification Icons */
+    .notification-icon {
+        font-size: 22px;
+        margin-right: 10px;
+    }
+
+    .unread-icon {
+        color: #007bff;
+    }
+
+    .read-icon {
+        color: #28a745;
+    }
+
 </style>

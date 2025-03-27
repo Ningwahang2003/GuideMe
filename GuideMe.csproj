@@ -22,7 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\ChatFiles\" />
     <Folder Include="wwwroot\ContestSubmissions\" />
+    <Folder Include="wwwroot\ChatUpload\" />
     <Folder Include="wwwroot\usercontent\" />
     <Folder Include="wwwroot\ProvinceImages\" />
     <Folder Include="wwwroot\UrbanImage\" />

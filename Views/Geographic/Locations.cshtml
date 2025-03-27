@@ -1,6 +1,11 @@
 ﻿@model List<GuideMe.Models.Location>
 
-<link rel="stylesheet" href="~/css/location.css" />
+<link rel="stylesheet" href="~/css/location.css" asp-append-version="true" />
+
+<video autoplay loop muted playsinline id="background-video">
+    <source src="~/Video/map.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
 
 <div class="location-container">
     <h2>Location Search</h2>
@@ -26,9 +31,6 @@
                             style="border:0"
                             allowfullscreen>
                     </iframe>
-
-
-
                 </div>
             }
         }

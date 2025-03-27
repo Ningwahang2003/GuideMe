@@ -17,6 +17,7 @@ public partial class UserPost
 
     public DateTime CreatedAt { get; set; }
 
+
     [NotMapped]
     [DataType(DataType.Upload)]
     public IFormFile[]? MediaFiles { get; set; }

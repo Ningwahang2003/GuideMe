@@ -1,0 +1,152 @@
+﻿/* Card Styling for Each Post */
+.card {
+    display: flex;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    }
+
+/* Left Side - Media (Image/Video) */
+.post-media-container {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap; /* Allows media to wrap if there are multiple items */
+    gap: 10px;
+    padding: 10px;
+}
+
+    .post-media-container img, .post-media-container video {
+        max-width: 100%;
+        height: auto;
+        flex-shrink: 0;
+        border-radius: 10px;
+    }
+
+/* Right Side - Content (Caption, Likes, Comments, and Buttons) */
+.post-content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Aligning text on the right side */
+.post-content {
+    align-self: flex-start; /* Align content to the right */
+}
+
+.post-caption {
+    font-size: 16px;
+    color: #333;
+    margin: 10px 0;
+}
+
+.text-muted {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.like-btn, .comment-btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.like-btn {
+    margin-bottom: 10px;
+}
+
+.comment-content {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+    .comment-content:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 10px 0;
+}
+
+li {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+    li strong {
+        color: #007bff;
+    }
+
+/* Buttons */
+.btn {
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card {
+        flex-direction: column;
+    }
+
+    .post-media-container {
+        max-width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .post-content {
+        flex: 1;
+        padding: 15px;
+    }
+}

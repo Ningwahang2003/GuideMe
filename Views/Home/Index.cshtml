@@ -8,9 +8,7 @@
 
 @if (TempData["SuccessMessage"] != null)
 {
-    <div id="successMessage">
-        @TempData["SuccessMessage"]
-    </div>
+    <div id="successMessage">@TempData["SuccessMessage"]</div>
 }
 
 <div id="event-container">
@@ -32,16 +30,13 @@
 {
     var contest = Model.UpcomingContests.First();
     var today = DateTime.UtcNow.Date;
-    var contestStartDate = contest.StartDate.Date;
-
     <div class="card mb-3">
         <div class="card-body">
             <h5 class="card-title">@contest.ContestType</h5>
             <p><strong>Start Date:</strong> @contest.StartDate.ToString("MM/dd/yyyy")</p>
             <p><strong>End Date:</strong> @contest.EndDate.ToString("MM/dd/yyyy")</p>
             <p><strong>Instructions:</strong> @contest.Instructions</p>
-
-            @if ((today - contestStartDate).TotalDays <= 1)
+            @if ((today - contest.StartDate.Date).TotalDays <= 1)
             {
                 <a href="@Url.Action("ParticipateContest", "Home", new { contestId = contest.ContestId })">Participate</a>
             }
@@ -49,7 +44,6 @@
             {
                 <p><strong>Participation is closed.</strong></p>
             }
-
             <a href="@Url.Action("ViewContest", "Home", new { contestId = contest.ContestId })">View</a>
         </div>
     </div>
@@ -59,37 +53,61 @@ else
     <p>No active contests currently.</p>
 }
 
+<h2>Latest User Posts</h2>
 
-@if (Model.Winner != null)
+@if (Model.UserPosts?.Any() == true)
 {
-    <h3>Contest Winner: @Model.Winner.Name</h3>
-    <p>Congratulations to @Model.Winner.Name for winning the contest!</p>
-
-    <h4>Contest Entries:</h4>
-    <ul>
-        @foreach (var entry in Model.ContestEntries)
+    <div class="row">
+        @foreach (var post in Model.UserPosts)
         {
-            <li>
-                @entry.Title
-                @entry.Submission
-                @entry.Descriptions
-                <br />
-                Votes: @entry.VoteCount
-            </li>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@post.User.Name</h5>
+                    @foreach (var mediaPath in post.MediaPath.Split(',').Where(mp => !string.IsNullOrEmpty(mp)))
+                    {
+                        if (mediaPath.EndsWith(".mp4") || mediaPath.EndsWith(".mov") || mediaPath.EndsWith(".avi"))
+                        {
+                            <video controls class="post-media"><source src="@mediaPath" type="video/mp4"></video>
+                        }
+                        else
+                        {
+                            <img src="@mediaPath" alt="Post Image" class="post-media" />
+                        }
+                    }
+                    <p>@post.Caption</p>
+                    <p class="text-muted">Posted on: @post.CreatedAt.ToString("MMM dd, yyyy")</p>
+
+                    <button class="btn btn-outline-primary like-btn" data-post-id="@post.PostId">Like (@post.PostLikes.Count)</button>
+                    <textarea class="comment-content" data-post-id="@post.PostId" placeholder="Add a comment..." required></textarea>
+                    <button class="btn btn-info comment-btn" data-post-id="@post.PostId">Comment</button>
+
+                    <div>
+                        <h6>Comments:</h6>
+                        <ul id="comment-list-@post.PostId">
+                            @foreach (var comment in post.UserComments)
+                            {
+                                <li><strong>@comment.User.Name:</strong> @comment.Content</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
         }
-    </ul>
+    </div>
+}
+else
+{
+    <p>No posts available.</p>
 }
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let slides = document.querySelectorAll('.event-slide');
+    $(document).ready(function () {
+        let slides = $('.event-slide');
         let currentIndex = 0;
 
         function showSlide(index) {
-            slides.forEach(slide => slide.style.display = 'none');
-            if (slides.length > 0) {
-                slides[index].style.display = 'block';
-            }
+            slides.hide().eq(index).show();
         }
 
         function nextSlide() {
@@ -99,19 +117,30 @@ else
 
         if (slides.length > 0) {
             showSlide(currentIndex);
-            setInterval(nextSlide, 3000); // Change event every 3 seconds
-        } else {
-            console.log("No upcoming events found.");
+            setInterval(nextSlide, 3000);
         }
-    });
 
-    // Automatically hide the success message after a few seconds
-    window.onload = function() {
-        const successMessage = document.getElementById("successMessage");
-        if (successMessage) {
-            setTimeout(() => {
-                successMessage.style.display = 'none';
-            }, 3000); // Adjust time in milliseconds
-        }
-    };
+        $('#successMessage').fadeOut(3000);
+
+        $(document).on('click', '.like-btn', function () {
+            let button = $(this);
+            let postId = button.data('post-id');
+            $.post('/UserContent/LikePost', { postId: postId }, function (res) {
+                if (res.success) {
+                    button.text(`Like (${res.likeCount})`);
+                }
+            }).fail(() => alert('Failed to process like.'));
+        });
+
+        $(document).on('click', '.comment-btn', function () {
+            let postId = $(this).data('post-id');
+            let content = $(`.comment-content[data-post-id='${postId}']`).val();
+            $.post('/UserContent/CommentPost', { postId: postId, content: content }, function (res) {
+                if (res.success) {
+                    $(`#comment-list-${postId}`).prepend(`<li><strong>${res.userName}:</strong> ${res.content}</li>`);
+                    $(`.comment-content[data-post-id='${postId}']`).val('');
+                }
+            }).fail(() => alert('Failed to add comment.'));
+        });
+    });
 </script>

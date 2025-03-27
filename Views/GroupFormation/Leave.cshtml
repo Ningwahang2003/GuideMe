@@ -1,16 +1,24 @@
 ﻿@{
     var groupId = (int)ViewData["GroupId"];
 }
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
 
-<h2>Leave Group</h2>
+<h2 style="text-align: center; color: #4b8f8c;">Leave Group</h2>
 
-<form asp-action="Leave" asp-controller="GroupFormation" method="post">
-    <input type="hidden" name="groupId" value="@groupId" 
+<form asp-action="Leave" asp-controller="GroupFormation" method="post" style="max-width: 500px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+    <input type="hidden" name="groupId" value="@groupId" />
 
-    <div class="form-group">
-        <label for="leaveReason">Reason for leaving:</label>
-        <textarea name="leaveReason" id="leaveReason" class="form-control" rows="3"></textarea>
+    <div class="form-group" style="margin-bottom: 20px;">
+        <label for="leaveReason" style="font-size: 1.1rem; color: #333; display: flex; align-items: center;">
+            <i class="fas fa-sign-out-alt" style="margin-right: 10px; color: #4b8f8c;"></i> Reason for leaving:
+        </label>
+        <textarea name="leaveReason" id="leaveReason" class="form-control" style="width: 100%; padding: 12px; font-size: 1rem; border-radius: 5px; border: 1px solid #ccc; margin-top: 8px; box-sizing: border-box;" rows="3"></textarea>
     </div>
 
-    <button type="submit">Leave</button>
+    <button type="submit" class="btn btn-danger" style="padding: 10px 20px; font-size: 1.1rem; border-radius: 5px; background-color: #e74c3c; color: white; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; width: 100%;">
+        <i class="fas fa-sign-out-alt" style="margin-right: 8px;"></i> Leave
+    </button>
 </form>
+

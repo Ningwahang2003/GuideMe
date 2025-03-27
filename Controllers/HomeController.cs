@@ -91,11 +91,13 @@ namespace GuideMe.Controllers
             var homeViewModel = new HomeViewModel
             {
                 UpcomingEvents = _context.Events.Where(e => e.EventStartDate >= today && e.IsAdded && !e.IsExpired).OrderBy(e => e.EventStartDate).Take(4).ToList(),
-
-                UpcomingContests = activeContest != null ? new List<WeeklyContest> { activeContest } : new List<WeeklyContest>()
+                UpcomingContests = activeContest != null ? new List<WeeklyContest> { activeContest } : new List<WeeklyContest>(),
+                UserPosts = _context.UserPosts.Include(p => p.User).Include(p => p.PostLikes).Include(p => p.UserComments).OrderByDescending(p => p.CreatedAt).ToList()
             };
 
+            Console.WriteLine("UserPosts Count: " + homeViewModel.UserPosts.Count);  // Check if data is being passed
             return View(homeViewModel);
+
         }
 
 
@@ -161,15 +163,14 @@ namespace GuideMe.Controllers
         [Authorize]
         public IActionResult ProfilePhoto()
         {
-
-            var userId = Convert.ToInt16(User.Identity!.Name);
-
+            var userId = Convert.ToInt32(User.Identity.Name);
             var user = _context.Users.FirstOrDefault(p => p.UserId == userId);
 
             var profileImagePath = string.IsNullOrEmpty(user?.UserImage)
                 ? "/UserFile/default-profile.png"
                 : $"/UserFile/{user.UserImage}";
 
+            // Pass image URL to the view
             ViewBag.image = profileImagePath;
 
             return PartialView("_Profile");

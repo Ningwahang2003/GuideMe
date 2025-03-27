@@ -14,7 +14,8 @@
     <!-- Load jQuery Validation Unobtrusive -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 
-
+    <!-- Add this line in the head section -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 
     <style>
@@ -155,9 +156,7 @@
                     <li><a asp-action="ModerateContent" asp-controller="Admin">ModerateContent</a></li>
                     <li class="profile-dropdown">
                         <button type="button" id="ProfileImgButton" class="flex items-center">
-                            <img class="profile-img"
-                                 src="@ViewBag.image"
-                                 alt="Profile Image" />
+                            <img class="profile-img" src="@Url.Content(ViewBag.image)" alt="Profile Image" />
                         </button>
                         <div id="dropdownNavbar" class="dropdown-menu hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
                             <a asp-action="ProfileUpdate" asp-controller="Home">Edit Profile</a>
@@ -182,14 +181,12 @@
                     <li><a asp-action="Locations" asp-controller="Geographic">Location</a></li>
                     <li><a asp-action="Weather" asp-controller="Geographic">Weather</a></li>
                     <li><a asp-action="Index" asp-controller="GroupFormation">Group</a></li>
-                    <li><a asp-action="GroupChat" asp-controller="GroupFormation">Chatroom</a></li>
+                    <li><a asp-action="Index" asp-controller="Chat">Chatroom</a></li>
                     <li><a asp-action="ViewEvent" asp-controller="Contribution">Event</a></li>
                     <li><a asp-action="UrbanTreasures" asp-controller="Contribution">UrbanTreasures</a></li>
                     <li class="profile-dropdown">
                         <button type="button" id="ProfileImgButton" class="flex items-center">
-                            <img class="profile-img"
-                                 src="@ViewBag.image"
-                                 alt="Profile Image" />
+                            <img class="profile-img" src="@Url.Content(ViewBag.image)" alt="Profile Image" />
                         </button>
                         <div id="dropdownNavbar" class="dropdown-menu hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
                             <a asp-action="GetUserPosts" asp-controller="UserContent">Profile</a>
@@ -233,6 +230,8 @@
             });
         });
     </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
      
 </body>
 </html>

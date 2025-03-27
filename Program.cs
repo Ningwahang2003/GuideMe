@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http.Features;
+using GuideMe.Hubs;
 
 namespace GuideMe
 {
@@ -70,6 +71,7 @@ namespace GuideMe
             app.UseAuthentication();
             app.UseAuthorization();
 
+            
             app.MapControllerRoute(
                 name: "weather",
                 pattern: "Geographic/Weather/{location?}",
@@ -80,7 +82,7 @@ namespace GuideMe
                 name: "default",
                 pattern: "{controller=Static}/{action=Index}/{id?}");
 
-            app.MapHub<ChatHub>("/chatHub").RequireAuthorization();
+            app.MapHub<ChatHub>("/chathub");
 
             app.Run();
         }

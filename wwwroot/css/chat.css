@@ -1,0 +1,157 @@
+﻿/* General Body Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container Styles */
+.container {
+    margin-top: 50px;
+}
+
+/* Left Sidebar: User Search & Chat History */
+#searchUser {
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+#userList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+    #userList li {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        #userList li:hover {
+            background-color: #e8e8e8;
+        }
+
+        #userList li .userIcon {
+            width: 40px;
+            height: 40px;
+            background-color: #ccc;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        #userList li .userName {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+/* Right Side: Chat Box */
+#chatBox {
+    background-color: #fff;
+    border-radius: 10px;
+    height: 500px;
+    overflow-y: scroll;
+    margin-bottom: 20px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+    #chatBox p {
+        text-align: center;
+        font-size: 18px;
+        color: #888;
+    }
+
+.input-group {
+    margin-top: 15px;
+}
+
+#messageInput {
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 14px;
+    flex-grow: 1;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+#attachment {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: #f1f1f1;
+    padding: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#sendMessage {
+    background-color: #0095f6;
+    color: white;
+    border-radius: 50%;
+    padding: 12px 20px;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    #sendMessage:hover {
+        background-color: #007cc3;
+    }
+
+/* Icons Styling */
+#attachment {
+    background-image: url('https://img.icons8.com/ios/50/000000/attach.png');
+    background-size: cover;
+    background-position: center;
+}
+
+#sendMessage {
+    background-image: url('https://img.icons8.com/ios/50/ffffff/sent.png');
+    background-size: cover;
+    background-position: center;
+}
+
+    #sendMessage:hover {
+        background-image: url('https://img.icons8.com/ios/50/ffffff/sent.png');
+    }
+
+/* Search Button Styling */
+#searchUser + button {
+    background-color: #0095f6;
+    color: white;
+    border-radius: 20px;
+    padding: 8px 12px;
+    margin-left: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    #searchUser + button:hover {
+        background-color: #007cc3;
+    }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        margin-top: 20px;
+    }
+
+    .col-md-4,
+    .col-md-8 {
+        padding: 0 15px;
+    }
+
+    #messageInput {
+        font-size: 14px;
+    }
+}

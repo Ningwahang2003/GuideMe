@@ -23,32 +23,46 @@ namespace GuideMe.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public IActionResult Index()
-        {
-            var posts = _context.UserPosts.Include(p => p.User).ToList();
-            return View(posts);
-        }
-
+        // GET: GetUserPosts - Displays posts of the current user
         [HttpGet]
+        [AllowAnonymous]  // Temporarily allow access for debugging
         public IActionResult GetUserPosts()
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.Name);
-            if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int userId))
+            // Debugging: Check if user is authenticated
+            if (!User.Identity.IsAuthenticated)
             {
+                Console.WriteLine("❌ User is NOT authenticated!");
                 return Unauthorized();
             }
 
-            var userPosts = _context.UserPosts.Where(p => p.UserId == userId).ToList();
+            var userIdClaim = User.FindFirstValue(ClaimTypes.Name);
+            if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int userId))
+            {
+                Console.WriteLine("❌ User ID not found in claims.");
+                return Unauthorized();
+            }
+
+            Console.WriteLine($"✅ Authenticated User ID: {userId}");
+
+            var userPosts = _context.UserPosts
+                .Where(p => p.UserId == userId)
+                .Include(p => p.User)
+                .Include(p => p.PostLikes)
+                .Include(p => p.UserComments)
+                .ThenInclude(c => c.User)
+                .ToList();
+
             return View(userPosts);
         }
 
+        // GET: Create a New Post
         [HttpGet]
         public IActionResult CreatePost()
         {
             return View();
         }
 
-
+        // POST: Create a New Post
         [HttpPost]
         public async Task<IActionResult> CreatePost(List<IFormFile> mediaFiles, string caption)
         {
@@ -88,7 +102,7 @@ namespace GuideMe.Controllers
             var post = new UserPost
             {
                 UserId = userId,
-                MediaPath = string.Join(",", filePaths),  // Store as comma-separated
+                MediaPath = string.Join(",", filePaths),
                 Caption = caption,
                 CreatedAt = DateTime.UtcNow
             };
@@ -99,7 +113,7 @@ namespace GuideMe.Controllers
             return RedirectToAction("GetUserPosts");
         }
 
-
+        // POST: Delete a Post
         [HttpPost]
         public async Task<IActionResult> DeletePost(int id)
         {
@@ -112,19 +126,88 @@ namespace GuideMe.Controllers
             var post = await _context.UserPosts.FindAsync(id);
             if (post == null)
             {
-                ModelState.AddModelError("", "Post not found.");
-                return View("GetUserPosts");
+                return NotFound();
             }
 
             if (post.UserId != userId)
             {
-                ModelState.AddModelError("", "You are not authorized to delete this post.");
-                return View("GetUserPosts");
+                return Unauthorized();
             }
+
+            // Load related PostLikes
+            var postLikes = _context.PostLikes.Where(pl => pl.PostId == id);
+            _context.PostLikes.RemoveRange(postLikes);
+
+            // Load related UserComments
+            var postComments = _context.UserComments.Where(pc => pc.PostId == id);
+            _context.UserComments.RemoveRange(postComments);
 
             _context.UserPosts.Remove(post);
             await _context.SaveChangesAsync();
+
             return RedirectToAction("GetUserPosts");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LikePost(int postId)
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.Name);
+            if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int userId))
+            {
+                return Json(new { success = false });
+            }
+
+            var existingLike = await _context.PostLikes.FirstOrDefaultAsync(l => l.PostId == postId && l.UserId == userId);
+            bool isLiked = false;
+
+            if (existingLike != null)
+            {
+                _context.PostLikes.Remove(existingLike);
+            }
+            else
+            {
+                var like = new PostLike { PostId = postId, UserId = userId };
+                _context.PostLikes.Add(like);
+                isLiked = true;
+            }
+
+            await _context.SaveChangesAsync();
+            int likeCount = await _context.PostLikes.CountAsync(l => l.PostId == postId);
+
+            return Json(new { success = true, likeCount, isLiked });
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> CommentPost(int postId, string content)
+        {
+            if (string.IsNullOrWhiteSpace(content))
+            {
+                return Json(new { success = false });
+            }
+
+            var userIdClaim = User.FindFirstValue(ClaimTypes.Name);
+            if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int userId))
+            {
+                return Json(new { success = false });
+            }
+
+            var comment = new UserComment
+            {
+                PostId = postId,
+                UserId = userId,
+                Content = content,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _context.UserComments.Add(comment);
+            await _context.SaveChangesAsync();
+
+            var user = await _context.Users.FindAsync(userId);
+            string userName = user?.Name ?? "Anonymous";
+
+            return Json(new { success = true, userName, content });
         }
 
     }
