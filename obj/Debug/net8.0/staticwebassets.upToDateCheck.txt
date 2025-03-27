@@ -1,51 +1,3 @@
-wwwroot\ChatFiles\05406cc7-dc45-46d3-8d71-c0d262a1d9cb_22072162 Ningwahang Subba(Limbu) (3).pdf
-wwwroot\ChatFiles\06accd76-b84d-40b6-99bb-fb77ed63e847_b.jpg
-wwwroot\ChatFiles\086436b2-3844-4c78-aeb9-5261bf9ee7b8_b.jpg
-wwwroot\ChatFiles\0e485315-6a5d-490d-af7a-ae8b01c59794_b.jpg
-wwwroot\ChatFiles\20f442bb-9590-463a-9712-538006fe4faa_b.jpg
-wwwroot\ChatFiles\318dc9bd-3626-4432-ac16-54e7e5e7d4ed_22072162 Ningwahang Subba(Limbu) (3)-2-8.pdf
-wwwroot\ChatFiles\35004241-856e-4792-a18c-1f9eb28bc1fe_bg.jpg
-wwwroot\ChatFiles\42507c0e-f53b-46dc-a4e2-d5b984ce5ab2_22072162 Ningwahang Subba(Limbu) (3).pdf
-wwwroot\ChatFiles\57738df8-2f6a-4030-8d9a-6d2d5a2963a7_DataandWebERD.drawio.png
-wwwroot\ChatFiles\6c7390ba-82d5-4b1e-b820-956b88f72bfb_b.jpg
-wwwroot\ChatFiles\77ff6970-ca06-49b9-923a-bdefebede16e_13280173_3840_2160_25fps.mp4
-wwwroot\ChatFiles\7b17fa49-2d27-437a-ab34-cb2c3f501573_Screenshot 2025-03-25 214813.png
-wwwroot\ChatFiles\91f2fa15-1077-4900-8e1d-086167df5864_22072162 Ningwahang Subba(Limbu) (3)-2-8.pdf
-wwwroot\ChatFiles\92893030-c1e8-4b67-aa71-dee463cf7d9d_CC6012NT Data and Web Development Coursework 2024-25 QP (1).pdf
-wwwroot\ChatFiles\b9740fc9-7f17-43fd-bd70-d6c4d3561e93_bg.jpg
-wwwroot\ChatFiles\e16a6953-1088-456a-a9f2-e460cf788060_b.jpg
-wwwroot\ChatFiles\e1f3be0b-5ab8-43aa-ab51-43b4c3affe77_CC6012NT Data and Web Development Coursework 2024-25 QP (2).pdf
-wwwroot\ChatFiles\e683c912-3e53-471b-861f-d68c3882e4f4_DataandWebERD.drawio.png
-wwwroot\ChatFiles\e7f74afd-42af-4070-b267-460dd258d312_22072162 Ningwahang Subba(Limbu) (3)-2-8.pdf
-wwwroot\ChatFiles\f0598f1d-0041-4bf7-9a1c-35503eb49810_background.jpg
-wwwroot\ChatFiles\f41b0809-f0b9-4253-9cef-09768dfc9d11_Screenshot 2025-03-25 214908.png
-wwwroot\ChatFiles\fb53f84e-5ea7-4ad1-bb64-db56886c0ce5_8965253-uhd_3840_2160_30fps.mp4
-wwwroot\ChatUpload\0a1f9306-bf99-42e5-ac8c-3b955faf4f60.png
-wwwroot\ChatUpload\1fe714d8-02e7-47f9-b1d4-2b906ff81c97.png
-wwwroot\ChatUpload\23250a77-4afb-4020-9074-e49b24d8f877.png
-wwwroot\ChatUpload\249468b8-06b0-43a2-9aa8-776d345e3466.png
-wwwroot\ChatUpload\3926c5f5-9e8c-479f-b130-b465ad0e86c0.pdf
-wwwroot\ChatUpload\4d3b4813-d187-423e-a404-e58a5af637bd.pdf
-wwwroot\ChatUpload\5653bd99-a9fc-4224-b481-a7fcb3e96c26.png
-wwwroot\ChatUpload\5a28685c-16aa-4e71-844a-3e72cbe2eb60.png
-wwwroot\ChatUpload\7343aab0-039e-41b3-8191-eac3f637882c.png
-wwwroot\ChatUpload\781a73dc-0fa3-46b3-b9d3-d5488a0d9d9c.png
-wwwroot\ChatUpload\813e5e9c-049f-4dd7-987f-523f0bef8f75.png
-wwwroot\ChatUpload\853d519c-4391-4eed-9bb8-51924f5aa760.png
-wwwroot\ChatUpload\8df7230c-0f29-47f7-a178-42d360a56915.png
-wwwroot\ChatUpload\8e1beb7c-4c3f-4cae-8850-76c512262c57.png
-wwwroot\ChatUpload\930909dc-3e70-476b-be6c-a5d0d1bc78ae.pdf
-wwwroot\ChatUpload\9a28452a-53d4-4767-a5e4-2623550ad927.png
-wwwroot\ChatUpload\9f6af046-de64-4fc0-b444-730670777163.pdf
-wwwroot\ChatUpload\a8f6b2ab-8b43-4bab-817c-f6512d74a3df.png
-wwwroot\ChatUpload\aa6b98e8-8429-4f17-9c26-c3feb40acbff.png
-wwwroot\ChatUpload\b0fcba34-00bd-4b4d-ba76-e5e49990ef39.pdf
-wwwroot\ChatUpload\b30eee0c-7fb2-4bed-85da-0abf0c669d30.pdf
-wwwroot\ChatUpload\bf230754-361f-4bf6-b16d-42220b7d5894.png
-wwwroot\ChatUpload\d11014f0-ad74-450d-a1ed-e98ded874186.png
-wwwroot\ChatUpload\d86bd24e-e9fb-4f2b-9056-41b52aa9ada0.png
-wwwroot\ChatUpload\e6c8d7ae-548c-4c51-a8c8-9f7666e3535b.png
-wwwroot\ChatUpload\f0175170-e5e3-4d86-ac73-0635b12f7c60.pdf
 wwwroot\ContestSubmissions\ContestSubmission_15780325-49f3-405f-858f-9ace3415fbb4.png
 wwwroot\ContestSubmissions\ContestSubmission_4bde0ef7-ec2a-4aca-8645-10bb1a066be9.png
 wwwroot\ContestSubmissions\ContestSubmission_690e74c9-d84a-4db1-bfc6-5e9992776492.jpg
@@ -222,7 +174,6 @@ wwwroot\usercontent\6b263838-e4a5-436f-8f40-b7bca1f4ce94.png
 wwwroot\usercontent\823f216f-3a8a-44b5-b122-d5681ce4c3da.png
 wwwroot\usercontent\89138368-7186-4cde-89f5-3ff5d18aed58.png
 wwwroot\usercontent\8f130a90-5b99-4b7d-8ec5-6dfe49371184.png
-wwwroot\usercontent\90c3a215-bc68-48be-b0aa-1304b9688505.mp4
 wwwroot\usercontent\97680ab3-8317-4d2b-92c7-7eee97bfcee7.png
 wwwroot\usercontent\9b423fbf-2928-4182-acc5-2e9c49c96dab.png
 wwwroot\usercontent\a0f74f41-e092-4a80-8597-5c51845af2d6.mp4
