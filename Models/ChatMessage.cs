@@ -11,11 +11,11 @@ public partial class ChatMessage
 
     public int UserId { get; set; }
 
-    public string MessageText { get; set; }
-
-    public string? Attachment { get; set; }
+    public string MessageText { get; set; } = null!;
 
     public DateTime SentAt { get; set; }
+
+    public string? Attachment { get; set; }
 
     public virtual Group Group { get; set; } = null!;
 

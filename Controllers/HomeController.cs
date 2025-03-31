@@ -28,79 +28,118 @@ namespace GuideMe.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var today = DateTime.UtcNow;
-
-            var activeContest = _context.WeeklyContests.FirstOrDefault(c => c.Status == "Active");
-
-            if (activeContest != null)
+            try
             {
-                if (today.Date > activeContest.EndDate.Date)
-                {
-                    if (activeContest.WinnerUserId == null)
-                    {
-                        var winningEntry = _context.ContestEntries.Where(e => e.ContestId == activeContest.ContestId).OrderByDescending(e => e.VoteCount).FirstOrDefault();
+                var today = DateTime.UtcNow;
+                var homeViewModel = new HomeViewModel();
 
-                        if (winningEntry != null)
-                        {
-                            activeContest.WinnerUserId = winningEntry.UserId;
-
-                        }
-
-                    }
-
-                    activeContest.Status = "Inactive";
-                    _context.SaveChanges();
-
-                    var nextContest = _context.WeeklyContests.Where(c => c.Status == "Inactive").OrderBy(c => c.ContestId).FirstOrDefault();
-
-                    if (nextContest != null)
-                    {
-                        nextContest.Status = "Active";
-                        nextContest.StartDate = today.Date;
-                        nextContest.EndDate = today.Date.AddDays(6);
-                        _context.SaveChanges();
-                        activeContest = nextContest;
-                    }
-                }
-            }
-            else
-            {
-                activeContest = _context.WeeklyContests.Where(c => c.Status == "Inactive").OrderBy(c => c.StartDate).FirstOrDefault();
+                // Handle weekly contests
+                var activeContest = _context.WeeklyContests
+                    .Include(c => c.ContestEntries)
+                    .ThenInclude(e => e.User)
+                    .FirstOrDefault(c => c.Status == "Active");
 
                 if (activeContest != null)
                 {
-                    activeContest.Status = "Active";
-                    activeContest.StartDate = today.Date;
-                    activeContest.EndDate = today.Date.AddDays(6);
-                    _context.SaveChanges();
+                    // Check if contest has ended (after 6 days)
+                    if (today.Date > activeContest.EndDate.Date)
+                    {
+                        // Determine winner
+                        if (activeContest.WinnerUserId == null)
+                        {
+                            var winningEntry = activeContest.ContestEntries
+                                .OrderByDescending(e => e.VoteCount)
+                                .FirstOrDefault();
+
+                            if (winningEntry != null)
+                            {
+                                activeContest.WinnerUserId = winningEntry.UserId;
+                                activeContest.ContestPhase = "Completed";
+                                homeViewModel.Winner = winningEntry.User;
+
+                                // Create notification for winner
+                                var notification = new Notification
+                                {
+                                    UserId = winningEntry.UserId,
+                                    Message = $"Congratulations! You won the {activeContest.ContestType} contest!",
+                                    CreatedAt = DateTime.Now,
+                                    IsRead = false
+                                };
+                                _context.Notifications.Add(notification);
+                            }
+                        }
+
+                        // Set current contest to inactive
+                        activeContest.Status = "Inactive";
+                        _context.SaveChanges();
+
+                        // Find and activate next contest
+                        var nextContest = _context.WeeklyContests
+                            .FirstOrDefault(c => c.Status == "Inactive" && c.ContestPhase != "Completed");
+
+                        if (nextContest != null)
+                        {
+                            nextContest.Status = "Active";
+                            nextContest.StartDate = today.Date;
+                            nextContest.EndDate = today.Date.AddDays(6);
+                            nextContest.ContestPhase = "Running";
+                            _context.SaveChanges();
+                            activeContest = nextContest;
+                        }
+                        else
+                        {
+                            // If no new contests, reset completed contests for next cycle
+                            var allCompletedContests = _context.WeeklyContests
+                                .Where(c => c.ContestPhase == "Completed")
+                                .OrderBy(c => c.ContestId)
+                                .ToList();
+
+                            if (allCompletedContests.Any())
+                            {
+                                var firstContest = allCompletedContests.First();
+                                firstContest.Status = "Active";
+                                firstContest.ContestPhase = "Running";
+                                firstContest.StartDate = today.Date;
+                                firstContest.EndDate = today.Date.AddDays(6);
+                                firstContest.WinnerUserId = null;
+                                activeContest = firstContest;
+                                _context.SaveChanges();
+                            }
+                        }
+                    }
+
+                    homeViewModel.ContestEntries = activeContest.ContestEntries.ToList();
                 }
+
+                // Load upcoming events
+                homeViewModel.UpcomingEvents = _context.Events
+                    .Where(e => e.EventStartDate >= today && e.IsAdded && !e.IsExpired)
+                            .OrderBy(e => e.EventStartDate)
+                            .Take(4)
+                            .ToList();
+
+                /*// Load user posts with related data
+                homeViewModel.UserPosts = _context.UserPosts
+                    .Include(p => p.User)
+                    .Include(p => p.PostLikes)
+                    .Include(p => p.UserComments)
+                    .OrderByDescending(p => p.CreatedAt)
+                    .ToList();*/
+
+                // Set active contest and winner info
+                homeViewModel.UpcomingContests = activeContest != null
+                    ? new List<WeeklyContest> { activeContest }
+                    : new List<WeeklyContest>();
+
+                // Rest of your existing code...
+                return View(homeViewModel);
             }
-
-            var winner = (activeContest != null && activeContest.WinnerUserId != null)
-            ? _context.Users.Where(u => u.UserId == activeContest.WinnerUserId).FirstOrDefault()
-            : null;
-
-            List<ContestEntry> contestEntries = new List<ContestEntry>();
-
-            if (activeContest != null)
+            catch (Exception ex)
             {
-                contestEntries = _context.ContestEntries.Where(e => e.ContestId == activeContest.ContestId).ToList();
+                Console.WriteLine($"Error in Index action: {ex.Message}");
+                return View(new HomeViewModel());
             }
-
-
-            var homeViewModel = new HomeViewModel
-            {
-                UpcomingEvents = _context.Events.Where(e => e.EventStartDate >= today && e.IsAdded && !e.IsExpired).OrderBy(e => e.EventStartDate).Take(4).ToList(),
-                UpcomingContests = activeContest != null ? new List<WeeklyContest> { activeContest } : new List<WeeklyContest>(),
-                UserPosts = _context.UserPosts.Include(p => p.User).Include(p => p.PostLikes).Include(p => p.UserComments).OrderByDescending(p => p.CreatedAt).ToList()
-            };
-
-            Console.WriteLine("UserPosts Count: " + homeViewModel.UserPosts.Count);  // Check if data is being passed
-            return View(homeViewModel);
-
         }
-
-
 
         [HttpGet]
         public IActionResult Register() 

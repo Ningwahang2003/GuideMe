@@ -1,7 +1,9 @@
-﻿body {
-    font-family: Arial, sans-serif;
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
     background-color: #f4f4f4;
-    background-image: url('/Image/events.png');
+    background-image: url('/Image/event.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

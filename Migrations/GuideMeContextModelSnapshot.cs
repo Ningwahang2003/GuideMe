@@ -307,6 +307,42 @@ namespace GuideMe.Migrations
                     b.ToTable("PostLike", (string)null);
                 });
 
+            modelBuilder.Entity("GuideMe.Models.PrivateMessage", b =>
+                {
+                    b.Property<int>("PrivateMessageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PrivateMessageId"));
+
+                    b.Property<string>("Attachment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MessageText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ReceiverId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SenderId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("SentAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("PrivateMessageId");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("PrivateMessages");
+                });
+
             modelBuilder.Entity("GuideMe.Models.Province", b =>
                 {
                     b.Property<int>("ProvinceId")
@@ -687,6 +723,21 @@ namespace GuideMe.Migrations
                     b.Navigation("Post");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GuideMe.Models.PrivateMessage", b =>
+                {
+                    b.HasOne("GuideMe.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("GuideMe.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("GuideMe.Models.UrbanTreasure", b =>

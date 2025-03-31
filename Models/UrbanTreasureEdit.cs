@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GuideMe.Models
 {
@@ -23,7 +24,16 @@ namespace GuideMe.Models
         [Required]
         public int ProvinceId { get; set; }
 
+
         [DataType(DataType.Upload)]
         public IFormFile[]? UrbanImage { get; set; }
+
+        public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
+
+        [NotMapped]
+        public double AverageRating => Ratings.Any() ? Ratings.Average(r => r.RatingValue) : 0;
+
+        [NotMapped]
+        public int RatingCount => Ratings.Count;
     }
 }

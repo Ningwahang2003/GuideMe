@@ -1,24 +1,14 @@
-﻿body, html {
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+
+body, html {
     height: 100%;
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-image: url('/Image/events.png');
+    font-family: 'Poppins', sans-serif;
+    background-image: url('/Image/event.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-}
-
-.eventrequest {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.eventrequest img {
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-    display: block;
-    border-radius: 8px;
 }
 
 .event {
@@ -30,65 +20,58 @@
 }
 
 .event-form {
-    max-width: 600px;
-    width: 100%;
-    padding: 30px;
+    max-width: 580px;
+    width: 90%;
+    padding: 25px;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin: 0 auto;
+    margin: 50px auto;
 }
 
-.event-form label {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 5px;
-}
-
-.event-form input {
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    width: 200vh;
-}
-
-.event-form textarea {
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    width: 100%;
-}
-
-.event-form textarea {
-    resize: vertical;
-    height: 150px;
-}
-
-.event-form button {
-    width: 100%;
-    padding: 12px;
-    background-color: #007bff;
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
- .event-form button:hover {
-    background-color: #0056b3;
- }
-
-@media (max-width: 400px) {
-    .event-form {
-        width: 90%;
+    .event-form input {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid rgba(204, 204, 204, 0.5);
+        border-radius: 5px;
+        margin-bottom: 15px;
+        display: block;
     }
-}
+
+    .event-form textarea {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid rgba(204, 204, 204, 0.5);
+        border-radius: 5px;
+        margin-bottom: 15px;
+        height: 120px;
+        resize: vertical;
+        display: block;
+    }
+
+    .event-form label {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 5px;
+    }
+
+
+    .event-form button {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .event-form button:hover {
+            background-color: #0056b3;
+        }

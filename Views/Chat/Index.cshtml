@@ -1,111 +1,345 @@
-﻿@model List<GuideMe.Models.UserViewModel>
-
+﻿@using System.Security.Claims
 @{
     ViewData["Title"] = "Chat";
-    var userId = User.Identity?.Name;
 }
 
-<div class="container mt-5">
+<div class="container-fluid mt-4">
     <div class="row">
-        <!-- Left Sidebar -->
-        <div class="col-md-4">
-            <div class="search-container mb-4">
-                <input type="text" id="searchUser" class="form-control" placeholder="Search users..." />
-                <button class="btn btn-primary" onclick="searchUsers()">Search</button>
+        <!-- Left sidebar -->
+        <div class="col-md-5">
+            <!-- Search box -->
+            <div class="search-container">
+                <form asp-action="SearchUsers" asp-controller="Chat" method="get">
+                    <div class="input-group">
+                        <input type="text" name="searchTerm" class="form-control" placeholder="Search users by name...">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
 
-            <h5>Chat History</h5>
-            <ul id="userList" class="list-group">
-                @if (Model != null && Model.Any())
+            <!-- Search Results -->
+            <div id="searchResults" class="list-group mt-3">
+                @if (ViewBag.SearchResults != null)
                 {
-                    @foreach (var user in Model)
+                    foreach (var user in ViewBag.SearchResults)
                     {
-                        <li class="list-group-item">
-                            <a href="@Url.Action("GetChatHistory", "Chat", new { userId = userId, otherUserId = user.UserId })">
-                                @if (!string.IsNullOrEmpty(user.UserImage))
-                                {
-                                    <img src="@user.UserImage" class="img-thumbnail" width="30" height="30" alt="@user.Name" />
-                                }
-                                @user.Name
-                            </a>
-
-                            @if (user.Messages != null && user.Messages.Any())
-                            {
-                                var latestMessage = user.Messages.First();
-                                <small class="text-muted">@latestMessage.SentAt.ToString("yyyy-MM-dd HH:mm:ss")</small>
-                                <div>@latestMessage.MessageText</div>
-                            }
-                        </li>
+                        @if (user.Role == "User")
+                        {
+                            <div class="user-item d-flex align-items-center p-2 border-bottom" data-user-id="@user.UserId">
+                                <img src="@(user.UserImage ?? "/UserFile/default-profile.png")"
+                                     class="rounded-circle mr-2"
+                                     style="width: 40px; height: 40px;">
+                                <div class="flex-grow-1">
+                                    <div class="font-weight-bold">@user.Name</div>
+                                </div>
+                            </div>
+                        }
                     }
                 }
-                else
-                {
-                    <li class="list-group-item">No users available</li>
-                }
-            </ul>
+            </div>
+
+            <!-- Chat Users List -->
+            <div id="chatUsersList" class="list-group mt-3"></div>
         </div>
 
-        <!-- Right Side -->
-        <div class="col-md-8">
-            @if (Model != null && Model.Any())
-            {
-                <h3>Chat with @Model[0].Name</h3>
-                <div id="chatBox" class="mb-3" style="height: 400px; overflow-y: auto; border: 1px solid #ddd; padding: 10px;">
-                    <div class="messages">
-                        @if (Model[0].Messages != null)
-                        {
-                            @foreach (var message in Model[0].Messages)
-                            {
-                                <div class="message mb-3">
-                                    <div class="message-header">
-                                        <strong>@(message.User?.Name ?? "Unknown User"):</strong>
-                                        <small class="text-muted">@message.SentAt.ToString("yyyy-MM-dd HH:mm:ss")</small>
-                                    </div>
-                                    <div class="message-body">
-                                        @message.MessageText
-                                    </div>
-                                </div>
-                            }
-                        }
+        <!-- Chat Area -->
+        <div class="col-md-7">
+            <div class="chat-container d-none">
+                <div class="chat-header d-flex align-items-center">
+                    <img id="selectedUserImage" src="/UserFile/default-profile.png" class="rounded-circle mr-2" style="width: 40px; height: 40px;">
+                    <h5 id="selectedUserName" class="mb-0"></h5>
+                </div>
+                <div id="messageArea" class="messages-area">
+                    <!-- Messages will be loaded here -->
+                </div>
+                <div class="chat-input-area">
+                    <div class="d-flex align-items-center">
+                        <div class="input-group">
+                            <input type="text" id="messageInput" class="form-control" placeholder="Type your message...">
+                            <div class="input-group-append">
+                                <button type="button" id="sendButton" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                @if (!string.IsNullOrEmpty(userId))
-                {
-                    <form method="post" action="/Chat/SendPrivateMessage">
-                        <input type="hidden" name="senderId" value="@userId" />
-                        <input type="hidden" name="receiverId" value="@Model[0].UserId" />
-                        <div class="form-group">
-                            <textarea name="message" class="form-control" placeholder="Type a message..." rows="3" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send</button>
-                    </form>
-                }
-            }
-            else
-            {
-                <p>Select a user to start chatting</p>
-            }
+            </div>
         </div>
     </div>
 </div>
 
+<input type="hidden" id="currentUserId" value="@User.FindFirstValue(ClaimTypes.Name)" />
+<input type="hidden" id="currentUserImage" value="@ViewBag.CurrentUserImage" />
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.3/signalr.min.js"></script>
-    <script>
-        // Establish SignalR connection
-        var connection = new signalR.HubConnectionBuilder()
+<script>
+    let selectedUserId = null;
+    let selectedUserName = null;
+    let connection = null;
+
+    function setupSignalR() {
+        connection = new signalR.HubConnectionBuilder()
             .withUrl("/chatHub")
+            .withAutomaticReconnect()
             .build();
 
-        connection.on("ReceivePrivateMessage", function(senderId, message) {
-            var messageContainer = document.getElementById("chatBox");
-            var newMessage = document.createElement("div");
-            newMessage.innerHTML = "<strong>User " + senderId + ":</strong> " + message;
-            messageContainer.appendChild(newMessage);
+        connection.on("ReceivePrivateMessage", function (senderId, senderName, message, timestamp, senderImage) {
+            const currentUserId = parseInt($('#currentUserId').val());
+
+            // Update chat for both sender and receiver
+            if (selectedUserId === senderId || senderId === currentUserId) {
+                appendMessage(message, timestamp, senderId !== currentUserId, senderImage);
+                updateChatUsersList(); // Update the chat list to show latest message
+            }
         });
 
-        connection.start().catch(function(err) {
-            return console.error(err.toString());
+        connection.start()
+            .then(function() {
+                console.log("SignalR Connected");
+            })
+            .catch(function (err) {
+                console.error(err.toString());
+                setTimeout(setupSignalR, 5000); // Retry connection
+            });
+    }
+
+    function updateChatUsersList() {
+        $.get('/Chat/GetChatUsers', function (users) {
+            const chatUsersList = $('#chatUsersList');
+            chatUsersList.empty();
+
+            users.forEach(item => {
+                const lastMessagePreview = item.lastMessage
+                    ? `<small class="text-muted">${item.lastMessage.messageText.substring(0, 20)}${item.lastMessage.messageText.length > 20 ? '...' : ''}</small>`
+                    : '';
+
+                const userHtml = `
+                    <div class="user-item d-flex align-items-center p-2 border-bottom ${selectedUserId === item.user.userId ? 'active' : ''}"
+                         data-user-id="${item.user.userId}">
+                        <img src="${item.user.userImage || '/UserFile/default-profile.png'}"
+                             class="rounded-circle mr-2"
+                             style="width: 40px; height: 40px; object-fit: cover;">
+                        <div class="flex-grow-1">
+                            <div class="d-flex justify-content-between">
+                                <strong>${item.user.name}</strong>
+                            </div>
+                            ${lastMessagePreview}
+                        </div>
+                    </div>
+                `;
+                chatUsersList.append(userHtml);
+            });
+
+            attachUserClickHandlers();
         });
-    </script>
-}
+    }
+
+    function attachUserClickHandlers() {
+        $('.user-item').click(function () {
+            selectedUserId = $(this).data('user-id');
+            selectedUserName = $(this).find('strong').text();
+
+            $('.user-item').removeClass('active');
+            $(this).addClass('active');
+
+            $('#selectedUserName').text(selectedUserName);
+            $('.chat-container').removeClass('d-none');
+
+            loadMessages(selectedUserId);
+        });
+    }
+
+    function loadMessages(userId) {
+        $.get(`/Chat/GetPrivateMessages?userId=${userId}`, function (messages) {
+            const messageArea = $('#messageArea');
+            messageArea.empty();
+
+            messages.forEach(message => {
+                const isReceived = message.senderId !== parseInt($('#currentUserId').val());
+                const userImage = isReceived
+                    ? $('.user-item[data-user-id="' + message.senderId + '"] img').attr('src')
+                    : $('#currentUserImage').attr('src') || '/UserFile/default-profile.png';
+
+                appendMessage(message.messageText, message.sentAt, isReceived, userImage);
+            });
+
+            scrollToBottom();
+        });
+    }
+
+    function appendMessage(message, timestamp, isReceived, userImage) {
+        const messageArea = $('#messageArea');
+        const messageClass = isReceived ? 'received' : 'sent';
+        const alignClass = isReceived ? 'justify-content-start' : 'justify-content-end';
+
+        const messageHtml = `
+            <div class="message-row d-flex ${alignClass} mb-2">
+                ${isReceived ? `<img src="${userImage}" class="rounded-circle mr-2" style="width: 30px; height: 30px;">` : ''}
+                <div class="message ${messageClass} p-2 rounded">
+                    <div class="message-content">${message}</div>
+                    <small class="text-muted">${new Date(timestamp).toLocaleTimeString()}</small>
+                </div>
+                ${!isReceived ? `<img src="${userImage}" class="rounded-circle ml-2" style="width: 30px; height: 30px;">` : ''}
+            </div>
+        `;
+
+        messageArea.append(messageHtml);
+        scrollToBottom();
+    }
+
+    function sendMessage() {
+        const messageInput = $('#messageInput');
+        const message = messageInput.val().trim();
+
+        if (!message || !selectedUserId || !connection) return;
+
+        const senderId = parseInt($('#currentUserId').val());
+
+        connection.invoke("SendPrivateMessage", senderId, selectedUserId, message)
+            .then(function() {
+                messageInput.val('');
+            })
+            .catch(function(err) {
+                console.error(err.toString());
+                alert("Failed to send message. Please try again.");
+            });
+    }
+
+    function scrollToBottom() {
+        const messageArea = $('#messageArea');
+        messageArea.scrollTop(messageArea[0].scrollHeight);
+    }
+
+    function startAutoRefresh() {
+        setInterval(function() {
+            if (selectedUserId) {
+                loadMessages(selectedUserId);
+            }
+            updateChatUsersList();
+        }, 5000);
+    }
+
+    $(document).ready(function() {
+        setupSignalR();
+        updateChatUsersList();
+        startAutoRefresh();
+
+        $('#messageInput').keypress(function(e) {
+            if (e.which == 13 && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        $('#sendButton').click(function(e) {
+            e.preventDefault();
+            sendMessage();
+        });
+    });
+</script>
+
+<style>
+    .d-none {
+        display: none !important;
+    }
+
+    .chat-header {
+        padding: 15px;
+        background: white;
+        border-bottom: 1px solid #dee2e6;
+        margin-bottom: 10px;
+    }
+
+        .chat-header h5 {
+            margin: 0;
+            color: #495057;
+        }
+
+    .chat-container {
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .messages-area {
+        flex-grow: 1;
+        overflow-y: auto;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 5px;
+    }
+
+    .chat-input-area {
+        padding: 15px;
+        background: white;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .message {
+        margin-bottom: 15px;
+        max-width: 70%;
+    }
+
+        .message.sent {
+            margin-left: auto;
+        }
+
+        .message.received {
+            margin-right: auto;
+        }
+
+    .message-content {
+        padding: 10px 15px;
+        border-radius: 15px;
+        position: relative;
+    }
+
+    .sent .message-content {
+        background: #007bff;
+        color: white;
+    }
+
+    .received .message-content {
+        background: white;
+        border: 1px solid #dee2e6;
+    }
+
+    .message-time {
+        font-size: 0.75rem;
+        color: #6c757d;
+        margin-top: 5px;
+    }
+
+    .user-item {
+        cursor: pointer;
+        padding: 10px;
+        transition: background-color 0.3s;
+    }
+
+        .user-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .user-item.active {
+            background-color: #e9ecef;
+        }
+
+    .search-container {
+        margin-bottom: 20px;
+    }
+
+    .last-message {
+        font-size: 0.8rem;
+        color: #6c757d;
+        margin-top: 2px;
+    }
+</style>

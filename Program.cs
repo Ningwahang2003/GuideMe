@@ -53,6 +53,7 @@ namespace GuideMe
                 serverOptions.Limits.MaxRequestBodySize = 1_000_000_000; // 1GB
             });
 
+
             var app = builder.Build();
 
             if (!app.Environment.IsDevelopment())
@@ -83,6 +84,13 @@ namespace GuideMe
                 pattern: "{controller=Static}/{action=Index}/{id?}");
 
             app.MapHub<ChatHub>("/chathub");
+
+            /*using (var scope = app.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<GuideMeContext>();
+                RatingSample.RatingData(context);
+                RatingSample.ExportRatingsToCSV(context);
+            }*/
 
             app.Run();
         }

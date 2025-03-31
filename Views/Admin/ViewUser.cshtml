@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<GuideMe.Models.User>
 
-<link rel="stylesheet" href="~/css/viewuser.css" />
+<link rel="stylesheet" href="~/css/viewuser.css" asp-append-version="true" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,8 +10,6 @@
     <title>User List</title>
 </head>
 <body>
-    <div class="container">
-        <h1>User List</h1>
         <table>
             <thead>
                 <tr>
@@ -50,7 +48,6 @@
                 }
             </tbody>
         </table>
-    </div>
 
     <div id="overlay" class="overlay" onclick="closeForm()"></div>
 

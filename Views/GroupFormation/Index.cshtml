@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<GuideMe.Models.Group>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <h2 class="text-center text-primary">Available Groups</h2>
 
@@ -106,31 +106,93 @@
 <style>
 
     body {
-        font-family: 'Bebas Neue', cursive;
-        background-color: #f8f9fa;
+        font-family: 'Poppins', sans-serif;
+        background-image: url('@Url.Content("~/Image/grouptravel.jpg")') !important;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
         margin: 0;
         padding: 0;
+        min-height: 100vh;
     }
 
-    /* Center the "Available Groups" heading */
+    /* Update the main heading and create button container */
     h2.text-center.text-primary {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 100%;
-        margin-bottom: 20px;
-        color: #4b8f8c; /* Softer greenish-blue for headings */
+        font-size: 3rem;
+        margin-bottom: 30px;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border: none;
     }
 
-    /* Container for the "Create Group" button aligned to the right */
+    /* Adjust create group button positioning */
     .text-end.mb-3 {
         position: absolute;
-        right: 20px;
-        top: 0;
+        right: 30px;
+        top: 100px;
+        height: auto;
+    }
+
+    /* Style the create group button */
+    .btn-primary {
+        text-decoration: none;
+        font-size: 1.2rem;
+        padding: 12px 25px;
+    }
+
+    /* Center the join button and adjust its size */
+    .group-box form {
         display: flex;
-        align-items: center;
         justify-content: center;
-        height: 210px;
+        margin-top: 20px;
+    }
+
+    .group-box .btn-success {
+        padding: 15px 40px;
+        font-size: 1.2rem;
+        width: auto;
+        margin: 0 auto;
+    }
+
+    /* Update create group button style */
+    .text-end.mb-3 .btn-primary {
+        text-decoration: none;
+        font-size: 1.4rem;
+        padding: 15px 30px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+        .text-end.mb-3 .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+    /* Update Edit and Leave buttons */
+    .action-buttons a {
+        text-decoration: none !important;
+        font-size: 1.2rem;
+        padding: 12px 25px;
+        transition: all 0.3s ease;
+    }
+
+    /* Update Group Chat heading */
+    .chat-section h4.text-center.text-primary {
+        color: white !important;
+        font-size: 3.5rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 35px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     .group-container {
@@ -140,80 +202,111 @@
         margin-top: 20px;
     }
 
-    .group-box {
-        background: #ffffff;
-        padding: 25px;
-        border-radius: 12px;
-        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    .group-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        margin: 40px auto;
+        padding: 20px;
+        max-width: 1400px;
     }
 
-        /* Hover effect for group box */
+    .group-box {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 35px;
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        text-align: center;
+        transition: all 0.4s ease;
+    }
+
         .group-box:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.15);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 15px 45px rgba(31, 38, 135, 0.2);
         }
 
+    .group-title {
+        color: #2c3e50;
+        font-size: 2.2rem;
+        font-family: 'Poppins', sans-serif;
+        margin-bottom: 25px;
+        border-bottom: 2px solid rgba(75, 143, 140, 0.5);
+        padding-bottom: 15px;
+        text-align: center;
+    }
 
     .group-box p {
-        font-size: 20px;
-        color: #555555; /* Softer gray for paragraph text */
-        margin: 8px 0;
+        font-size: 1.3rem;
+        font-family: 'Roboto', sans-serif;
+        color: #34495e;
+        margin: 15px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
 
     .group-box i {
-        font-size: 26px;
-        margin-right: 8px;
-        color: #4b8f8c; /* Softer blue for icons */
-    }
-
-    /* Action Buttons */
-    .action-buttons a,
-    .action-buttons form button {
-        display: inline-block;
-        padding: 12px 20px;
-        font-size: 20px;
-        font-weight: bold;
+        font-size: 1.6rem;
+        margin-right: 15px;
+        color: #4b8f8c;
+        width: 30px;
         text-align: center;
-        border-radius: 8px;
-        text-decoration: none;
-        transition: 0.3s ease-in-out;
-        width: 160px;
-        border: 2px solid transparent;
     }
 
-    /* Buttons with softened colors */
-    .btn-warning {
-        background-color: #f1c232; /* Soft yellow */
-        color: #333333;
-        border-color: #e0a800;
+    .action-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 30px;
     }
 
-        .btn-warning:hover {
-            background-color: #e0a800; /* Slight darkened yellow */
-            color: white;
+        .action-buttons a,
+        .action-buttons form button,
+        .btn-success {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(5px);
         }
+
+    /* Update button styles for better visibility on transparent background */
+    .btn-warning {
+        background: rgba(241, 194, 50, 0.9);
+        color: #333;
+    }
 
     .btn-danger {
-        background-color: #c93e3e; /* Softer red */
+        background: rgba(201, 62, 62, 0.9);
         color: white;
-        border-color: #b83232;
     }
-
-        .btn-danger:hover {
-            background-color: #b83232; /* Slight darkened red */
-        }
 
     .btn-success {
-        background-color: #6fa44d; /* Softer green */
+        background: rgba(111, 164, 77, 0.9);
         color: white;
-        border-color: #5c8b3e;
     }
 
+        /* Button hover effects */
+        .btn-warning:hover,
+        .btn-danger:hover,
         .btn-success:hover {
-            background-color: #5c8b3e; /* Slight darkened green */
+            transform: translateY(-3px);
+            filter: brightness(110%);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
+
+    
 
     /* Chat Section Styling */
     .chat-section {

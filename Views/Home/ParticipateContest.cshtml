@@ -1,6 +1,6 @@
 ﻿@model GuideMe.Models.ContestEntry
 
-<link rel="stylesheet" href="~/css/participatecontest.css" />
+<link rel="stylesheet" href="~/css/participatecontest.css" asp-append-version="true" />
 
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 <form asp-action="ParticipateContest" asp-route-contestId="@Model.ContestId" enctype="multipart/form-data" method="post">

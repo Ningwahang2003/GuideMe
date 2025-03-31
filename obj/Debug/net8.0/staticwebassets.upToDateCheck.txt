@@ -1,13 +1,30 @@
+wwwroot\ChatFiles\88235b43-32ab-41bc-8a96-29af385c6f63_Screenshot 2025-03-27 213028.png
 wwwroot\ChatFiles\abeab4c4-c529-4f50-a41c-7e994a503fdc_Screenshot (2).png
 wwwroot\ContestSubmissions\ContestSubmission_15780325-49f3-405f-858f-9ace3415fbb4.png
+wwwroot\ContestSubmissions\ContestSubmission_269d17cb-bce4-45f4-9c09-5841ead85ea0.png
+wwwroot\ContestSubmissions\ContestSubmission_2efe0a0e-993f-4b60-935a-6a5480095879.png
+wwwroot\ContestSubmissions\ContestSubmission_2f934bc9-1c10-4a02-91f1-4874cb4fb500.jpg
 wwwroot\ContestSubmissions\ContestSubmission_4bde0ef7-ec2a-4aca-8645-10bb1a066be9.png
+wwwroot\ContestSubmissions\ContestSubmission_594e3537-bbf8-46e1-99f4-0117ebc5d9dd.jpg
+wwwroot\ContestSubmissions\ContestSubmission_61a42fb3-ab56-4324-b6e5-698133440371.png
 wwwroot\ContestSubmissions\ContestSubmission_690e74c9-d84a-4db1-bfc6-5e9992776492.jpg
+wwwroot\ContestSubmissions\ContestSubmission_77ca3879-7558-4b3c-8dc8-63564005902f.jpg
+wwwroot\ContestSubmissions\ContestSubmission_8007580d-4254-487c-bff2-92624d6fba0f.png
+wwwroot\ContestSubmissions\ContestSubmission_a1173e18-4df3-4a9f-954d-fa42df27bea7.jpg
+wwwroot\ContestSubmissions\ContestSubmission_a5c4391a-7cd6-44bf-8a01-b3491b20d8af.png
+wwwroot\ContestSubmissions\ContestSubmission_a60f59aa-2302-4604-956a-e498a6a6c49c.png
 wwwroot\ContestSubmissions\ContestSubmission_ab4103b4-b65b-466a-93b8-b38f14b4d772.png
 wwwroot\ContestSubmissions\ContestSubmission_ac7fa1d5-b323-4247-895f-32ec91c9f34f.jpg
+wwwroot\ContestSubmissions\ContestSubmission_cdec625f-c2ad-4215-8feb-ea4a02ad2ba2.jpg
 wwwroot\ContestSubmissions\ContestSubmission_ce24749a-bc82-49d3-a05d-80eb00a35da3.jpg
 wwwroot\ContestSubmissions\ContestSubmission_d80a2272-9338-4282-a1bc-8e46fa77f0cf.jpg
+wwwroot\ContestSubmissions\ContestSubmission_dfc8aeab-876e-4179-87d5-85e4b58ccadb.png
 wwwroot\ContestSubmissions\ContestSubmission_e7c86ad3-eb8b-4e0e-a812-4aafd9072b0e.jpg
 wwwroot\ContestSubmissions\ContestSubmission_ea9f87fb-7ca7-4980-92a5-d29b175e1028.png
+wwwroot\ContestSubmissions\ContestSubmission_ed7882ff-91da-4f0d-b74c-42234e62f2f2.png
+wwwroot\ContestSubmissions\ContestSubmission_f085348f-780a-4b89-bbd0-cd7ed5ef6e2f.jpg
+wwwroot\ContestSubmissions\ContestSubmission_f0fd105b-6b25-4d79-a413-00969f8235ad.png
+wwwroot\ContestSubmissions\ContestSubmission_f106567a-d74b-4f59-b293-dd91109982a8.png
 wwwroot\ContestSubmissions\ContestSubmission_f1c74dc3-9332-44c5-9c39-d0b7eebae454.png
 wwwroot\css\addcontest.css
 wwwroot\css\AddEvent.css
@@ -41,20 +58,23 @@ wwwroot\gomaps\gomaps.js
 wwwroot\gomaps\gruntfile.js
 wwwroot\gomaps\package.json
 wwwroot\gomaps\readme.md
-wwwroot\Image\event.png
-wwwroot\Image\events.png
+wwwroot\Image\c.jpg
+wwwroot\Image\contest.jpg
+wwwroot\Image\d.jpg
+wwwroot\Image\event.jpg
 wwwroot\Image\facebook.png
+wwwroot\Image\grouptravel.jpg
 wwwroot\Image\Kathmandu.png
 wwwroot\Image\Logo.png
 wwwroot\Image\main.png
 wwwroot\Image\nepal.png
+wwwroot\Image\participate.jpg
+wwwroot\Image\people.jpg
 wwwroot\Image\Pokhara.png
 wwwroot\Image\Scan.png
-wwwroot\Image\Screenshot 2024-12-19 152646.png
-wwwroot\Image\Screenshot 2024-12-30 190909.png
 wwwroot\Image\Search.png
 wwwroot\Image\twitter.png
-wwwroot\Image\view.png
+wwwroot\Image\weekly.jpg
 wwwroot\Image\youtube.png
 wwwroot\jquery\jquery.js
 wwwroot\jquery\jquery.min.js
@@ -154,7 +174,6 @@ wwwroot\UrbanImage\UrbanImage4aae5ee7-d199-43ec-8b18-f9064770ca35.JPG
 wwwroot\UrbanImage\UrbanImage616b29da-d58d-4a87-81e1-a18f84ca3008.png
 wwwroot\UrbanImage\UrbanImage7d0ea10b-4ad6-4881-8e81-476dacc4952f.JPG
 wwwroot\UrbanImage\UrbanImage9a581ffd-5bd7-42b6-bda5-beac49a87e9c.PNG
-wwwroot\UrbanImage\UrbanImage9f02fd53-08a4-490c-9c01-afa1cb4703a5.MOV
 wwwroot\UrbanImage\UrbanImagea744a23f-3434-4230-a891-ecfcd4bf7a1b.JPG
 wwwroot\UrbanImage\UrbanImageb6426b85-f3eb-4d2c-adc1-dd4cd2389939.JPG
 wwwroot\UrbanImage\UrbanImagecf54d8a9-ae44-40dd-b061-fb41789c5fae.JPG
@@ -177,7 +196,6 @@ wwwroot\usercontent\89138368-7186-4cde-89f5-3ff5d18aed58.png
 wwwroot\usercontent\8f130a90-5b99-4b7d-8ec5-6dfe49371184.png
 wwwroot\usercontent\97680ab3-8317-4d2b-92c7-7eee97bfcee7.png
 wwwroot\usercontent\9b423fbf-2928-4182-acc5-2e9c49c96dab.png
-wwwroot\usercontent\a0f74f41-e092-4a80-8597-5c51845af2d6.mp4
 wwwroot\usercontent\ae3c5bea-bf73-4c18-bd4e-9dea5bf40eff.png
 wwwroot\usercontent\b9d64b53-6fcf-49fa-8837-c4c54d976efd.png
 wwwroot\usercontent\eaf52362-ce25-4526-9278-631326aeccdc.png
@@ -188,6 +206,7 @@ wwwroot\UserFile\UserFile1338b266-e8d2-476e-b00b-4ece9849705a.JPG
 wwwroot\UserFile\UserFile3dc5747d-6d27-4d84-925f-dadd3b8ad2bb.png
 wwwroot\UserFile\UserFile53b67443-f62d-4abd-84b4-7e63e1b435dc.jpg
 wwwroot\UserFile\UserFile73dcab14-e0df-40c9-a6a3-d27375bcc3e2.png
+wwwroot\UserFile\UserFile7595286a-0822-4233-9404-1415f57316ce.png
 wwwroot\UserFile\UserFile78a679a5-a378-4886-9806-e6175c43e4dc.png
 wwwroot\UserFile\UserFile81309e52-4884-41a2-8393-add9ef5aa292.png
 wwwroot\UserFile\UserFile8fcc9905-34bc-4eda-903f-b33ea4602e3f.png
@@ -201,4 +220,6 @@ wwwroot\UserFile\UserFilee3843b97-a6ab-4814-87f6-a5f8a11f3d61.JPG
 wwwroot\UserFile\UserFilee41ce310-63fc-474b-be0b-423693a45da2.jpg
 wwwroot\UserFile\UserFilee48c0e0e-5c56-496c-ad43-9815de7779fa.png
 wwwroot\Video\map.mp4
+wwwroot\Video\search.mp4
+wwwroot\Video\searchevent.mp4
 wwwroot\Video\weather.mp4

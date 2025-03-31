@@ -1,5 +1,8 @@
-﻿html, body {
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+html, body {
     height: 100vh;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -20,7 +23,6 @@
     z-index: -1;
 }
 
-/* Update the container to ensure proper layering */
 .location-container {
     position: relative;
     max-width: 1200px;
@@ -30,16 +32,6 @@
     border-radius: 10px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     z-index: 2;
-}
-
-/* Body styling */
-body {
-    font-family: 'Roboto', sans-serif;
-    background: transparent; /* Changed from background-color */
-    color: #333;
-    min-height: 100vh;
-    position: relative;
-    z-index: 1;
 }
 
 h2 {

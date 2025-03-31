@@ -1,37 +1,55 @@
 ﻿@model List<GuideMe.Models.Event>
-
-<link rel="stylesheet" href="~/css/ViewEvents.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="~/css/ViewEvents.css" asp-append-version="true" />
 
 <div class="view-event-container">
 
-    <h2 class="event-header">Join the Journey: <br /> Where Every Moment Tells a Story!</h2>
+    <section class="search-event-section">
 
-    <div class="search-container">
-        <form asp-action="ViewEvent" method="get">
-            <input type="text" name="location" placeholder="Search by location">
-            <input type="date" name="date">
-            <button type="submit">Search</button>
-        </form>
-    </div>
+        <video autoplay muted loop class="background-video">
+            <source src="~/Video/search.mp4" type="video/mp4">
+        </video>
+
+        <h2 class="event-header">Join the Journey: <br /> Where Every Moment Tells a Story!</h2>
+
+        <div class="search-container">
+            <form asp-action="ViewEvent" method="get">
+                <input type="text" name="location" placeholder="Search by location">
+                <input type="date" name="date">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </section>
+
+    @if (TempData["SearchError"] != null)
+    {
+        <div class="alert alert-warning text-center mt-3">
+            @TempData["SearchError"]
+        </div>
+    }
+
 
     <div class="text-end">
         <a asp-controller="Contribution" asp-action="CheckEventRequest" class="btn btn-primary">
             Add Events
         </a>
+        <h2 class="event">All Events</h2>
     </div>
-
-    <h2 class="event"> All Events </h2>
 
     <div class="event-container">
         @foreach (var ev in Model)
         {
             <div class="event-card">
-                <h3>@ev.EventTitle</h3>
-                <p><strong>Location:</strong> @ev.EventLocation</p>
-                <p><strong>Start Date:</strong> @(ev.EventStartDate?.ToString("yyyy-MM-dd") ?? "N/A")</p>
-                <p><strong>End Date:</strong> @(ev.EventEndDate?.ToString("yyyy-MM-dd") ?? "N/A")</p>
-                <p><strong>Time:</strong> @ev.EventTime</p>
-                <p>@ev.EventDescription</p>
+                <p class="event-title">
+                    <span class="title-text">@ev.EventTitle</span>
+                </p>
+                <div class="event-details">
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> @ev.EventLocation</p>
+                    <p><i class="fas fa-calendar-check"></i> <strong>Start Date:</strong> @(ev.EventStartDate?.ToString("yyyy-MM-dd") ?? "N/A")</p>
+                    <p><i class="fas fa-calendar-times"></i> <strong>End Date:</strong> @(ev.EventEndDate?.ToString("yyyy-MM-dd") ?? "N/A")</p>
+                    <p><i class="fas fa-clock"></i> <strong>Time:</strong> @ev.EventTime</p>
+                    <p><i class="fas fa-info-circle"></i> @ev.EventDescription</p>
+                </div>
             </div>
         }
     </div>

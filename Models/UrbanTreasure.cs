@@ -21,5 +21,7 @@ public partial class UrbanTreasure
 
     public virtual Province Province { get; set; } = null!;
 
+    public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
+
     public virtual User User { get; set; } = null!;
 }

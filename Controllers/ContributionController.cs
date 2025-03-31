@@ -139,7 +139,14 @@ namespace GuideMe.Controllers
                 events = events.Where(e => e.EventStartDate <= date && e.EventEndDate >= date);
             }
 
-            return View(events.ToList());
+            var resultEvents = events.ToList();
+
+            if ((!string.IsNullOrEmpty(location) || date.HasValue) && !resultEvents.Any())
+            {
+                TempData["SearchError"] = "No events found for the specified location or date.";
+            }
+
+            return View(resultEvents);
         }
 
 
@@ -156,25 +163,19 @@ namespace GuideMe.Controllers
                 return View();
             }
 
-            // Check if the user already has an approved event
-            var existingEvent = _context.Events.FirstOrDefault(e => e.UserId == userId && e.IsApproved == true);
-            if (existingEvent != null)
+            // Check for any pending unapproved request
+            var pendingRequest = _context.Events.FirstOrDefault(e => e.UserId == userId &&e.IsAdded == false &&e.IsApproved == false);
+
+            if (pendingRequest != null)
             {
-                if ((bool)existingEvent.IsApproved)
-                {
-                    return RedirectToAction("AddEvent");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Your event request is still awaiting approval.");
-                    return View();
-                }
+                ModelState.AddModelError("", "Your event request is still awaiting approval.");
+                return View();
             }
 
             return View();
         }
 
-        [Authorize]
+
         [HttpPost]
         public IActionResult RequestEvent(Event request)
         {
@@ -186,8 +187,8 @@ namespace GuideMe.Controllers
             }
 
             // Check if the user already submitted a request
-            var existingEvent = _context.Events.FirstOrDefault(e => e.UserId == userId && e.IsApproved == false);
-            if (existingEvent != null)
+            var existingRequest = _context.Events.FirstOrDefault(e => e.UserId == userId && e.IsApproved == false);
+            if (existingRequest != null)
             {
                 ModelState.AddModelError("", "Your event request is still awaiting approval.");
                 return View(request);
@@ -198,15 +199,15 @@ namespace GuideMe.Controllers
                 UserId = userId,
                 EventTitle = request.EventTitle,
                 EventDescription = request.EventDescription,
-                EventStartDate = request.EventStartDate,
-                EventEndDate = request.EventEndDate,
-                EventTime = request.EventTime,
+                EventStartDate = DateTime.Now,
+                EventEndDate = DateTime.Now.AddDays(1),
+                EventTime = null,
                 IsApproved = false,
                 IsAdded = false
             };
             _context.Events.Add(newRequest);
             _context.SaveChanges();
-            return RedirectToAction("ViewEvent","Contribution");
+            return RedirectToAction("ViewEvent");
         }
 
 
@@ -228,9 +229,10 @@ namespace GuideMe.Controllers
                 return View(model);
             }
 
-            var approvedRequest = _context.Events.Any(e => e.UserId == userId && e.IsApproved == true);
+            var approvedRequest = _context.Events
+                .FirstOrDefault(e => e.UserId == userId && e.IsApproved == true && e.IsAdded == false);
 
-            if (!approvedRequest)
+            if (approvedRequest == null)
             {
                 ModelState.AddModelError("", "You must request admin approval before adding an event.");
                 return RedirectToAction("RequestEvent");
@@ -249,10 +251,13 @@ namespace GuideMe.Controllers
                 IsAdded = true
             };
 
+            // Mark the request as used
+            approvedRequest.IsAdded = true;
+
             _context.Events.Add(newEvent);
             _context.SaveChanges();
 
-            return RedirectToAction("ViewEvent", "Contribution");
+            return RedirectToAction("ViewEvent");
         }
 
 
@@ -266,32 +271,17 @@ namespace GuideMe.Controllers
                 return RedirectToAction("RequestEvent");
             }
 
-            var eventRequest = _context.Events.FirstOrDefault(e => e.UserId == userId && e.IsApproved == true);
+            // Check only for approved but unused requests
+            var approvedRequest = _context.Events.FirstOrDefault(e => e.UserId == userId &&e.IsApproved == true &&e.IsAdded == false);
 
-            if (eventRequest == null)
+            if (approvedRequest != null)
             {
-                return RedirectToAction("RequestEvent");
+                return RedirectToAction("AddEvent");
             }
 
-            var addedEvent = _context.Events.Any(e => e.UserId == userId && e.IsApproved == true && e.IsAdded == true);
-
-            if (addedEvent)
-            {
-                eventRequest.IsApproved = false;
-                eventRequest.IsAdded = false;
-                eventRequest.EventTitle = "Pending Request";
-                eventRequest.EventDescription = "Awaiting new event details";
-                eventRequest.EventStartDate = DateTime.Now;
-                eventRequest.EventEndDate = DateTime.Now.AddDays(1);
-                eventRequest.EventTime = null;
-
-                _context.SaveChanges();
-
-                return RedirectToAction("RequestEvent");
-            }
-
-            return RedirectToAction("AddEvent");
+            return RedirectToAction("RequestEvent");
         }
+
 
     }
 }

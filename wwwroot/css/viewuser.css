@@ -1,136 +1,71 @@
-﻿body {
-    font-family: 'Roboto', sans-serif;
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('/Image/people.jpg') no-repeat center center fixed;
+    background-size: cover;
     margin: 0;
     padding: 0;
-    background-color: #f7f7f7;
-    color: #333;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 20px;
-    background: #fff;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    position: relative;
-    overflow: hidden;
-}
-
-h1 {
-    font-size: 2.4rem;
-    text-align: center;
-    color: #2c3e50;
-    margin-bottom: 30px;
-    font-weight: 600;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+    width: 95%;
+    background: rgba(255, 255, 255, 0.90);
     border-radius: 8px;
     overflow: hidden;
+    margin: 20px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-    table thead {
-        background-color: #4CAF50;
-        color: #fff;
-    }
-
-    table th,
-    table td {
-        text-align: left;
-        padding: 15px;
-        font-size: 1rem;
-        border-bottom: 1px solid #ddd;
-    }
-
-    table th {
-        font-weight: 600;
-    }
-
-    table tr:nth-child(even) {
-        background-color: #f9f9f9;
-    }
-
-    table tr:hover {
-        background-color: #f1f1f1;
-    }
-
-    table img {
-        width: 50px;
-        height: 50px;
-        object-fit: cover;
-        border-radius: 50%;
-    }
-
-    table span {
-        font-style: italic;
-        color: #aaa;
-    }
-
-.edit-form {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    box-sizing: border-box;
-    max-width: 100%;
-    animation: fadeIn 0.3s ease-in-out;
+h1 {
+    color: white;
+    text-align: center;
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
-    .edit-form h3 {
-        text-align: center;
-        color: #4CAF50;
-        margin-bottom: 20px;
-        font-size: 1.5rem;
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+th {
+    background: #333;
+    color: white;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+tr:hover {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    button:hover {
+        background: #0056b3;
+        transform: translateY(-2px);
     }
-
-    .edit-form .form-group {
-        margin-bottom: 15px;
-    }
-
-    .edit-form label {
-        font-size: 1rem;
-        color: #34495e;
-        margin-bottom: 5px;
-    }
-
-    .edit-form input,
-    .edit-form button {
-        width: 100%;
-        padding: 12px;
-        margin: 5px 0;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        box-sizing: border-box;
-        font-size: 1rem;
-    }
-
-        .edit-form input[type="file"] {
-            padding: 10px;
-        }
-
-    .edit-form button {
-        background-color: #4CAF50;
-        color: white;
-        font-size: 1.1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-        .edit-form button:hover {
-            background-color: #45a049;
-        }
 
 .overlay {
     display: none;
@@ -139,32 +74,78 @@ table {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 999;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+.edit-form {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 12px;
+    z-index: 1000;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 2rem;
+    .edit-form h3 {
+        color: #333;
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 25px;
+        font-weight: 600;
     }
 
-    .container {
-        margin: 20px;
-        padding: 15px;
+    .edit-form form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
     }
 
-    .edit-form {
-        width: 90%;
+    .edit-form label {
+        color: #555;
+        font-weight: 500;
+        margin-bottom: 5px;
     }
-}
+
+    .edit-form input[type="text"],
+    .edit-form input[type="email"],
+    .edit-form input[type="file"] {
+        width: 100% !important;
+        padding: 10px;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        font-size: 15px;
+        box-sizing: border-box;
+    }
+
+    .edit-form input[type="file"] {
+        border: 2px dashed #ddd;
+        padding: 12px;
+    }
+
+    .edit-form button {
+        width: 100%;
+        padding: 12px;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: all 0.3s ease;
+    }
+
+        .edit-form button:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }

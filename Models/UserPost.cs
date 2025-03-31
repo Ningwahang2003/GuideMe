@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 
 namespace GuideMe.Models;
 
@@ -17,10 +15,9 @@ public partial class UserPost
 
     public DateTime CreatedAt { get; set; }
 
+    public int? LikesCount { get; set; }
 
-    [NotMapped]
-    [DataType(DataType.Upload)]
-    public IFormFile[]? MediaFiles { get; set; }
+    public int? CommentsCount { get; set; }
 
     public virtual ICollection<PostLike> PostLikes { get; set; } = new List<PostLike>();
 

@@ -24,34 +24,64 @@
     }
 </div>
 
-<h2>Current Weekly Contest</h2>
-
-@if (Model.UpcomingContests.Any())
-{
-    var contest = Model.UpcomingContests.First();
+@{
     var today = DateTime.UtcNow.Date;
-    <div class="card mb-3">
-        <div class="card-body">
-            <h5 class="card-title">@contest.ContestType</h5>
-            <p><strong>Start Date:</strong> @contest.StartDate.ToString("MM/dd/yyyy")</p>
-            <p><strong>End Date:</strong> @contest.EndDate.ToString("MM/dd/yyyy")</p>
-            <p><strong>Instructions:</strong> @contest.Instructions</p>
-            @if ((today - contest.StartDate.Date).TotalDays <= 1)
-            {
-                <a href="@Url.Action("ParticipateContest", "Home", new { contestId = contest.ContestId })">Participate</a>
-            }
-            else
-            {
-                <p><strong>Participation is closed.</strong></p>
-            }
-            <a href="@Url.Action("ViewContest", "Home", new { contestId = contest.ContestId })">View</a>
+    var contest = Model.UpcomingContests.FirstOrDefault();
+}
+@if (Model.Winner != null && contest != null &&(today - contest.EndDate.Date).TotalDays <= 1 &&today > contest.EndDate.Date)
+{
+    <div class="winner-announcement mb-4">
+        <h2>Last Week's Contest Winner! 🏆</h2>
+        <div class="winner-card">
+            <div class="winner-info">
+                <h3>@Model.Winner.Name</h3>
+                <p>Congratulations to our winner!</p>
+                <div class="winning-entry mt-3">
+                    <p><strong>Contest:</strong> @contest.ContestType</p>
+                    @if (Model.ContestEntries.Any(e => e.UserId == Model.Winner.UserId))
+                    {
+                        var winningEntry = Model.ContestEntries.First(e => e.UserId == Model.Winner.UserId);
+                        <p>@winningEntry.Title</p>
+                    }
+                </div>
+            </div>
         </div>
     </div>
 }
 else
 {
-    <p>No active contests currently.</p>
+    <h2>Current Weekly Contest</h2>
+
+    @if (Model.UpcomingContests.Any())
+    {
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">@contest.ContestType</h5>
+                <p><strong>Status:</strong> @contest.ContestPhase</p>
+                <p><strong>Start Date:</strong> @contest.StartDate.ToString("MM/dd/yyyy")</p>
+                <p><strong>End Date:</strong> @contest.EndDate.ToString("MM/dd/yyyy")</p>
+                <p><strong>Instructions:</strong> @contest.Instructions</p>
+                @if ((today - contest.StartDate.Date).TotalDays <= 1)
+                {
+                    <a href="@Url.Action("ParticipateContest", "Home", new { contestId = contest.ContestId })"
+                       class="btn btn-primary">Participate</a>
+                }
+                else
+                {
+                    <p class="alert alert-info">Participation is closed</p>
+                }
+                <a href="@Url.Action("ViewContest", "Home", new { contestId = contest.ContestId })"
+                   class="btn btn-secondary">View Entries</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>No active contests currently.</p>
+    }
+    
 }
+
 
 <h2>Latest User Posts</h2>
 

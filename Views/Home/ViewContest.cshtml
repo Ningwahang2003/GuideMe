@@ -1,8 +1,9 @@
 ﻿@model IEnumerable<GuideMe.Models.ContestEntry>
 
-<link rel="stylesheet" href="~/css/viewcontest.css" />
+<link rel="stylesheet" href="~/css/viewcontest.css" asp-append-version="true" />
 @{
     ViewBag.Title = "Contest Participants";
+    var isAdmin = User.IsInRole("Admin");
 }
 
 <h2>Contest Participants</h2>
@@ -30,8 +31,14 @@ else
         @foreach (var entry in Model)
         {
             <div class="participant-card">
+                <div class="user-info">
+                    <img src="@(string.IsNullOrEmpty(entry.User?.UserImage) ? "/UserFile/default-profile.png" : $"/UserFile/{entry.User.UserImage}")"
+                         alt="User Avatar"
+                         class="user-avatar"
+                         onerror="this.src='/UserFile/default-profile.png'" />
+                    <h3 class="participant-name">@entry.User?.Name</h3>
+                </div>
                 <h3 class="participant-title">@entry.Title</h3>
-                <p class="participant-description">@entry.Descriptions</p>
 
                 <div class="participant-images">
                     <div class="image-container">
@@ -45,11 +52,16 @@ else
                             </div>
                         }
                     </div>
-                    <h3 class="participant-name">@entry.User?.Name</h3>
+
+                    <p class="participant-description">@entry.Descriptions</p>
                 </div>
 
                 <div class="vote-section">
-                    <p hidden class="vote-count">Votes: @entry.VoteCount</p>
+                    @if (isAdmin)
+                    {
+                        <p class="vote-count">Votes: @entry.VoteCount</p>
+                    }
+
                     <form asp-action="Vote" method="post">
                         <input type="hidden" name="contestEntryId" value="@entry.ContestEntryId" />
                         <button type="submit" class="btn btn-primary">Vote</button>

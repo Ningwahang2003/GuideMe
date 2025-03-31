@@ -9,19 +9,54 @@ namespace GuideMe.Hubs
     public class ChatHub : Hub
     {
         private readonly GuideMeContext _context;
+        private DateOnly? timestamp;
 
         public ChatHub(GuideMeContext context)
         {
             _context = context;
         }
 
-
         // Method to send private message
         public async Task SendPrivateMessage(int senderId, int receiverId, string message)
         {
-            await Clients.User(receiverId.ToString()).SendAsync("ReceivePrivateMessage", senderId, message);
-        }
+            try
+            {
+                if (string.IsNullOrEmpty(message)) return;
 
+                var sender = await _context.Users.FindAsync(senderId);
+                if (sender == null) return;
+
+                var currentTime = DateTime.Now;
+                var privateMessage = new PrivateMessage
+                {
+                    SenderId = senderId,
+                    ReceiverId = receiverId,
+                    MessageText = message,
+                    SentAt = DateOnly.FromDateTime(currentTime)
+                };
+
+                await _context.PrivateMessages.AddAsync(privateMessage);
+                await _context.SaveChangesAsync();
+
+                string senderImage = !string.IsNullOrEmpty(sender.UserImage)
+                    ? $"/UserFile/{sender.UserImage}"
+                    : "/UserFile/default-profile.png";
+
+                // Send to both sender and receiver
+                await Clients.Users(new[] { senderId.ToString(), receiverId.ToString() })
+                    .SendAsync("ReceivePrivateMessage",
+                        senderId,
+                        sender.Name,
+                        message,
+                        currentTime,
+                        senderImage);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in SendPrivateMessage: {ex.Message}");
+                throw;
+            }
+        }
 
 
         // Join a group for real-time messaging

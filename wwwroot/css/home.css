@@ -94,3 +94,42 @@ a {
         border-radius: 8px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
+
+.winner-announcement {
+    background: linear-gradient(135deg, #ffd700, #ffa500);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+    .winner-announcement h2 {
+        color: #fff;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        margin-bottom: 20px;
+    }
+
+.winner-card {
+    background: rgba(255,255,255,0.9);
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.winner-info {
+    text-align: center;
+}
+
+    .winner-info h3 {
+        color: #333;
+        margin-bottom: 10px;
+        font-size: 24px;
+    }
+
+    .winner-info p {
+        color: #666;
+        margin: 0;
+    }

@@ -31,7 +31,11 @@ public partial class GuideMeContext : DbContext
 
     public virtual DbSet<PostLike> PostLikes { get; set; }
 
+    public virtual DbSet<PrivateMessage> PrivateMessages { get; set; }
+
     public virtual DbSet<Province> Provinces { get; set; }
+
+    public virtual DbSet<Rating> Ratings { get; set; }
 
     public virtual DbSet<UrbanTreasure> UrbanTreasures { get; set; }
 
@@ -56,6 +60,10 @@ public partial class GuideMeContext : DbContext
         {
             entity.HasKey(e => e.ChatMessageId).HasName("PK__ChatMess__9AB6103552931227");
 
+            entity.HasIndex(e => e.GroupId, "IX_ChatMessages_GroupId");
+
+            entity.HasIndex(e => e.UserId, "IX_ChatMessages_UserId");
+
             entity.Property(e => e.SentAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
@@ -77,6 +85,10 @@ public partial class GuideMeContext : DbContext
 
             entity.ToTable("ContestEntry");
 
+            entity.HasIndex(e => e.ContestId, "IX_ContestEntry_ContestId");
+
+            entity.HasIndex(e => e.UserId, "IX_ContestEntry_UserId");
+
             entity.Property(e => e.Title).HasMaxLength(100);
 
             entity.HasOne(d => d.Contest).WithMany(p => p.ContestEntries)
@@ -91,6 +103,8 @@ public partial class GuideMeContext : DbContext
         modelBuilder.Entity<Event>(entity =>
         {
             entity.HasKey(e => e.EventId).HasName("PK__Events__7944C810DE62B743");
+
+            entity.HasIndex(e => e.UserId, "IX_Events_UserId");
 
             entity.Property(e => e.EventEndDate).HasColumnType("datetime");
             entity.Property(e => e.EventLocation).HasMaxLength(255);
@@ -117,6 +131,10 @@ public partial class GuideMeContext : DbContext
         modelBuilder.Entity<GroupMember>(entity =>
         {
             entity.HasKey(e => e.GroupMemberId).HasName("PK__GroupMem__34481292F805F964");
+
+            entity.HasIndex(e => e.GroupId, "IX_GroupMembers_GroupId");
+
+            entity.HasIndex(e => e.UserId, "IX_GroupMembers_UserId");
 
             entity.Property(e => e.JoinedAt).HasColumnType("datetime");
             entity.Property(e => e.UserName).HasMaxLength(100);
@@ -145,6 +163,8 @@ public partial class GuideMeContext : DbContext
         {
             entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E122FC975B5");
 
+            entity.HasIndex(e => e.UserId, "IX_Notifications_UserId");
+
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
@@ -162,6 +182,10 @@ public partial class GuideMeContext : DbContext
 
             entity.ToTable("PostLike");
 
+            entity.HasIndex(e => e.PostId, "IX_PostLike_PostId");
+
+            entity.HasIndex(e => e.UserId, "IX_PostLike_UserId");
+
             entity.HasOne(d => d.Post).WithMany(p => p.PostLikes)
                 .HasForeignKey(d => d.PostId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -173,6 +197,11 @@ public partial class GuideMeContext : DbContext
                 .HasConstraintName("FK_UserLike");
         });
 
+        modelBuilder.Entity<PrivateMessage>(entity =>
+        {
+            entity.HasKey(e => e.PrivateMessageId).HasName("PK__PrivateM__F64E74D7662052F2");
+        });
+
         modelBuilder.Entity<Province>(entity =>
         {
             entity.HasKey(e => e.ProvinceId).HasName("PK__Provienc__D72D03A0712A4C13");
@@ -182,9 +211,32 @@ public partial class GuideMeContext : DbContext
             entity.Property(e => e.ProvinceName).HasMaxLength(50);
         });
 
+        modelBuilder.Entity<Rating>(entity =>
+        {
+            entity.HasKey(e => e.RatingId).HasName("PK__Ratings__FCCDF87CFA16EE1A");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.HasOne(d => d.UrbanTreasure).WithMany(p => p.Ratings)
+                .HasForeignKey(d => d.UrbanTreasureId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Ratings__UrbanTr__2BFE89A6");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Ratings)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Ratings__UserId__2B0A656D");
+        });
+
         modelBuilder.Entity<UrbanTreasure>(entity =>
         {
             entity.HasKey(e => e.UrbanTreasureId).HasName("PK__UrbanTre__79281DDF042F0DFC");
+
+            entity.HasIndex(e => e.ProvinceId, "IX_UrbanTreasures_ProvinceId");
+
+            entity.HasIndex(e => e.UserId, "IX_UrbanTreasures_UserId");
 
             entity.Property(e => e.Image).HasMaxLength(255);
             entity.Property(e => e.Location).HasMaxLength(250);
@@ -221,6 +273,10 @@ public partial class GuideMeContext : DbContext
 
             entity.ToTable("UserComment");
 
+            entity.HasIndex(e => e.PostId, "IX_UserComment_PostId");
+
+            entity.HasIndex(e => e.UserId, "IX_UserComment_UserId");
+
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
@@ -242,9 +298,13 @@ public partial class GuideMeContext : DbContext
 
             entity.ToTable("UserPost");
 
+            entity.HasIndex(e => e.UserId, "IX_UserPost_UserId");
+
+            entity.Property(e => e.CommentsCount).HasDefaultValue(0);
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.LikesCount).HasDefaultValue(0);
 
             entity.HasOne(d => d.User).WithMany(p => p.UserPosts)
                 .HasForeignKey(d => d.UserId)
@@ -257,6 +317,10 @@ public partial class GuideMeContext : DbContext
             entity.HasKey(e => e.UserVoteId).HasName("PK__UserVote__0F0C36EC326F3BEC");
 
             entity.ToTable("UserVote");
+
+            entity.HasIndex(e => e.ContestEntryId, "IX_UserVote_ContestEntryId");
+
+            entity.HasIndex(e => e.UserId, "IX_UserVote_UserId");
 
             entity.Property(e => e.VoteDate)
                 .HasDefaultValueSql("(getdate())")
@@ -290,6 +354,8 @@ public partial class GuideMeContext : DbContext
             entity.HasKey(e => e.ContestId).HasName("PK__WeeklyCo__87DE0B1A91583540");
 
             entity.ToTable("WeeklyContest");
+
+            entity.HasIndex(e => e.UserId, "IX_WeeklyContest_UserId");
 
             entity.Property(e => e.ContestPhase).HasMaxLength(50);
             entity.Property(e => e.ContestType).HasMaxLength(255);
