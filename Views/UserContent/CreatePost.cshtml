@@ -1,35 +1,141 @@
 ﻿@{
     ViewData["Title"] = "Create Post";
 }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-image: url('../Image/createpost.jpg');
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
 
-<h2>Create a New Post</h2>
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 25px;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
 
-@if (!ViewData.ModelState.IsValid)
-{
-    <div class="alert alert-danger">
-        <ul>
-            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-            {
-                <li>@error.ErrorMessage</li>
-            }
-        </ul>
-    </div>
-}
+    h2 {
+        color: #2563eb;
+        font-size: 28px;
+        margin-bottom: 25px;
+        text-align: center;
+        font-weight: 600;
+    }
 
-<form asp-controller="UserContent" asp-action="CreatePost" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="caption">Caption</label>
-        <input type="text" name="caption" class="form-control" placeholder="Write a caption..." required />
-    </div>
+    .form-group {
+        margin-bottom: 20px;
+    }
 
-    <div class="form-group">
-        <label for="mediaFiles">Upload Images/Videos</label>
-        <input type="file" name="mediaFiles" class="form-control-file" accept="image/*,video/*" multiple required />
-        <small>You can select multiple files</small>
-    </div>
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: #2563eb;
+        font-weight: 500;
+        font-size: 14px;
+    }
 
-    <button type="submit" class="btn btn-primary">Post</button>
-</form>
+    .form-control,
+    .form-control-file {
+        width: 100% !important;
+        padding: 14px;
+        border: 2px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.9);
+        box-sizing: border-box;
+    }
 
-<br />
-<a asp-action="Index">Back to Posts</a>
+        .form-control:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+            outline: none;
+        }
+
+    .form-control-file {
+        border: 2px dashed #2563eb;
+        background: rgba(37, 99, 235, 0.05);
+        cursor: pointer;
+    }
+
+    small {
+        color: #6b7280;
+        font-size: 12px;
+        margin-top: 5px;
+        display: block;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(145deg, #2563eb, #1d4ed8);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+    }
+
+        .btn-primary:hover {
+            background: linear-gradient(145deg, #1d4ed8, #1e40af);
+        }
+
+    a {
+        display: block;
+        text-align: center;
+        color: #2563eb;
+        text-decoration: none;
+        margin-top: 15px;
+        font-weight: 500;
+    }
+
+        a:hover {
+            color: #1e40af;
+        }
+</style>
+
+<div class="container">
+    <h2>Create a New Post</h2>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+
+    <form asp-controller="UserContent" asp-action="CreatePost" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="caption">Caption</label>
+            <input type="text" name="caption" class="form-control" placeholder="Write a caption..." required />
+        </div>
+
+        <div class="form-group">
+            <label for="mediaFiles">Upload Images/Videos</label>
+            <input type="file" name="mediaFiles" class="form-control-file" accept="image/*,video/*" multiple required />
+            <small>You can select multiple files</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Post</button>
+    </form>
+
+    <br />
+    <a asp-action="Index">Back to Posts</a>
+</div>

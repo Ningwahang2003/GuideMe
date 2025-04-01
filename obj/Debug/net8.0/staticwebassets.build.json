@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7Ws/A8TvwOD3lh2aRP6FQtUPt9v/AeojHAKL/9eBIls=",
+  "Hash": "aJ+DhwnLKZxmLtrVASGwaJC/cjcolaZ8OWwuXTtdezs=",
   "Source": "GuideMe",
   "BasePath": "_content/GuideMe",
   "Mode": "Default",
@@ -1039,8 +1039,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "r4i883yvg6",
-      "Integrity": "y+F05ZaRi7kYWajrJk1FY8puNCC5cASo7jfriGhTfW4=",
+      "Fingerprint": "c480ub3fk3",
+      "Integrity": "HAPZ1I/cZJkuiS7IQoZJ9FokJEUWutS5rf+dbmSTbTc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\viewuser.css"
@@ -4740,27 +4740,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Video\\search.mp4"
-    },
-    {
-      "Identity": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\Video\\searchevent.mp4",
-      "SourceId": "GuideMe",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\",
-      "BasePath": "_content/GuideMe",
-      "RelativePath": "Video/searchevent#[.{fingerprint}]?.mp4",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "uyirzjghx4",
-      "Integrity": "xgeDhUqPBapv8m7SaYnqLobajRwA9Scoe3kabBNrdSs=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Video\\searchevent.mp4"
     },
     {
       "Identity": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\Video\\weather.mp4",
@@ -8558,6 +8537,51 @@
       ]
     },
     {
+      "Route": "css/viewuser.c480ub3fk3.css",
+      "AssetFile": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\css\\viewuser.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3173"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"HAPZ1I/cZJkuiS7IQoZJ9FokJEUWutS5rf+dbmSTbTc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 31 Mar 2025 08:40:06 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "c480ub3fk3"
+        },
+        {
+          "Name": "label",
+          "Value": "css/viewuser.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-HAPZ1I/cZJkuiS7IQoZJ9FokJEUWutS5rf+dbmSTbTc="
+        }
+      ]
+    },
+    {
       "Route": "css/viewuser.css",
       "AssetFile": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\css\\viewuser.css",
       "Selectors": [],
@@ -8568,7 +8592,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2708"
+          "Value": "3173"
         },
         {
           "Name": "Content-Type",
@@ -8576,11 +8600,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"y+F05ZaRi7kYWajrJk1FY8puNCC5cASo7jfriGhTfW4=\""
+          "Value": "\"HAPZ1I/cZJkuiS7IQoZJ9FokJEUWutS5rf+dbmSTbTc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 31 Mar 2025 08:24:40 GMT"
+          "Value": "Mon, 31 Mar 2025 08:40:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8590,52 +8614,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-y+F05ZaRi7kYWajrJk1FY8puNCC5cASo7jfriGhTfW4="
-        }
-      ]
-    },
-    {
-      "Route": "css/viewuser.r4i883yvg6.css",
-      "AssetFile": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\css\\viewuser.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2708"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"y+F05ZaRi7kYWajrJk1FY8puNCC5cASo7jfriGhTfW4=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 31 Mar 2025 08:24:40 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "r4i883yvg6"
-        },
-        {
-          "Name": "label",
-          "Value": "css/viewuser.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-y+F05ZaRi7kYWajrJk1FY8puNCC5cASo7jfriGhTfW4="
+          "Value": "sha256-HAPZ1I/cZJkuiS7IQoZJ9FokJEUWutS5rf+dbmSTbTc="
         }
       ]
     },
@@ -23232,88 +23211,6 @@
         {
           "Name": "integrity",
           "Value": "sha256-WusnhW+3qfI48uAoKyatZwBOH+EeL51DiZzvfDdX2S8="
-        }
-      ]
-    },
-    {
-      "Route": "Video/searchevent.mp4",
-      "AssetFile": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\Video\\searchevent.mp4",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "35523841"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "video/mp4"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"xgeDhUqPBapv8m7SaYnqLobajRwA9Scoe3kabBNrdSs=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 28 Mar 2025 18:29:19 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-xgeDhUqPBapv8m7SaYnqLobajRwA9Scoe3kabBNrdSs="
-        }
-      ]
-    },
-    {
-      "Route": "Video/searchevent.uyirzjghx4.mp4",
-      "AssetFile": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\Video\\searchevent.mp4",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "35523841"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "video/mp4"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"xgeDhUqPBapv8m7SaYnqLobajRwA9Scoe3kabBNrdSs=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 28 Mar 2025 18:29:19 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "uyirzjghx4"
-        },
-        {
-          "Name": "label",
-          "Value": "Video/searchevent.mp4"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-xgeDhUqPBapv8m7SaYnqLobajRwA9Scoe3kabBNrdSs="
         }
       ]
     },

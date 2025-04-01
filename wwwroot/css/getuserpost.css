@@ -1,152 +1,210 @@
-﻿/* Card Styling for Each Post */
-.card {
-    display: flex;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    max-width: 800px;
-    margin: 20px auto;
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+body {
+    background-color: #fafafa;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
-    }
-
-/* Left Side - Media (Image/Video) */
-.post-media-container {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap; /* Allows media to wrap if there are multiple items */
-    gap: 10px;
-    padding: 10px;
-}
-
-    .post-media-container img, .post-media-container video {
-        max-width: 100%;
-        height: auto;
-        flex-shrink: 0;
-        border-radius: 10px;
-    }
-
-/* Right Side - Content (Caption, Likes, Comments, and Buttons) */
-.post-content {
-    flex: 1;
+.posts-page {
+    max-width: 1500px;
+    margin: 0 auto;
     padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #262626;
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+.create-post-btn {
+    display: inline-block;
+    background-color: #0095f6;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin: 20px;
+    font-weight: 500;
+}
+
+    .create-post-btn:hover {
+        background-color: #0081d6;
+    }
+
+.posts-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.posts-scroll {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.post-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.post-header {
+    padding: 12px;
+    border-bottom: 1px solid #efefef;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 }
 
-/* Aligning text on the right side */
+.post-date {
+    color: #8e8e8e;
+    font-size: 12px;
+}
+
+.post-media-container {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    overflow-x: auto;
+    white-space: nowrap;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+    .post-media-container::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .post-media-container::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    .post-media-container::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+    }
+
+.post-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: inline-block;
+    scroll-snap-align: start;
+}
+
 .post-content {
-    align-self: flex-start; /* Align content to the right */
+    padding: 12px;
 }
 
-.post-caption {
-    font-size: 16px;
-    color: #333;
-    margin: 10px 0;
-}
-
-.text-muted {
-    font-size: 14px;
-    color: #6c757d;
+.action-buttons {
+    display: flex;
+    gap: 16px;
+    margin: 12px 0;
 }
 
 .like-btn, .comment-btn {
-    width: 100%;
-    margin-top: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
 }
 
-.like-btn {
-    margin-bottom: 10px;
+.like-count {
+    font-weight: 600;
+    margin: 8px 0;
+}
+
+.caption {
+    margin: 8px 0;
+    line-height: 1.4;
+}
+
+.comments-section {
+    max-height: 150px;
+    overflow-y: auto;
+    margin: 12px 0;
+}
+
+    .comments-section ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .comments-section li {
+        margin: 8px 0;
+        line-height: 1.4;
+    }
+
+.comment-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #efefef;
 }
 
 .comment-content {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-    margin-top: 10px;
-    box-sizing: border-box;
+    flex: 1;
+    border: 1px solid #efefef;
+    border-radius: 4px;
+    padding: 8px;
+    resize: none;
+    height: 36px;
 }
 
-    .comment-content:focus {
-        border-color: #007bff;
-        outline: none;
-    }
-
-ul {
-    list-style-type: none;
-    padding-left: 0;
-    margin: 10px 0;
-}
-
-li {
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 8px;
-}
-
-    li strong {
-        color: #007bff;
-    }
-
-/* Buttons */
-.btn {
-    border-radius: 5px;
-    padding: 10px 15px;
-    font-size: 14px;
-    font-weight: bold;
+.post-comment-btn {
+    background: none;
+    border: none;
+    color: #0095f6;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-.btn-primary {
-    background-color: #007bff;
-    color: #fff;
+.comments-section, .comment-form {
+    display: none;
 }
 
-    .btn-primary:hover {
-        background-color: #0056b3;
+    .comments-section.show, .comment-form.show {
+        display: block;
     }
 
-.btn-secondary {
-    background-color: #6c757d;
-    color: #fff;
+.delete-btn {
+    background: none;
+    border: none;
+    color: #ed4956;
+    font-weight: 600;
+    padding: 8px 0;
+    cursor: pointer;
+    margin-top: 12px;
+    width: 100%;
 }
 
-    .btn-secondary:hover {
-        background-color: #5a6268;
+    .delete-btn:hover {
+        color: #c62828;
     }
 
-.btn-danger {
-    background-color: #dc3545;
-    color: #fff;
+.no-posts {
+    text-align: center;
+    margin: 40px 0;
+    color: #8e8e8e;
 }
 
-    .btn-danger:hover {
-        background-color: #c82333;
+    .no-posts a {
+        color: #0095f6;
+        text-decoration: none;
     }
 
-/* Responsive Design */
 @media (max-width: 768px) {
-    .card {
-        flex-direction: column;
-    }
-
-    .post-media-container {
-        max-width: 100%;
-        margin-bottom: 15px;
-    }
-
-    .post-content {
-        flex: 1;
-        padding: 15px;
+    .posts-scroll {
+        grid-template-columns: 1fr;
     }
 }

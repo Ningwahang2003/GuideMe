@@ -1,4 +1,3 @@
 C:\Users\acer\Source\Repos\GuideMe\wwwroot\Video\map.mp4
 C:\Users\acer\Source\Repos\GuideMe\wwwroot\Video\search.mp4
-C:\Users\acer\Source\Repos\GuideMe\wwwroot\Video\searchevent.mp4
 C:\Users\acer\Source\Repos\GuideMe\wwwroot\Video\weather.mp4

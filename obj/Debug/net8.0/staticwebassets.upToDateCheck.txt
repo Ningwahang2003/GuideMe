@@ -221,5 +221,4 @@ wwwroot\UserFile\UserFilee41ce310-63fc-474b-be0b-423693a45da2.jpg
 wwwroot\UserFile\UserFilee48c0e0e-5c56-496c-ad43-9815de7779fa.png
 wwwroot\Video\map.mp4
 wwwroot\Video\search.mp4
-wwwroot\Video\searchevent.mp4
 wwwroot\Video\weather.mp4
