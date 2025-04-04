@@ -147,7 +147,7 @@ namespace GuideMe.Controllers
                     {
                         UserId = u.UserId,
                         Name = u.Name,
-                        UserImage = u.UserImage
+                        UserImage = !string.IsNullOrEmpty(u.UserImage) ? u.UserImage : null
                     },
                     LastMessage = _context.PrivateMessages
                         .Where(m => (m.SenderId == currentUserId && m.ReceiverId == u.UserId) ||

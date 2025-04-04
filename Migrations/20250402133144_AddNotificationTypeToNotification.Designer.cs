@@ -4,6 +4,7 @@ using GuideMe.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GuideMe.Migrations
 {
     [DbContext(typeof(GuideMeContext))]
-    partial class GuideMeContextModelSnapshot : ModelSnapshot
+    [Migration("20250402133144_AddNotificationTypeToNotification")]
+    partial class AddNotificationTypeToNotification
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -270,9 +273,6 @@ namespace GuideMe.Migrations
 
                     b.Property<string>("Message")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NotificationType")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")

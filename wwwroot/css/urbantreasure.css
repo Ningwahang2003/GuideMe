@@ -1,5 +1,7 @@
-﻿body {
-    font-family: 'Bebas Neue', cursive;
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
     background-color: #f8f9fa;
     margin: 0;
     padding: 0;
@@ -32,7 +34,7 @@
 
 .btn {
     font-size: 16px;
-    font-family: 'Bebas Neue', cursive;
+    font-family: 'Poppins', sans-serif;
     font-weight: bold;
     padding: 10px 20px;
     background-color: dimgrey;
@@ -163,7 +165,7 @@ button.btn-add-image {
 
 .section-title {
     text-align: center;
-    font-size: 22px;
+    font-size: 32px;
     font-weight: bold;
     color: #333;
     text-transform: uppercase;
@@ -190,27 +192,29 @@ button.btn-add-image {
 
 .province-content {
     position: absolute;
+    height: 100%;
+    width: 100%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
     color: white;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.7);
     border-radius: 8px;
     z-index: 1;
 }
 
 .province-name {
-    font-size: 28px;
+    font-size: 30px;
     font-weight: bold;
     margin-bottom: 15px;
     text-transform: uppercase;
 }
 
 .province-description {
-    font-size: 16px;
-    font-weight: 300;
+    font-size: 17px;
+    font-weight: 400;
     margin-bottom: 20px;
 }
 

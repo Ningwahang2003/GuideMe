@@ -8,9 +8,11 @@
 <link rel="stylesheet" href="~/css/getuserpost.css" asp-append-version="true" />
 
 <div class="posts-page">
-    <h2>My Posts</h2>
+    <div>
+        <h2>My Posts</h2>
 
-    <a asp-action="CreatePost" asp-controller="UserContent" class="create-post-btn">Create New Post</a>
+        <a asp-action="CreatePost" asp-controller="UserContent" class="create-post-btn">Add Post</a>
+    </div>
 
     @if (!Model.Any())
     {

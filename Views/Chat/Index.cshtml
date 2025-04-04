@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Chat";
 }
+<link rel="stylesheet" href="~/css/individualchatroom.css" asp-append-version="true" />
 
 <div class="container-fluid mt-4">
     <div class="row">
@@ -30,11 +31,16 @@
                         @if (user.Role == "User")
                         {
                             <div class="user-item d-flex align-items-center p-2 border-bottom" data-user-id="@user.UserId">
-                                <img src="@(user.UserImage ?? "/UserFile/default-profile.png")"
+                                <img src="@(!string.IsNullOrEmpty(user.UserImage) ? $"/UserFile/{user.UserImage}" : "/UserFile/default-profile.png")"
                                      class="rounded-circle mr-2"
-                                     style="width: 40px; height: 40px;">
+                                     style="width: 40px; height: 40px; object-fit: cover;">
                                 <div class="flex-grow-1">
-                                    <div class="font-weight-bold">@user.Name</div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="font-weight-bold">@user.Name</div>
+                                        <button type="button" class="close-search btn btn-link p-0 ml-2" aria-label="Close">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         }
@@ -109,7 +115,7 @@
             });
     }
 
-    function updateChatUsersList() {
+        function updateChatUsersList() {
         $.get('/Chat/GetChatUsers', function (users) {
             const chatUsersList = $('#chatUsersList');
             chatUsersList.empty();
@@ -119,10 +125,14 @@
                     ? `<small class="text-muted">${item.lastMessage.messageText.substring(0, 20)}${item.lastMessage.messageText.length > 20 ? '...' : ''}</small>`
                     : '';
 
+                const userImagePath = item.user.userImage
+                    ? `/UserFile/${item.user.userImage}`
+                    : '/UserFile/default-profile.png';
+
                 const userHtml = `
                     <div class="user-item d-flex align-items-center p-2 border-bottom ${selectedUserId === item.user.userId ? 'active' : ''}"
                          data-user-id="${item.user.userId}">
-                        <img src="${item.user.userImage || '/UserFile/default-profile.png'}"
+                        <img src="${userImagePath}"
                              class="rounded-circle mr-2"
                              style="width: 40px; height: 40px; object-fit: cover;">
                         <div class="flex-grow-1">
@@ -140,22 +150,24 @@
         });
     }
 
-    function attachUserClickHandlers() {
+        function attachUserClickHandlers() {
         $('.user-item').click(function () {
             selectedUserId = $(this).data('user-id');
             selectedUserName = $(this).find('strong').text();
+            const selectedUserImage = $(this).find('img').attr('src');
 
             $('.user-item').removeClass('active');
             $(this).addClass('active');
 
             $('#selectedUserName').text(selectedUserName);
+            $('#selectedUserImage').attr('src', selectedUserImage);
             $('.chat-container').removeClass('d-none');
 
             loadMessages(selectedUserId);
         });
     }
 
-    function loadMessages(userId) {
+        function loadMessages(userId) {
         $.get(`/Chat/GetPrivateMessages?userId=${userId}`, function (messages) {
             const messageArea = $('#messageArea');
             messageArea.empty();
@@ -163,8 +175,8 @@
             messages.forEach(message => {
                 const isReceived = message.senderId !== parseInt($('#currentUserId').val());
                 const userImage = isReceived
-                    ? $('.user-item[data-user-id="' + message.senderId + '"] img').attr('src')
-                    : $('#currentUserImage').attr('src') || '/UserFile/default-profile.png';
+                    ? $('#selectedUserImage').attr('src')
+                    : $('#currentUserImage').val() ? `/UserFile/${$('#currentUserImage').val()}` : '/UserFile/default-profile.png';
 
                 appendMessage(message.messageText, message.sentAt, isReceived, userImage);
             });
@@ -173,19 +185,19 @@
         });
     }
 
-    function appendMessage(message, timestamp, isReceived, userImage) {
+       function appendMessage(message, timestamp, isReceived, userImage) {
         const messageArea = $('#messageArea');
         const messageClass = isReceived ? 'received' : 'sent';
         const alignClass = isReceived ? 'justify-content-start' : 'justify-content-end';
 
+        // Only user image per message
         const messageHtml = `
             <div class="message-row d-flex ${alignClass} mb-2">
-                ${isReceived ? `<img src="${userImage}" class="rounded-circle mr-2" style="width: 30px; height: 30px;">` : ''}
+                ${isReceived ? `<img src="${userImage}" class="rounded-circle mr-2" style="width: 30px; height: 30px; object-fit: cover;">` : ''}
                 <div class="message ${messageClass} p-2 rounded">
                     <div class="message-content">${message}</div>
                     <small class="text-muted">${new Date(timestamp).toLocaleTimeString()}</small>
                 </div>
-                ${!isReceived ? `<img src="${userImage}" class="rounded-circle ml-2" style="width: 30px; height: 30px;">` : ''}
             </div>
         `;
 
@@ -241,105 +253,16 @@
             e.preventDefault();
             sendMessage();
         });
+
+        // Adding handler for close button
+        $(document).on('click', '.close-search', function(e) {
+            e.stopPropagation();
+            $(this).closest('.user-item').remove();
+
+            // Hiding the container if no  user
+            if ($('#searchResults .user-item').length === 0) {
+                $('#searchResults').empty();
+            }
+        });
     });
 </script>
-
-<style>
-    .d-none {
-        display: none !important;
-    }
-
-    .chat-header {
-        padding: 15px;
-        background: white;
-        border-bottom: 1px solid #dee2e6;
-        margin-bottom: 10px;
-    }
-
-        .chat-header h5 {
-            margin: 0;
-            color: #495057;
-        }
-
-    .chat-container {
-        height: 80vh;
-        display: flex;
-        flex-direction: column;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .messages-area {
-        flex-grow: 1;
-        overflow-y: auto;
-        padding: 20px;
-        background: #f8f9fa;
-        border-radius: 5px;
-    }
-
-    .chat-input-area {
-        padding: 15px;
-        background: white;
-        border-top: 1px solid #dee2e6;
-    }
-
-    .message {
-        margin-bottom: 15px;
-        max-width: 70%;
-    }
-
-        .message.sent {
-            margin-left: auto;
-        }
-
-        .message.received {
-            margin-right: auto;
-        }
-
-    .message-content {
-        padding: 10px 15px;
-        border-radius: 15px;
-        position: relative;
-    }
-
-    .sent .message-content {
-        background: #007bff;
-        color: white;
-    }
-
-    .received .message-content {
-        background: white;
-        border: 1px solid #dee2e6;
-    }
-
-    .message-time {
-        font-size: 0.75rem;
-        color: #6c757d;
-        margin-top: 5px;
-    }
-
-    .user-item {
-        cursor: pointer;
-        padding: 10px;
-        transition: background-color 0.3s;
-    }
-
-        .user-item:hover {
-            background-color: #f8f9fa;
-        }
-
-        .user-item.active {
-            background-color: #e9ecef;
-        }
-
-    .search-container {
-        margin-bottom: 20px;
-    }
-
-    .last-message {
-        font-size: 0.8rem;
-        color: #6c757d;
-        margin-top: 2px;
-    }
-</style>

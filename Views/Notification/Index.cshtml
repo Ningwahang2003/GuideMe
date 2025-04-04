@@ -7,6 +7,7 @@
     @foreach (var notification in ViewBag.Notifications)
     {
         <div class="notification-item @(notification.IsRead ? "read" : "unread")">
+            @(notification.NotificationType == "Warning" ? "warning" : "")">
             <i class="notification-icon @(notification.IsRead ? "fas fa-check-circle read-icon" : "fas fa-envelope unread-icon")"></i>
             <div class="notification-message">
                 <p>@notification.Message</p>
@@ -111,6 +112,15 @@
     .notification-icon {
         font-size: 22px;
         margin-right: 10px;
+    }
+
+    .notification-item.warning {
+        border-left: 6px solid #ffc107;
+        background-color: #fff3cd;
+    }
+
+    .warning-icon {
+        color: #ffc107;
     }
 
     .unread-icon {

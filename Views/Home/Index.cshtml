@@ -2,9 +2,11 @@
 
 @{
     ViewData["Title"] = "Home Page";
+    var today = DateTime.UtcNow.Date;
+    var contest = Model.UpcomingContests.FirstOrDefault();
 }
-
-<link rel="stylesheet" href="~/css/home.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
 
 @if (TempData["SuccessMessage"] != null)
 {
@@ -15,120 +17,181 @@
     @foreach (var ev in Model.UpcomingEvents)
     {
         <div class="event-slide">
-            <h3>@ev.EventTitle</h3>
-            <p>@ev.EventDescription</p>
-            <p><strong>Starts:</strong> @ev.EventStartDate?.ToString("yyyy-MM-dd")</p>
-            <p><strong>Ends:</strong> @ev.EventEndDate?.ToString("yyyy-MM-dd")</p>
-            <p><strong>Time:</strong> @ev.EventTime</p>
+            <video autoplay muted loop class="slide-video">
+                <source src="~/Video/homeevent.mp4" type="video/mp4">
+            </video>
+            <div class="slide-content">
+                <h1>Moments become memories: <br /> let’s make them unforgettable !!</h1>
+                <h3>@ev.EventTitle</h3>
+                <p>@ev.EventDescription</p>
+                <p><strong>Starts:</strong> @ev.EventStartDate?.ToString("yyyy-MM-dd")</p>
+                <p><strong>Ends:</strong> @ev.EventEndDate?.ToString("yyyy-MM-dd")</p>
+                <p><strong>Time:</strong> @ev.EventTime</p>
+            </div>
         </div>
     }
 </div>
-
-@{
-    var today = DateTime.UtcNow.Date;
-    var contest = Model.UpcomingContests.FirstOrDefault();
-}
-@if (Model.Winner != null && contest != null &&(today - contest.EndDate.Date).TotalDays <= 1 &&today > contest.EndDate.Date)
-{
-    <div class="winner-announcement mb-4">
-        <h2>Last Week's Contest Winner! 🏆</h2>
-        <div class="winner-card">
-            <div class="winner-info">
-                <h3>@Model.Winner.Name</h3>
-                <p>Congratulations to our winner!</p>
-                <div class="winning-entry mt-3">
-                    <p><strong>Contest:</strong> @contest.ContestType</p>
-                    @if (Model.ContestEntries.Any(e => e.UserId == Model.Winner.UserId))
-                    {
-                        var winningEntry = Model.ContestEntries.First(e => e.UserId == Model.Winner.UserId);
-                        <p>@winningEntry.Title</p>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
-}
-else
-{
-    <h2>Current Weekly Contest</h2>
-
-    @if (Model.UpcomingContests.Any())
+<div class="contest"> 
+    <h1> Current Weekly Contest</h1>
+</div>
+<div class="contest-section">
+    @if (Model.Winner != null && contest != null && (today - contest.EndDate.Date).TotalDays <= 1 && today > contest.EndDate.Date)
     {
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">@contest.ContestType</h5>
-                <p><strong>Status:</strong> @contest.ContestPhase</p>
-                <p><strong>Start Date:</strong> @contest.StartDate.ToString("MM/dd/yyyy")</p>
-                <p><strong>End Date:</strong> @contest.EndDate.ToString("MM/dd/yyyy")</p>
-                <p><strong>Instructions:</strong> @contest.Instructions</p>
-                @if ((today - contest.StartDate.Date).TotalDays <= 1)
-                {
-                    <a href="@Url.Action("ParticipateContest", "Home", new { contestId = contest.ContestId })"
-                       class="btn btn-primary">Participate</a>
-                }
-                else
-                {
-                    <p class="alert alert-info">Participation is closed</p>
-                }
-                <a href="@Url.Action("ViewContest", "Home", new { contestId = contest.ContestId })"
-                   class="btn btn-secondary">View Entries</a>
+        <div class="winner-announcement mb-4">
+            <h2>Last Week's Contest Winner! 🏆</h2>
+            <div class="winner-card">
+                <div class="winner-info">
+                    <h3>@Model.Winner.Name</h3>
+                    <p>Congratulations to our winner!</p>
+                    <div class="winning-entry mt-3">
+                        <p><strong>Contest:</strong> @contest.ContestType</p>
+                        @if (Model.ContestEntries.Any(e => e.UserId == Model.Winner.UserId))
+                        {
+                            var winningEntry = Model.ContestEntries.First(e => e.UserId == Model.Winner.UserId);
+                            <p>@winningEntry.Title</p>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     }
     else
     {
-        <p>No active contests currently.</p>
-    }
-    
-}
-
-
-<h2>Latest User Posts</h2>
-
-@if (Model.UserPosts?.Any() == true)
-{
-    <div class="row">
-        @foreach (var post in Model.UserPosts)
+        @if (Model.UpcomingContests.Any())
         {
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">@post.User.Name</h5>
-                    @foreach (var mediaPath in post.MediaPath.Split(',').Where(mp => !string.IsNullOrEmpty(mp)))
-                    {
-                        if (mediaPath.EndsWith(".mp4") || mediaPath.EndsWith(".mov") || mediaPath.EndsWith(".avi"))
-                        {
-                            <video controls class="post-media"><source src="@mediaPath" type="video/mp4"></video>
-                        }
-                        else
-                        {
-                            <img src="@mediaPath" alt="Post Image" class="post-media" />
-                        }
-                    }
-                    <p>@post.Caption</p>
-                    <p class="text-muted">Posted on: @post.CreatedAt.ToString("MMM dd, yyyy")</p>
+            <div class="contest-details">
+                <h5 class="card-title">@contest.ContestType</h5>
+                <p><strong>Start Date:</strong> @contest.StartDate.ToString("MM/dd/yyyy")</p>
+                <p><strong>End Date:</strong> @contest.EndDate.ToString("MM/dd/yyyy")</p>
+                <p><strong>Instructions:</strong> @contest.Instructions</p>
 
-                    <button class="btn btn-outline-primary like-btn" data-post-id="@post.PostId">Like (@post.PostLikes.Count)</button>
-                    <textarea class="comment-content" data-post-id="@post.PostId" placeholder="Add a comment..." required></textarea>
-                    <button class="btn btn-info comment-btn" data-post-id="@post.PostId">Comment</button>
 
-                    <div>
-                        <h6>Comments:</h6>
-                        <ul id="comment-list-@post.PostId">
-                            @foreach (var comment in post.UserComments)
-                            {
-                                <li><strong>@comment.User.Name:</strong> @comment.Content</li>
-                            }
-                        </ul>
+                @if (Model.ContestEntries?.Any() == true)
+                {
+                    <div class="participants-container">
+                        <h4> Participants </h4>
+                        @foreach (var entry in Model.ContestEntries)
+                        {
+                            <div class="participant">
+                                <div class="participant-image">
+                                    <img src="@(string.IsNullOrEmpty(entry.User.UserImage) ? "/UserFile/default-profile.png" : $"/UserFile/{entry.User.UserImage}")" alt="@entry.User.Name" />
+                                </div>
+                                <span class="participant-name">@entry.User.Name</span>
+                            </div>
+                        }
                     </div>
-                </div>
+                }
+                else
+                {
+                    <p>No participants yet</p>
+                }
+
+
+                @{
+                    var daysSinceStart = (Model.CurrentDate - contest.StartDate).TotalDays;
+                }
+                @if (daysSinceStart <= 1 && User.Identity.IsAuthenticated)
+                {
+                    <a href="@Url.Action("ParticipateContest", "Home", new { contestId = contest.ContestId })"
+                    class="btn btn-primary">Participate</a>
+                }
+                else
+                {
+                    <p class="alert alert-info">Participation period has ended</p>
+                }
+                <a href="@Url.Action("ViewContest", "Home", new { contestId = contest.ContestId })"
+                class="btn btn-secondary">View Entries</a>
+
             </div>
         }
-    </div>
-}
-else
-{
-    <p>No posts available.</p>
-}
+        else
+        {
+            <p>No active contests currently.</p>
+        }
+
+    }
+</div>
+
+<div class="usercontent">
+    <h2>Latest User Posts</h2>
+
+    @if (Model.UserPosts?.Any() == true)
+    {
+        <div class="row">
+            @foreach (var post in Model.UserPosts)
+            {
+                <div class="card">
+                    <div class="card-body">
+                        <div class="user-header">
+                            <div class="user-profile-image">
+                                <img src="@(string.IsNullOrEmpty(post.User.UserImage) ? "/UserFile/default-profile.png" : $"/UserFile/{post.User.UserImage}")"
+                                alt="@post.User.Name's profile" />
+                            </div>
+                            <h5 class="card-title">@post.User.Name</h5>
+                        </div>
+
+                        <div class="media-container">
+                            @foreach (var mediaPath in post.MediaPath.Split(',').Where(mp => !string.IsNullOrEmpty(mp)))
+                            {
+                                <div class="media-item">
+                                    @if (mediaPath.EndsWith(".mp4") || mediaPath.EndsWith(".mov") || mediaPath.EndsWith(".avi"))
+                                    {
+                                        <video controls class="post-media"><source src="@mediaPath" type="video/mp4"></video>
+                                    }
+                                    else
+                                    {
+                                        <img src="@mediaPath" alt="Post Image" class="post-media" />
+                                    }
+                                </div>
+                            }
+                        </div>
+                        <p>@post.Caption</p>
+                        <p class="text-muted">Posted on: @post.CreatedAt.ToString("MMM dd, yyyy")</p>
+
+                        <div class="post-actions">
+                            <div class="like-container">
+                                <i class="fas fa-heart like-btn" data-post-id="@post.PostId"></i>
+                                <span class="like-count">@post.PostLikes.Count</span>
+                            </div>
+                            <button class="comment-toggle" data-post-id="@post.PostId">
+                                <i class="fas fa-comment"></i> Comments
+                            </button>
+                        </div>
+
+                        <div class="comment-section" id="comment-section-@post.PostId">
+                            <textarea class="comment-content" data-post-id="@post.PostId" placeholder="Add a comment..." required></textarea>
+                            <button class="btn btn-info comment-btn" data-post-id="@post.PostId">Comment</button>
+                            <div>
+                                <h6>Comments:</h6>
+                                <ul id="comment-list-@post.PostId">
+                                    @foreach (var comment in post.UserComments)
+                                    {
+                                        <li><strong>@comment.User.Name:</strong> @comment.Content</li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <form asp-controller="Admin" asp-action="DeleteUserPost" method="post" style="display: inline;">
+                                <input type="hidden" name="postId" value="@post.PostId" />
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">
+                                    Delete Post
+                                </button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            }
+
+        </div>
+    }
+    else
+    {
+        <p>No posts available.</p>
+    }
+</div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -152,12 +215,12 @@ else
 
         $('#successMessage').fadeOut(3000);
 
-        $(document).on('click', '.like-btn', function () {
-            let button = $(this);
-            let postId = button.data('post-id');
+            $(document).on('click', '.like-btn', function () {
+            let icon = $(this);
+            let postId = icon.data('post-id');
             $.post('/UserContent/LikePost', { postId: postId }, function (res) {
                 if (res.success) {
-                    button.text(`Like (${res.likeCount})`);
+                    icon.siblings('.like-count').text(res.likeCount);
                 }
             }).fail(() => alert('Failed to process like.'));
         });
@@ -171,6 +234,42 @@ else
                     $(`.comment-content[data-post-id='${postId}']`).val('');
                 }
             }).fail(() => alert('Failed to add comment.'));
+        });
+
+
+        $('.comment-toggle').click(function() {
+            const postId = $(this).data('post-id');
+            const commentSection = $(`#comment-section-${postId}`);
+            $(this).toggleClass('active');
+            commentSection.toggleClass('active');
+        });
+
+        // Initialize media container scroll behavior
+        $('.media-container').each(function() {
+            const container = $(this);
+            const mediaItems = container.find('.media-item');
+
+            if (mediaItems.length > 1) {
+                container.scrollLeft(0);
+
+                // Optional: Add navigation indicators
+                const indicators = $('<div class="media-indicators"></div>');
+                mediaItems.each((index) => {
+                    indicators.append(`<span class="indicator ${index === 0 ? 'active' : ''}"></span>`);
+                });
+                container.after(indicators);
+            }
+        });
+
+        // Update indicators on scroll
+        $('.media-container').on('scroll', function() {
+            const container = $(this);
+            const scrollPosition = container.scrollLeft();
+            const itemWidth = container.width();
+            const currentItem = Math.round(scrollPosition / itemWidth);
+
+            container.next('.media-indicators').find('.indicator').removeClass('active')
+                .eq(currentItem).addClass('active');
         });
     });
 </script>

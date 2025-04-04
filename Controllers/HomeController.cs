@@ -31,7 +31,11 @@ namespace GuideMe.Controllers
             try
             {
                 var today = DateTime.UtcNow;
-                var homeViewModel = new HomeViewModel();
+                var homeViewModel = new HomeViewModel()
+                {
+                    CurrentDate = today
+                };
+
 
                 // Handle weekly contests
                 var activeContest = _context.WeeklyContests
@@ -41,7 +45,7 @@ namespace GuideMe.Controllers
 
                 if (activeContest != null)
                 {
-                    // Check if contest has ended (after 6 days)
+                    // Checking if contest has ended (after 6 days)
                     if (today.Date > activeContest.EndDate.Date)
                     {
                         // Determine winner
@@ -118,13 +122,14 @@ namespace GuideMe.Controllers
                             .Take(4)
                             .ToList();
 
-                /*// Load user posts with related data
+                // Load user posts with related data
                 homeViewModel.UserPosts = _context.UserPosts
                     .Include(p => p.User)
                     .Include(p => p.PostLikes)
                     .Include(p => p.UserComments)
+                        .ThenInclude(c => c.User)
                     .OrderByDescending(p => p.CreatedAt)
-                    .ToList();*/
+                    .ToList();
 
                 // Set active contest and winner info
                 homeViewModel.UpcomingContests = activeContest != null
@@ -287,6 +292,21 @@ namespace GuideMe.Controllers
         [HttpGet("participatecontest/{contestId}")]
         public IActionResult ParticipateContest(int contestId)
         {
+            var contest = _context.WeeklyContests.FirstOrDefault(c => c.ContestId == contestId);
+            if (contest == null)
+            {
+                TempData["ErrorMessage"] = "Contest not found.";
+                return RedirectToAction("Index");
+            }
+
+            // Check if participation is still open (within 1 day of start)
+            var daysSinceStart = (DateTime.UtcNow.Date - contest.StartDate.Date).TotalDays;
+            if (daysSinceStart > 1)
+            {
+                TempData["ErrorMessage"] = "Participation period has ended.";
+                return RedirectToAction("Index");
+            }
+
             ContestEntry contestEntry = new ContestEntry { ContestId = contestId };
             return View(contestEntry);
         }
@@ -294,6 +314,7 @@ namespace GuideMe.Controllers
         [HttpPost("participatecontest/{contestId}")]
         public IActionResult ParticipateContest(ContestEntry ce, IEnumerable<IFormFile> ContestImages)
         {
+
             if (ContestImages == null || ContestImages.Count() == 0)
             {
                 ModelState.AddModelError("", "Please upload at least one image.");
@@ -347,6 +368,13 @@ namespace GuideMe.Controllers
             if (contest == null)
             {
                 ModelState.AddModelError("", "Invalid contest.");
+                return View("ParticipateContest", ce);
+            }
+
+            var daysSinceStart = (DateTime.UtcNow.Date - contest.StartDate.Date).TotalDays;
+            if (daysSinceStart > 1)
+            {
+                ModelState.AddModelError("", "Participation period has ended.");
                 return View("ParticipateContest", ce);
             }
 

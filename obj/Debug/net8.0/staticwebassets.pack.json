@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets\\ContestSubmissions\\ContestSubmission_2f934bc9-1c10-4a02-91f1-4874cb4fb500.jpg"
     },
     {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\ContestSubmissions\\ContestSubmission_440856a3-2763-4d76-b0c6-f3e3754bb3a2.png",
+      "PackagePath": "staticwebassets\\ContestSubmissions\\ContestSubmission_440856a3-2763-4d76-b0c6-f3e3754bb3a2.png"
+    },
+    {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\ContestSubmissions\\ContestSubmission_4bde0ef7-ec2a-4aca-8645-10bb1a066be9.png",
       "PackagePath": "staticwebassets\\ContestSubmissions\\ContestSubmission_4bde0ef7-ec2a-4aca-8645-10bb1a066be9.png"
     },
@@ -141,12 +145,20 @@
       "PackagePath": "staticwebassets\\Image\\c.jpg"
     },
     {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\Image\\changepassword.jpg",
+      "PackagePath": "staticwebassets\\Image\\changepassword.jpg"
+    },
+    {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\Image\\contest.jpg",
       "PackagePath": "staticwebassets\\Image\\contest.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\Image\\d.jpg",
-      "PackagePath": "staticwebassets\\Image\\d.jpg"
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\Image\\contestweekly.jpg",
+      "PackagePath": "staticwebassets\\Image\\contestweekly.jpg"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\Image\\createpost.jpg",
+      "PackagePath": "staticwebassets\\Image\\createpost.jpg"
     },
     {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\Image\\event.jpg",
@@ -181,8 +193,16 @@
       "PackagePath": "staticwebassets\\Image\\twitter.png"
     },
     {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\Image\\userupdate.jpg",
+      "PackagePath": "staticwebassets\\Image\\userupdate.jpg"
+    },
+    {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\Image\\weekly.jpg",
       "PackagePath": "staticwebassets\\Image\\weekly.jpg"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\Image\\weeklycontest.jpg",
+      "PackagePath": "staticwebassets\\Image\\weeklycontest.jpg"
     },
     {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\Image\\youtube.png",
@@ -205,6 +225,10 @@
       "PackagePath": "staticwebassets\\ProvinceImages\\ProvinceImage21d74922-4253-49b8-bb0a-1f267dc837ce.JPG"
     },
     {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\ProvinceImages\\ProvinceImage23f7cef4-f316-40ac-a975-0e0849523745.png",
+      "PackagePath": "staticwebassets\\ProvinceImages\\ProvinceImage23f7cef4-f316-40ac-a975-0e0849523745.png"
+    },
+    {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\ProvinceImages\\ProvinceImage6afc2836-bfd9-4dff-9d32-4fea64a685d8.png",
       "PackagePath": "staticwebassets\\ProvinceImages\\ProvinceImage6afc2836-bfd9-4dff-9d32-4fea64a685d8.png"
     },
@@ -213,8 +237,16 @@
       "PackagePath": "staticwebassets\\ProvinceImages\\ProvinceImage78a84b42-d847-4a0d-bd30-1b12a42b636a.png"
     },
     {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\ProvinceImages\\ProvinceImage7a07eddb-fc70-489f-83d4-9ed7c5be8482.png",
+      "PackagePath": "staticwebassets\\ProvinceImages\\ProvinceImage7a07eddb-fc70-489f-83d4-9ed7c5be8482.png"
+    },
+    {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\ProvinceImages\\ProvinceImage7a126415-dcd7-4e7c-8e3e-fffa59d0ba79.JPG",
       "PackagePath": "staticwebassets\\ProvinceImages\\ProvinceImage7a126415-dcd7-4e7c-8e3e-fffa59d0ba79.JPG"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\ProvinceImages\\ProvinceImage95b65276-968f-40da-aae3-b163de31b874.png",
+      "PackagePath": "staticwebassets\\ProvinceImages\\ProvinceImage95b65276-968f-40da-aae3-b163de31b874.png"
     },
     {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\ProvinceImages\\ProvinceImage9e97ed19-6fb5-484f-97b0-2572fed2ad65.jpg",
@@ -223,6 +255,10 @@
     {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\ProvinceImages\\ProvinceImage_d5dc145d-4aae-4d24-8724-e91df14e8356.JPG",
       "PackagePath": "staticwebassets\\ProvinceImages\\ProvinceImage_d5dc145d-4aae-4d24-8724-e91df14e8356.JPG"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\ProvinceImages\\ProvinceImagecb97a76e-efce-4ef6-bc28-6841aa4255f8.png",
+      "PackagePath": "staticwebassets\\ProvinceImages\\ProvinceImagecb97a76e-efce-4ef6-bc28-6841aa4255f8.png"
     },
     {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\ProvinceImages\\ProvinceImaged0be08e6-5f6a-4f40-98f5-4c47493d7396.png",
@@ -329,6 +365,10 @@
       "PackagePath": "staticwebassets\\UserFile\\UserFile3dc5747d-6d27-4d84-925f-dadd3b8ad2bb.png"
     },
     {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\UserFile\\UserFile48559f97-d656-4d6e-9687-94fc678d4516.jpg",
+      "PackagePath": "staticwebassets\\UserFile\\UserFile48559f97-d656-4d6e-9687-94fc678d4516.jpg"
+    },
+    {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\UserFile\\UserFile53b67443-f62d-4abd-84b4-7e63e1b435dc.jpg",
       "PackagePath": "staticwebassets\\UserFile\\UserFile53b67443-f62d-4abd-84b4-7e63e1b435dc.jpg"
     },
@@ -393,6 +433,10 @@
       "PackagePath": "staticwebassets\\UserFile\\default-profile.png"
     },
     {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\Video\\homeevent.mp4",
+      "PackagePath": "staticwebassets\\Video\\homeevent.mp4"
+    },
+    {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\Video\\map.mp4",
       "PackagePath": "staticwebassets\\Video\\map.mp4"
     },
@@ -451,6 +495,14 @@
     {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\css\\home.css",
       "PackagePath": "staticwebassets\\css\\home.css"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\css\\homepage.css",
+      "PackagePath": "staticwebassets\\css\\homepage.css"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\css\\individualchatroom.css",
+      "PackagePath": "staticwebassets\\css\\individualchatroom.css"
     },
     {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\css\\location.css",
@@ -837,16 +889,44 @@
       "PackagePath": "staticwebassets\\tailwindcss\\utilities.min.css"
     },
     {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\00a11005-530a-491e-a204-367227969ed4.png",
+      "PackagePath": "staticwebassets\\usercontent\\00a11005-530a-491e-a204-367227969ed4.png"
+    },
+    {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\0386db9b-4109-4c49-9523-cd80dda1348d.png",
       "PackagePath": "staticwebassets\\usercontent\\0386db9b-4109-4c49-9523-cd80dda1348d.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\08df353d-87c5-475f-baac-83936af43673.png",
+      "PackagePath": "staticwebassets\\usercontent\\08df353d-87c5-475f-baac-83936af43673.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\0e418e5b-9a0e-4e66-aeee-323e27872d70.png",
+      "PackagePath": "staticwebassets\\usercontent\\0e418e5b-9a0e-4e66-aeee-323e27872d70.png"
     },
     {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\1db9a905-21cb-4782-9e04-71664939ffbb.png",
       "PackagePath": "staticwebassets\\usercontent\\1db9a905-21cb-4782-9e04-71664939ffbb.png"
     },
     {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\309db98c-8b75-4271-a412-fe2b6c47c2a6.png",
+      "PackagePath": "staticwebassets\\usercontent\\309db98c-8b75-4271-a412-fe2b6c47c2a6.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\32ca7060-8da1-4a88-a18c-08b19cb858ab.png",
+      "PackagePath": "staticwebassets\\usercontent\\32ca7060-8da1-4a88-a18c-08b19cb858ab.png"
+    },
+    {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\36db04a1-4632-4ba5-b0cb-b3bed81df9c5.png",
       "PackagePath": "staticwebassets\\usercontent\\36db04a1-4632-4ba5-b0cb-b3bed81df9c5.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\432ae90d-1971-485b-8f81-51f4bd83ba47.png",
+      "PackagePath": "staticwebassets\\usercontent\\432ae90d-1971-485b-8f81-51f4bd83ba47.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\4fd350fc-17c3-42c4-9fb3-65766ef42a61.png",
+      "PackagePath": "staticwebassets\\usercontent\\4fd350fc-17c3-42c4-9fb3-65766ef42a61.png"
     },
     {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\52f89262-70cf-4c61-9097-9443083f66e4.png",
@@ -861,12 +941,24 @@
       "PackagePath": "staticwebassets\\usercontent\\684dff70-dd53-464e-8703-22d3b8a895b5.png"
     },
     {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\6a1d015f-ac39-4323-8bd5-32ff8d6225bb.png",
+      "PackagePath": "staticwebassets\\usercontent\\6a1d015f-ac39-4323-8bd5-32ff8d6225bb.png"
+    },
+    {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\6b263838-e4a5-436f-8f40-b7bca1f4ce94.png",
       "PackagePath": "staticwebassets\\usercontent\\6b263838-e4a5-436f-8f40-b7bca1f4ce94.png"
     },
     {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\6f2028e6-ce54-47a4-97ab-af04d4429b6d.png",
+      "PackagePath": "staticwebassets\\usercontent\\6f2028e6-ce54-47a4-97ab-af04d4429b6d.png"
+    },
+    {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\823f216f-3a8a-44b5-b122-d5681ce4c3da.png",
       "PackagePath": "staticwebassets\\usercontent\\823f216f-3a8a-44b5-b122-d5681ce4c3da.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\86ff0964-a67c-4fd9-b50b-7b6db1f6a726.jpg",
+      "PackagePath": "staticwebassets\\usercontent\\86ff0964-a67c-4fd9-b50b-7b6db1f6a726.jpg"
     },
     {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\89138368-7186-4cde-89f5-3ff5d18aed58.png",
@@ -877,12 +969,24 @@
       "PackagePath": "staticwebassets\\usercontent\\8f130a90-5b99-4b7d-8ec5-6dfe49371184.png"
     },
     {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\8f7dea09-422a-4c41-ba76-f9c272fa1d54.png",
+      "PackagePath": "staticwebassets\\usercontent\\8f7dea09-422a-4c41-ba76-f9c272fa1d54.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\9291602a-9464-45fc-9b21-6dfab2b219eb.png",
+      "PackagePath": "staticwebassets\\usercontent\\9291602a-9464-45fc-9b21-6dfab2b219eb.png"
+    },
+    {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\97680ab3-8317-4d2b-92c7-7eee97bfcee7.png",
       "PackagePath": "staticwebassets\\usercontent\\97680ab3-8317-4d2b-92c7-7eee97bfcee7.png"
     },
     {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\9b423fbf-2928-4182-acc5-2e9c49c96dab.png",
       "PackagePath": "staticwebassets\\usercontent\\9b423fbf-2928-4182-acc5-2e9c49c96dab.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\abcb4a4a-04cc-4559-b123-907351ebedb1.mp4",
+      "PackagePath": "staticwebassets\\usercontent\\abcb4a4a-04cc-4559-b123-907351ebedb1.mp4"
     },
     {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\ae3c5bea-bf73-4c18-bd4e-9dea5bf40eff.png",
@@ -893,12 +997,24 @@
       "PackagePath": "staticwebassets\\usercontent\\b9d64b53-6fcf-49fa-8837-c4c54d976efd.png"
     },
     {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\bca78553-4995-416a-b007-6b9e12a366ed.png",
+      "PackagePath": "staticwebassets\\usercontent\\bca78553-4995-416a-b007-6b9e12a366ed.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\c8f82205-c6a0-49cf-aa23-26ff68770776.png",
+      "PackagePath": "staticwebassets\\usercontent\\c8f82205-c6a0-49cf-aa23-26ff68770776.png"
+    },
+    {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\eaf52362-ce25-4526-9278-631326aeccdc.png",
       "PackagePath": "staticwebassets\\usercontent\\eaf52362-ce25-4526-9278-631326aeccdc.png"
     },
     {
       "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\fb784a97-06f5-4925-9148-8bab3315917c.png",
       "PackagePath": "staticwebassets\\usercontent\\fb784a97-06f5-4925-9148-8bab3315917c.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\wwwroot\\usercontent\\fc8f87f0-2a94-4bd4-987c-4ea8babf5097.png",
+      "PackagePath": "staticwebassets\\usercontent\\fc8f87f0-2a94-4bd4-987c-4ea8babf5097.png"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.GuideMe.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

@@ -149,12 +149,11 @@
                     <img src="/Image/Logo.png" alt="logo" />
                 </div>
                 <ul class="navbar-nav">
-                    <li><a asp-action="Index" asp-controller="Admin">Home</a></li>
+                    <li><a asp-action="Index" asp-controller="Home">Home</a></li>
                     <li><a asp-action="ViewUser" asp-controller="Admin">ViewUser</a></li>
                     <li><a asp-action="UrbanTreasures" asp-controller="Contribution">UrbanTreasures</a></li>
                     <li><a asp-action="ManageEventRequest" asp-controller="Admin">HandleEvent</a></li>
                     <li><a asp-action="ViewWeeklyContest" asp-controller="Admin">ManageContest</a></li>
-                    <li><a asp-action="ModerateContent" asp-controller="Admin">ModerateContent</a></li>
                     <li class="profile-dropdown">
                         <button type="button" id="ProfileImgButton" class="flex items-center">
                             <img class="profile-img" src="@Url.Content(ViewBag.image)" alt="Profile Image" />

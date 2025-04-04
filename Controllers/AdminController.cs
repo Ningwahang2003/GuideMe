@@ -3,6 +3,7 @@ using GuideMe.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -140,18 +141,40 @@ namespace GuideMe.Controllers
         [HttpPost]
         public IActionResult DeleteProvince(int id)
         {
-            var province = _context.Provinces.FirstOrDefault(p => p.ProvinceId == id);
-            if (province != null)
+            try
             {
-                var UrbanTreasureContent = _context.UrbanTreasures.Where(ut => ut.ProvinceId == id);
-                _context.UrbanTreasures.RemoveRange(UrbanTreasureContent);
+                var province = _context.Provinces
+                    .Include(p => p.UrbanTreasures)
+                    .ThenInclude(ut => ut.Ratings)
+                    .FirstOrDefault(p => p.ProvinceId == id);
 
+                if (province == null)
+                {
+                    return NotFound();
+                }
+
+                // Delete related ratings first
+                foreach (var urbanTreasure in province.UrbanTreasures)
+                {
+                    _context.Ratings.RemoveRange(urbanTreasure.Ratings);
+                }
+
+                // Delete urban treasures
+                _context.UrbanTreasures.RemoveRange(province.UrbanTreasures);
+
+                // Finally delete the province
                 _context.Provinces.Remove(province);
                 _context.SaveChanges();
-            }
-            return RedirectToAction("ManageForm");
-        }
 
+                return RedirectToAction("ManageForm");
+            }
+            catch (Exception ex)
+            {
+                // Log the error and return with error message
+                ModelState.AddModelError("", "Unable to delete province. Please ensure it has no related data.");
+                return RedirectToAction("ManageForm");
+            }
+        }
 
 
         /*EventHandling*/
@@ -176,7 +199,8 @@ namespace GuideMe.Controllers
                     UserId = request.UserId,
                     Message = $"Your event request for '{request.EventTitle}' has been approved.",
                     CreatedAt = DateTime.Now,
-                    IsRead = false
+                    IsRead = false,
+                    NotificationType = "Approved"
                 };
 
                 _context.Notifications.Add(notification);
@@ -199,7 +223,8 @@ namespace GuideMe.Controllers
                     UserId = request.UserId,
                     Message = $"Your event request for '{request.EventTitle}' has been rejected.",
                     CreatedAt = DateTime.Now,
-                    IsRead = false
+                    IsRead = false,
+                    NotificationType = "Rejected"
                 };
 
                 _context.Notifications.Add(notification);
@@ -237,6 +262,59 @@ namespace GuideMe.Controllers
                 return RedirectToAction("ViewWeeklyContest");
             }
             return View(contest);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteContest(int id)
+        {
+            var contest = await _context.WeeklyContests.FindAsync(id);
+            if (contest != null)
+            {
+                _context.WeeklyContests.Remove(contest);
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Contest deleted successfully";
+            }
+            return RedirectToAction(nameof(ViewWeeklyContest));
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUserPost(int postId)
+        {
+            var post = await _context.UserPosts
+                .Include(p => p.User)
+                .Include(p => p.PostLikes)
+                .Include(p => p.UserComments)
+                .FirstOrDefaultAsync(p => p.PostId == postId);
+
+            if (post != null)
+            {
+                // Removing related likes
+                _context.PostLikes.RemoveRange(post.PostLikes);
+
+                // Removing related comments
+                _context.UserComments.RemoveRange(post.UserComments);
+
+                // Creating notification for the user
+                var notification = new Notification
+                {
+                    UserId = post.UserId,
+                    Message = $"Your post has been removed by admin due to violence concerns.",
+                    CreatedAt = DateTime.Now,
+                    IsRead = false,
+                    NotificationType = "Warning"
+                };
+
+                _context.Notifications.Add(notification);
+
+                _context.UserPosts.Remove(post);
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Post deleted and user notified.";
+            }
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

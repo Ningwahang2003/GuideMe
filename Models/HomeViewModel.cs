@@ -4,6 +4,7 @@
     {
         public HomeViewModel()
         {
+            CurrentDate = DateTime.UtcNow;
             UpcomingEvents = new List<Event>();
             UpcomingContests = new List<WeeklyContest>();
             ContestEntries = new List<ContestEntry>();
@@ -16,5 +17,7 @@
         public User? Winner { get; set; }
         public List<ContestEntry> ContestEntries { get; set; }
         public List<UserPost> UserPosts { get; set; }
+
+        public DateTime CurrentDate { get; set; }
     }
 }

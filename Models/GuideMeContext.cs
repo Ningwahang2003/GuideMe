@@ -169,6 +169,7 @@ public partial class GuideMeContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.IsRead).HasDefaultValue(false);
+            entity.Property(e => e.NotificationType).HasMaxLength(100);
 
             entity.HasOne(d => d.User).WithMany(p => p.Notifications)
                 .HasForeignKey(d => d.UserId)

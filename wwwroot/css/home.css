@@ -1,135 +1,476 @@
-﻿body {
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
     margin: 0;
     padding: 0;
+    background-color: #f8f9fa;
 }
 
 #event-container {
-    width: 90%;
-    max-width: 800px;
-    margin: auto;
-    text-align: center;
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100vw;
+    height: 50vh;
+    position: relative;
+    overflow: hidden;
+    margin: -24px calc(-50vw + 50%) 0 -24px;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    position: relative;
 }
 
 .event-slide {
+    width: 100%;
+    height: 100%;
+    position: relative;
     display: none;
-    padding: 20px;
-    border: 2px solid #ddd;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    transition: all 0.5s ease-in-out;
 }
 
-#successMessage {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    transition: opacity 0.5s ease-in-out;
+
+.slide-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
 }
+
+.slide-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 2rem;
+}
+
+    .slide-content h1 {
+        text-transform: uppercase;
+        font-size: 2.3em;
+        margin-bottom: 1rem;
+        text-align: center;
+        letter-spacing: 1.5px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        line-height: 1.4;
+        position: relative;
+        top: -15px;
+    }
+
+    .slide-content h3 {
+        font-size: 2em;
+        margin-bottom: -10px;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .slide-content p {
+        font-size: 1.1em;
+        margin-bottom: 0.5rem;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .slide-content strong {
+        color: #fff;
+        font-weight: 600;
+    }
+
+/*contest*/
+
+.contest h1 {
+    text-align: center;
+    text-transform: uppercase;
+    color: forestgreen;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+/* Contest Section */
+.contest-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/Image/weeklycontest.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+    padding: 30px 20px;
+    position: relative;
+    margin: 25px auto;
+    min-height: 140px;
+    max-height: 550px;
+    isolation: isolate;
+    width: 85%;
+    display: block;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+    .contest-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.1);
+        z-index: 0;
+    }
+
+    .contest-section > * {
+        position: relative;
+        z-index: 1;
+    }
+
+
+.contest-details {
+    margin-top: -15px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: white;
+}
+
+
+    .contest-details .card-title {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        color: white;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .contest-details p {
+        font-size: 1.2em;
+        margin-bottom: 15px;
+        line-height: 1.6;
+    }
+
+    .contest-details strong {
+        color: ghostwhite;
+        font-size: 1.1em;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .contest-details .btn {
+        margin: 10px 5px;
+        padding: 12px 30px;
+        font-size: 1em;
+        color:black;
+        border-radius: 8px;
+        text-transform: uppercase;
+        text-decoration: none;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .contest-details .btn-primary {
+        background-color: #4CAF50;
+        border: none;
+        width: 200px;
+    }
+
+        .contest-details .btn-primary:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+    .contest-details .btn-secondary {
+        background-color: ghostwhite;
+        border: none;
+        width: 200px;
+    }
+
+        .contest-details .btn-secondary:hover {
+            background-color: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+    .contest-details .alert-info {
+        background-color: rgba(33, 150, 243, 0.2);
+        border: none;
+        color: white;
+        font-size: 0.9em;
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+        margin: 15px auto;
+        max-width: 400px;
+    }
+
+
+.participants-container h4 {
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.participants-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.participant {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.participant-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+    .participant-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.participant-name {
+    font-size: 0.7em;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* User Posts Section */
+.usercontent {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+    .usercontent h2 {
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+        color: #333;
+        font-size: 2.5em;
+    }
 
 .card {
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: white;
 }
 
 .card-body {
     padding: 20px;
+    position: relative;
 }
 
-.card-title {
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
+.user-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
 }
 
-/* Participation and View Links */
-a {
-    display: inline-block;
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: background 0.3s ease-in-out;
+.user-profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
 }
 
-    a:hover {
-        background-color: #0056b3;
+    .user-profile-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
-.winner-section {
-    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    color: white;
-    font-weight: bold;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+.card-title {
+    margin: 0;
 }
 
-.contest-entries {
-    list-style-type: none;
+/* Media Container Styles */
+.media-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 15px;
+    padding: 10px 0;
+    margin: 15px 0;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+    .media-container::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .media-container::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .media-container::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+    }
+
+.media-item {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    position: relative;
+}
+
+.post-media {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Post Actions */
+.post-actions {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+    align-items: center;
+}
+
+.like-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.like-btn {
+    color: red;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+    .like-btn:hover {
+        transform: scale(1.2);
+    }
+
+.like-count {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.comment-toggle {
+    background: none;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s ease;
+    border-radius: 20px;
+}
+
+    .comment-toggle:hover {
+        color: #333;
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+/* Comment Section */
+.comment-section {
+    display: none;
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+    .comment-section.active {
+        display: block;
+        animation: slideDown 0.3s ease-out;
+    }
+
+.comment-content {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: vertical;
+    min-height: 60px;
+}
+
+.comment-btn {
+    margin-bottom: 15px;
+}
+
+#comment-list {
+    list-style: none;
     padding: 0;
 }
 
-.contest-entries li {
-        background: white;
-        padding: 15px;
-        margin-bottom: 10px;
-        border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.winner-announcement {
-    background: linear-gradient(135deg, #ffd700, #ffa500);
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    margin: 20px 0;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-    .winner-announcement h2 {
-        color: #fff;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-        margin-bottom: 20px;
+    #comment-list li {
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
 
-.winner-card {
-    background: rgba(255,255,255,0.9);
-    padding: 20px;
-    border-radius: 8px;
+/* Media Indicators */
+.media-indicators {
     display: flex;
-    align-items: center;
     justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
 }
 
-.winner-info {
-    text-align: center;
+.indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
 
-    .winner-info h3 {
-        color: #333;
-        margin-bottom: 10px;
-        font-size: 24px;
+    .indicator.active {
+        background: rgba(0, 0, 0, 0.6);
     }
 
-    .winner-info p {
-        color: #666;
-        margin: 0;
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
     }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
