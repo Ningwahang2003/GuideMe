@@ -21,6 +21,8 @@ public partial class GuideMeContext : DbContext
 
     public virtual DbSet<Event> Events { get; set; }
 
+    public virtual DbSet<Feedback> Feedbacks { get; set; }
+
     public virtual DbSet<Group> Groups { get; set; }
 
     public virtual DbSet<GroupMember> GroupMembers { get; set; }
@@ -34,8 +36,6 @@ public partial class GuideMeContext : DbContext
     public virtual DbSet<PrivateMessage> PrivateMessages { get; set; }
 
     public virtual DbSet<Province> Provinces { get; set; }
-
-    public virtual DbSet<Rating> Ratings { get; set; }
 
     public virtual DbSet<UrbanTreasure> UrbanTreasures { get; set; }
 
@@ -119,6 +119,22 @@ public partial class GuideMeContext : DbContext
                 .HasConstraintName("FK__Events__UserId__6FE99F9F");
         });
 
+        modelBuilder.Entity<Feedback>(entity =>
+        {
+            entity.HasKey(e => e.FeedbackId).HasName("PK__Feedback__6A4BEDD6A3A94A96");
+
+            entity.ToTable("Feedback");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.IsRead).HasDefaultValue(false);
+
+            entity.HasOne(d => d.User).WithMany(p => p.Feedbacks)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__Feedback__UserId__32AB8735");
+        });
+
         modelBuilder.Entity<Group>(entity =>
         {
             entity.HasKey(e => e.GroupId).HasName("PK__Groups__149AF36A67D6DE83");
@@ -152,11 +168,13 @@ public partial class GuideMeContext : DbContext
 
         modelBuilder.Entity<Location>(entity =>
         {
-            entity.HasKey(e => e.LocationId).HasName("PK__Location__E7FEA497411B474C");
+            entity.HasKey(e => e.LocationId).HasName("PK__Location__E7FEA497543032CD");
 
-            entity.Property(e => e.LocationName)
-                .HasMaxLength(255)
-                .IsUnicode(false);
+            entity.Property(e => e.LocationName).HasMaxLength(255);
+
+            entity.HasOne(d => d.User).WithMany(p => p.Locations)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_Location_User");
         });
 
         modelBuilder.Entity<Notification>(entity =>
@@ -210,25 +228,6 @@ public partial class GuideMeContext : DbContext
             entity.ToTable("Province");
 
             entity.Property(e => e.ProvinceName).HasMaxLength(50);
-        });
-
-        modelBuilder.Entity<Rating>(entity =>
-        {
-            entity.HasKey(e => e.RatingId).HasName("PK__Ratings__FCCDF87CFA16EE1A");
-
-            entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-
-            entity.HasOne(d => d.UrbanTreasure).WithMany(p => p.Ratings)
-                .HasForeignKey(d => d.UrbanTreasureId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Ratings__UrbanTr__2BFE89A6");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Ratings)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Ratings__UserId__2B0A656D");
         });
 
         modelBuilder.Entity<UrbanTreasure>(entity =>

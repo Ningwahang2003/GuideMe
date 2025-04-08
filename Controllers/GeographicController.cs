@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 using System.Web;
 
 namespace GuideMe.Controllers
@@ -35,7 +36,7 @@ namespace GuideMe.Controllers
                 return View();
             }
 
-            string apiKey = "AlzaSy8FoBHru-r3uLewYttBRj8_e5MpZoMpmLt";
+            string apiKey = "AlzaSyeEdHFkMe9ez6PeMFg7ZT4OKTvc1iukwYT";
             string apiUrl = $"https://maps.gomaps.pro/maps/api/geocode/json?address={search}&key={apiKey}";
 
             var response = await _httpClient.GetAsync(apiUrl);
@@ -53,9 +54,19 @@ namespace GuideMe.Controllers
                 LocationName = result["formatted_address"]?.ToString(),
                 Latitude = result["geometry"]?["location"]?["lat"]?.ToObject<double>(),
                 Longitude = result["geometry"]?["location"]?["lng"]?.ToObject<double>(),
+                LocationCreatedAt = DateOnly.FromDateTime(DateTime.Now),
+                UserId = User.Identity.IsAuthenticated ? int.Parse(User.FindFirstValue(ClaimTypes.Name)) : null
             }).ToList();
 
-            if (locations == null || !locations.Any())
+            if (locations != null && locations.Any() && User.Identity.IsAuthenticated)
+            {
+                foreach (var location in locations)
+                {
+                    _context.Locations.Add(location);
+                }
+                await _context.SaveChangesAsync();
+            }
+            else if (locations == null || !locations.Any())
             {
                 ModelState.AddModelError("", "Could not find the entered location.");
             }

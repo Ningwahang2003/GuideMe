@@ -27,13 +27,5 @@ namespace GuideMe.Models
 
         [DataType(DataType.Upload)]
         public IFormFile[]? UrbanImage { get; set; }
-
-        public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
-
-        [NotMapped]
-        public double AverageRating => Ratings.Any() ? Ratings.Average(r => r.RatingValue) : 0;
-
-        [NotMapped]
-        public int RatingCount => Ratings.Count;
     }
 }

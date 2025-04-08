@@ -25,13 +25,15 @@ public partial class User
 
     public virtual ICollection<Event> Events { get; set; } = new List<Event>();
 
+    public virtual ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();
+
     public virtual ICollection<GroupMember> GroupMembers { get; set; } = new List<GroupMember>();
+
+    public virtual ICollection<Location> Locations { get; set; } = new List<Location>();
 
     public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
 
     public virtual ICollection<PostLike> PostLikes { get; set; } = new List<PostLike>();
-
-    public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
 
     public virtual ICollection<UrbanTreasure> UrbanTreasures { get; set; } = new List<UrbanTreasure>();
 

@@ -145,18 +145,11 @@ namespace GuideMe.Controllers
             {
                 var province = _context.Provinces
                     .Include(p => p.UrbanTreasures)
-                    .ThenInclude(ut => ut.Ratings)
                     .FirstOrDefault(p => p.ProvinceId == id);
 
                 if (province == null)
                 {
                     return NotFound();
-                }
-
-                // Delete related ratings first
-                foreach (var urbanTreasure in province.UrbanTreasures)
-                {
-                    _context.Ratings.RemoveRange(urbanTreasure.Ratings);
                 }
 
                 // Delete urban treasures
@@ -170,10 +163,48 @@ namespace GuideMe.Controllers
             }
             catch (Exception ex)
             {
-                // Log the error and return with error message
                 ModelState.AddModelError("", "Unable to delete province. Please ensure it has no related data.");
                 return RedirectToAction("ManageForm");
             }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUrbanTreasure(int id)
+        {
+            var urbanTreasure = await _context.UrbanTreasures.Include(u => u.User).FirstOrDefaultAsync(u => u.UrbanTreasureId == id);
+
+            if (urbanTreasure != null)
+            {
+                if (!string.IsNullOrEmpty(urbanTreasure.Image))
+                {
+                    var imageNames = urbanTreasure.Image.Split(',');
+                    foreach (var imageName in imageNames)
+                    {
+                        var imagePath = Path.Combine(_env.WebRootPath, "UrbanImage", imageName);
+                        if (System.IO.File.Exists(imagePath))
+                        {
+                            System.IO.File.Delete(imagePath);
+                        }
+                    }
+                }
+
+                var notification = new Notification
+                {
+                    UserId = urbanTreasure.UserId,
+                    Message = $"Your Urban Treasure post '{urbanTreasure.Title}' has been removed by admin.",
+                    CreatedAt = DateTime.Now,
+                    IsRead = false,
+                    NotificationType = "Warning"
+                };
+
+                _context.Notifications.Add(notification);
+                _context.UrbanTreasures.Remove(urbanTreasure);
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Urban Treasure post deleted and user notified.";
+            }
+
+            return RedirectToAction("ProvinceContribution");
         }
 
 

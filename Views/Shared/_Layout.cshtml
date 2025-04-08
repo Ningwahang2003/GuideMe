@@ -136,6 +136,21 @@
         form button:hover {
         background-color: #45a049;
         }
+
+        .notification-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+            .notification-link i {
+                font-size: 30px;
+                color: #fff;
+            }
+
+            .notification-link:hover i {
+                color: #ddd;
+            }
     </style>
 </head>
 <body>
@@ -154,9 +169,10 @@
                     <li><a asp-action="UrbanTreasures" asp-controller="Contribution">UrbanTreasures</a></li>
                     <li><a asp-action="ManageEventRequest" asp-controller="Admin">HandleEvent</a></li>
                     <li><a asp-action="ViewWeeklyContest" asp-controller="Admin">ManageContest</a></li>
+                    <li><a asp-action="ManageFeedback" asp-controller="Feedback">UserFeedBack</a></li>
                     <li class="profile-dropdown">
                         <button type="button" id="ProfileImgButton" class="flex items-center">
-                            <img class="profile-img" src="@Url.Content(ViewBag.image)" alt="Profile Image" />
+                            <img id="ProfileImage" class="profile-img" src="/UserFile/default-profile.png" alt="Profile Image" />
                         </button>
                         <div id="dropdownNavbar" class="dropdown-menu hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
                             <a asp-action="ProfileUpdate" asp-controller="Home">Edit Profile</a>
@@ -186,16 +202,21 @@
                     <li><a asp-action="UrbanTreasures" asp-controller="Contribution">UrbanTreasures</a></li>
                     <li class="profile-dropdown">
                         <button type="button" id="ProfileImgButton" class="flex items-center">
-                            <img class="profile-img" src="@Url.Content(ViewBag.image)" alt="Profile Image" />
+                            <img id="ProfileImage" class="profile-img" src="/UserFile/default-profile.png" alt="Profile Image" />
                         </button>
                         <div id="dropdownNavbar" class="dropdown-menu hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
                             <a asp-action="GetUserPosts" asp-controller="UserContent">Profile</a>
                             <a asp-action="ProfileUpdate" asp-controller="Home">Edit Profile</a>
                             <a asp-action="ChangePassword" asp-controller="Authentication">Change Password</a>
+                            <a asp-action="Submit" asp-controller="Feedback">Feedback</a>
                             <a asp-action="SignOut" asp-controller="Authentication">Sign out</a>
                         </div>
-                    </li> 
-                    <li><a asp-action="Index" asp-controller="Notification">Notifications</a></li>
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Notification" class="notification-link">
+                            <i class="fas fa-bell"></i>
+                        </a>
+                    </li>
 
                 </ul>
             </nav>
@@ -215,17 +236,13 @@
             $.ajax({
                 url: '/Home/ProfilePhoto',
                 method: 'GET',
-                success: function (html) {
-                    const imageElement = $(html).find('img');
-                    if (imageElement.length) {
-                        const imageSrc = imageElement.attr('src');
-                        $('#ProfileImage').attr('src', imageSrc);
-                    } else {
-                        console.warn("No image found.");
+                success: function (response) {
+                    if (response) {
+                        $('#ProfileImage').attr('src', $(response).attr('src'));
                     }
                 },
                 error: function (xhr, status, error) {
-                    console.error("Failed:", status, error);
+                    console.error("Failed to load profile image:", error);
                 }
             });
         });

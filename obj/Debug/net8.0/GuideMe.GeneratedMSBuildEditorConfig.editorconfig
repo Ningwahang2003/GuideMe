@@ -92,6 +92,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJpYnV0aW9uXFZpZXdFdmVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/acer/Source/Repos/GuideMe/Views/Feedback/ManageFeedback.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmVlZGJhY2tcTWFuYWdlRmVlZGJhY2suY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/acer/Source/Repos/GuideMe/Views/Feedback/Submit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmVlZGJhY2tcU3VibWl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/acer/Source/Repos/GuideMe/Views/Geographic/Locations.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VvZ3JhcGhpY1xMb2NhdGlvbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

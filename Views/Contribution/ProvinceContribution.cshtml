@@ -1,6 +1,6 @@
 ﻿@model GuideMe.Models.Province
 
-<link rel="stylesheet" href="~/css/provincecontribution.css" />
+<link rel="stylesheet" href="~/css/provincecontribution.css" asp-append-version="true" />
 
 <div class="container">
 
@@ -14,6 +14,13 @@
             {
                         <div class="list">
                             <div class="card">
+                        <div class="card-header">
+                            <div class="user-info">
+                                <img src="@Url.Content(string.IsNullOrEmpty(contribution.User.UserImage) ? "~/UserFile/default-profile.png" : $"~/UserFile/{contribution.User.UserImage}")"
+                                     class="user-avatar" alt="User Avatar">
+                                <span class="username">@contribution.User.Name</span>
+                            </div>
+                        </div>
                                 <div class="scroll-container">
                                     @foreach (var img in contribution.Image.Split(','))
                                     {
@@ -26,10 +33,19 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="card-title">By User: @contribution.User.Name</h5>
                                     <p class="card-text">@contribution.Title</p>
                                     <p class="card-text">@contribution.Location</p>
                                     <p class="card-text">@contribution.Description</p>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <form asp-controller="Admin" asp-action="DeleteUrbanTreasure" method="post"
+                                              onsubmit="return confirm('Are you sure you want to delete this post?');">
+                                            <input type="hidden" name="id" value="@contribution.UrbanTreasureId" />
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fas fa-trash"></i> Delete Post
+                                            </button>
+                                        </form>
+                                    }
                                 </div>
                             </div>
                         </div>

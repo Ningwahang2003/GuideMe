@@ -210,13 +210,7 @@ namespace GuideMe.Controllers
             var userId = Convert.ToInt32(User.Identity.Name);
             var user = _context.Users.FirstOrDefault(p => p.UserId == userId);
 
-            var profileImagePath = string.IsNullOrEmpty(user?.UserImage)
-                ? "/UserFile/default-profile.png"
-                : $"/UserFile/{user.UserImage}";
-
-            // Pass image URL to the view
-            ViewBag.image = profileImagePath;
-
+            ViewBag.image = user?.UserImage ?? "default-profile.png";
             return PartialView("_Profile");
         }
 

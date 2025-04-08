@@ -1,0 +1,115 @@
+﻿@model GuideMe.Models.Feedback
+
+@{
+    ViewData["Title"] = "Submit Feedback";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<div class="feedback-section">
+    <form asp-controller="Feedback" asp-action="Submit" method="post">
+        <div class="feedback-header">
+            <h4>Send Feedback</h4>
+        </div>
+
+        <div class="form-group">
+            <textarea asp-for="Content"
+                      class="form-control"
+                      rows="8"
+                      placeholder="Tell us what you think must be improved in the website..."
+                      required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-paper-plane"></i> Submit Feedback
+        </button>
+    </form>
+</div>
+
+<style>
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: url('/Image/feedback.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+
+
+    .feedback-section {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        position: relative;
+    }
+
+        .feedback-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            z-index: 1;
+        }
+
+        .feedback-section form {
+            position: relative;
+            z-index: 2;
+        }
+
+    .feedback-header {
+        margin-bottom: 35px;
+        text-align: center;
+    }
+
+        .feedback-header h4 {
+            color: #333;
+            font-size: 35px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+    }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            background: white;
+        }
+
+    .btn-primary {
+        width: 100%;
+        padding: 12px;
+        background: #007bff;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+    .fas {
+        margin-right: 8px;
+    }
+</style>

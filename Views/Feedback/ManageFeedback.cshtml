@@ -1,0 +1,123 @@
+﻿@model IEnumerable<GuideMe.Models.Feedback>
+
+@{
+    ViewData["Title"] = "Feedback List";
+}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<div class="container">
+    <h2>User Feedback</h2>
+    <div class="feedback-list">
+        @foreach (var feedback in Model)
+        {
+            <div class="feedback-card @(feedback.IsRead == false ? "unread" : "")">
+                <div class="feedback-info">
+                    <div class="user-info">
+                        <img class="user-avatar" src="@(string.IsNullOrEmpty(feedback.User.UserImage) ? "/images/default-avatar.png" : "/UserFile/" + feedback.User.UserImage)" alt="@feedback.User.Name" />
+                        <span class="user-name">@feedback.User.Name</span>
+                    </div>
+                    <span class="feedback-date">@feedback.CreatedAt?.ToString("MMM dd, yyyy HH:mm")</span>
+                </div>
+                <p class="feedback-content">@feedback.Content</p>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/Image/feedback.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    h2 {
+        color: white;
+        font-size: 40px;
+        font-weight: 700;
+        margin-bottom: 30px;
+        text-align: center;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 10px;
+    }
+
+    .feedback-list {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+
+    .feedback-card {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        border-left: 4px solid #ddd;
+    }
+
+        .feedback-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .feedback-card.unread {
+            border-left-color: #007bff;
+            background-color: #f8f9fa;
+        }
+
+    .feedback-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #007bff;
+    }
+
+    .user-name {
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 16px;
+    }
+
+    .user-name {
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 16px;
+    }
+
+    .feedback-date {
+        color: #6c757d;
+        font-size: 14px;
+    }
+
+    .feedback-content {
+        color: #444;
+        line-height: 1.6;
+        margin: 0;
+        font-size: 15px;
+        white-space: pre-wrap;
+    }
+</style>

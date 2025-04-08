@@ -14,4 +14,8 @@ public partial class Location
     public double? Latitude { get; set; }
 
     public double? Longitude { get; set; }
+
+    public int? UserId { get; set; }
+
+    public virtual User? User { get; set; }
 }
