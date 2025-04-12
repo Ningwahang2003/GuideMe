@@ -54,15 +54,26 @@ namespace GuideMe.Controllers
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
+                if (string.IsNullOrEmpty(searchTerm))
+                {
+                    TempData["SearchError"] = "Please enter the username you want to search.";
+                    return View("Index");
+                }
+
                 var searchResults = await _context.Users
                 .Where(u => u.UserId != currentUserId &&
                            u.Role == "User" &&
                            EF.Functions.Collate(u.Name, "SQL_Latin1_General_CP1_CI_AS") == searchTerm)
                     .ToListAsync();
+
+                if (!searchResults.Any())
+                {
+                    TempData["SearchError"] = "Username does not exist. Please try again.";
+                }
+
                 ViewBag.SearchResults = searchResults;
                 return View("Index");
             }
-
             ViewBag.SearchResults = null;
             return View("Index");
         }

@@ -91,7 +91,7 @@ namespace GuideMe.Controllers
                             Host = "smtp.gmail.com",
                             Port = 587,
                             UseDefaultCredentials = false,
-                            Credentials = new NetworkCredential("np05cp4a220079@iic.edu.np", "wyxj yjtj fawe wqss"),
+                            Credentials = new NetworkCredential("np05cp4a220079@iic.edu.np", "rdgh wsql bjqj mswx"),
                             EnableSsl = true,
                             DeliveryMethod = SmtpDeliveryMethod.Network
                         };
@@ -113,7 +113,7 @@ namespace GuideMe.Controllers
 
                     catch (Exception ex)
                     {
-                        return Json(ex);
+                        return Json(new { error = ex.Message });
                     }
                 }
                 else
@@ -143,8 +143,9 @@ namespace GuideMe.Controllers
            }
            else
            {
-                return Json("failed");
-           }
+                ModelState.AddModelError("", "Entered EmailToken is incorrect");
+                return View(u);
+            }
         }
 
         [HttpGet]

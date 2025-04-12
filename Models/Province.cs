@@ -15,6 +15,7 @@ public partial class Province
 
     public string? ProvinceDescription { get; set; }
 
+
     [NotMapped]
     [DataType(DataType.Upload)]
     public IFormFile? ProvinceImages { get; set; }

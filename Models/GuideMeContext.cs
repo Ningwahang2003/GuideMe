@@ -170,7 +170,9 @@ public partial class GuideMeContext : DbContext
         {
             entity.HasKey(e => e.LocationId).HasName("PK__Location__E7FEA497543032CD");
 
+            entity.Property(e => e.LocationCreatedAt).HasColumnType("datetime");
             entity.Property(e => e.LocationName).HasMaxLength(255);
+            entity.Property(e => e.SearchCount).HasDefaultValue(0);
 
             entity.HasOne(d => d.User).WithMany(p => p.Locations)
                 .HasForeignKey(d => d.UserId)

@@ -68,6 +68,7 @@ namespace GuideMe.Controllers
             if (isInGroup)
             {
                 TempData["ErrorMessage"] = "You can only be in one group at a time.";
+                TempData["AlertType"] = "danger";
                 return RedirectToAction("Index");
             }
 

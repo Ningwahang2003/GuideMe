@@ -1,4 +1,5 @@
 ﻿@model List<GuideMe.Models.Location>
+@using System.Linq
 
 <link rel="stylesheet" href="~/css/location.css" asp-append-version="true" />
 
@@ -9,6 +10,53 @@
 
 <div class="location-container">
     <h2>Location Search</h2>
+
+
+    <!-- Recommendations panel -->
+    <div class="side-recommendations">
+        @{
+            var recommendations = ViewBag.Recommendations as List<Location>;
+            var userLocation = ViewBag.UserLocation as Location;
+        }
+        @if (recommendations != null && recommendations.Any())
+        {
+            <div class="recommendation-panel">
+                @if (userLocation != null)
+                {
+                    <div class="last-search">
+                        <h4><i class="fas fa-history"></i> Your Last Search</h4>
+                        <div class="last-search-card">
+                            <div class="last-search-name">@userLocation.LocationName</div>
+                            <div class="last-search-time">
+                                <i class="fas fa-clock"></i> @userLocation.LocationCreatedAt?.ToString("MMM dd, yyyy")
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <h4><i class="fas fa-star"></i> Recommended Places</h4>
+                @foreach (var rec in recommendations)
+                {
+                    <div class="rec-card @(userLocation?.LocationName == rec.LocationName ? "highlight" : "")"
+                         onclick="setLocation('@rec.LocationName')">
+                        <div class="rec-name">@rec.LocationName</div>
+                        @if (userLocation != null)
+                        {
+                            var distance = rec.GetDistanceTo(userLocation);
+                            <div class="rec-distance">
+                                <i class="fas fa-map-marker-alt"></i>
+                                @(Math.Round(distance, 1)) km away
+                            </div>
+                        }
+                        <div class="rec-stats">
+                            <i class="fas fa-search"></i> @rec.SearchCount searches
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
 
     <form method="get" action="@Url.Action("Locations", "Geographic")">
         <input type="text" id="search" name="search" placeholder="Enter a city or address" required />
@@ -40,3 +88,9 @@
         }
     </div>
 </div>
+
+<script>
+    function setLocation(name) {
+        document.getElementById('search').value = name;
+    }
+</script>

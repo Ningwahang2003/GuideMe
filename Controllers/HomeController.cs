@@ -131,12 +131,10 @@ namespace GuideMe.Controllers
                     .OrderByDescending(p => p.CreatedAt)
                     .ToList();
 
-                // Set active contest and winner info
                 homeViewModel.UpcomingContests = activeContest != null
                     ? new List<WeeklyContest> { activeContest }
                     : new List<WeeklyContest>();
 
-                // Rest of your existing code...
                 return View(homeViewModel);
             }
             catch (Exception ex)
@@ -161,44 +159,60 @@ namespace GuideMe.Controllers
             }
             try
             {
-                var user = _context.Users.Where(a=>a.Email ==  e.Email).FirstOrDefault();
-
-                if (user == null)
+                if (!e.Password.Any(char.IsUpper) || !e.Password.Any(c => "@#$".Contains(c)))
                 {
-                    if (e.UserFile != null)
+                    ModelState.AddModelError("Password", "Password must contain at least one uppercase letter and one special character (@, #, or $)");
+                    return View(e);
+                }
+
+
+                var emailExists = _context.Users.Any(a => a.Email == e.Email);
+                var nameExists = _context.Users.Any(a => a.Name == e.Name);
+
+                if (emailExists || nameExists)
+                {
+                    if (emailExists)
                     {
-                        string fileName = "UserFile" + Guid.NewGuid() + Path.GetExtension(e.UserFile.FileName);
-                        string filePath = Path.Combine(_env.WebRootPath, "UserFile", fileName);
-                        using (FileStream stream = new FileStream(filePath, FileMode.Create))
-                        {
-                            e.UserFile.CopyTo(stream);
-                        }
-                        e.UserImage = fileName;
+                        ModelState.AddModelError("Email", "This email is already registered.");
                     }
-
-                    User u = new()
+                    if (nameExists)
                     {
-                        UserId = e.UserId,
-                        Email = e.Email,
-                        Password = _protector.Protect(e.Password),
-                        Name = e.Name,
-                        Role = e.Role,
-                        LastLogin = e.LastLogin,
-                        UserImage = e.UserImage
-                    };
+                        ModelState.AddModelError("Name", "This username is already taken.");
+                    }
+                    return View(e);
+                }
 
-                    _context.Users.Add(u);
-                    _context.SaveChanges();
-                    return RedirectToAction("LogIn","Authentication");
-                }
-                else
+
+                if (e.UserFile != null)
                 {
-                    ModelState.AddModelError("", "Email already exist, Plz try another Email !!");
+                    string fileName = "UserFile" + Guid.NewGuid() + Path.GetExtension(e.UserFile.FileName);
+                    string filePath = Path.Combine(_env.WebRootPath, "UserFile", fileName);
+                    using (FileStream stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        e.UserFile.CopyTo(stream);
+                    }
+                    e.UserImage = fileName;
                 }
+
+                User u = new()
+                {
+                    UserId = e.UserId,
+                    Email = e.Email,
+                    Password = _protector.Protect(e.Password),
+                    Name = e.Name,
+                    Role = e.Role,
+                    LastLogin = e.LastLogin,
+                    UserImage = e.UserImage
+                };
+
+                _context.Users.Add(u);
+                _context.SaveChanges();
+                return RedirectToAction("LogIn", "Authentication");
+
             }
-            catch
+            catch(Exception ex)
             {
-                ModelState.AddModelError("", "Registration Failed !!");
+                ModelState.AddModelError("", $"Registration Failed: {ex.Message}");
                 return View(e);
             }
             return View(e);

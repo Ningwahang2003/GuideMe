@@ -10,6 +10,9 @@ namespace GuideMe.Models
         public string Email { get; set; } = null!;
 
         [Required]
+        [StringLength(100, MinimumLength = 5, ErrorMessage = "Password must be at least 5 characters long")]
+        [RegularExpression(@"^(?=.*[A-Z])(?=.*[@#$]).*$",
+        ErrorMessage = "Password must contain at least one uppercase letter and one special character (@, #, or $)")]
         public string Password { get; set; } = null!;
 
         [Required]

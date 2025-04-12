@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http.Features;
 using GuideMe.Hubs;
+using GuideMe.Services;
 
 namespace GuideMe
 {
@@ -53,6 +54,8 @@ namespace GuideMe
                 serverOptions.Limits.MaxRequestBodySize = 1_000_000_000; // 1GB
             });
 
+
+            builder.Services.AddScoped<LocationRecommendationService>();
 
             var app = builder.Build();
 

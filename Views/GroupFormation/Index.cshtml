@@ -6,8 +6,8 @@
 
 @if (TempData["ErrorMessage"] != null)
 {
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        @TempData["ErrorMessage"]
+    <div class="alert alert-danger alert-dismissible fade show" style="background-color: rgba(255, 255, 255, 0.9); border: 2px solid #dc3545; border-radius: 5px; padding: 15px; margin: 20px auto; max-width: 600px; color: #dc3545; font-weight: 500; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+        <strong>Error!</strong> @TempData["ErrorMessage"]
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
