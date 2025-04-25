@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\ChatUpload\**" />
+    <Content Remove="wwwroot\ChatUpload\**" />
+    <EmbeddedResource Remove="wwwroot\ChatUpload\**" />
+    <None Remove="wwwroot\ChatUpload\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\Image\Screenshot 2024-12-19 151858.png" />
   </ItemGroup>
 
@@ -24,11 +31,9 @@
   <ItemGroup>
     <Folder Include="wwwroot\ChatFiles\" />
     <Folder Include="wwwroot\ContestSubmissions\" />
-    <Folder Include="wwwroot\ChatUpload\" />
     <Folder Include="wwwroot\usercontent\" />
     <Folder Include="wwwroot\ProvinceImages\" />
     <Folder Include="wwwroot\UrbanImage\" />
-    <Folder Include="wwwroot\Video\" />
   </ItemGroup>
 
 </Project>

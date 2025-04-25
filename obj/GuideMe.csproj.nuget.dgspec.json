@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\acer\\Source\\Repos\\GuideMe\\GuideMe.csproj": {}
+    "C:\\Users\\acer\\Desktop\\FYPGuideMe\\GuideMe.csproj": {}
   },
   "projects": {
-    "C:\\Users\\acer\\Source\\Repos\\GuideMe\\GuideMe.csproj": {
+    "C:\\Users\\acer\\Desktop\\FYPGuideMe\\GuideMe.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\GuideMe.csproj",
+        "projectUniqueName": "C:\\Users\\acer\\Desktop\\FYPGuideMe\\GuideMe.csproj",
         "projectName": "GuideMe",
-        "projectPath": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\GuideMe.csproj",
+        "projectPath": "C:\\Users\\acer\\Desktop\\FYPGuideMe\\GuideMe.csproj",
         "packagesPath": "C:\\Users\\acer\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\acer\\Source\\Repos\\GuideMe\\obj\\",
+        "outputPath": "C:\\Users\\acer\\Desktop\\FYPGuideMe\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

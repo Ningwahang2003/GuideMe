@@ -104,10 +104,9 @@
         connection.on("ReceivePrivateMessage", function (senderId, senderName, message, timestamp, senderImage) {
             const currentUserId = parseInt($('#currentUserId').val());
 
-            // Update chat for both sender and receiver
             if (selectedUserId === senderId || senderId === currentUserId) {
                 appendMessage(message, timestamp, senderId !== currentUserId, senderImage);
-                updateChatUsersList(); // Update the chat list to show latest message
+                updateChatUsersList(); 
             }
         });
 
@@ -117,7 +116,7 @@
             })
             .catch(function (err) {
                 console.error(err.toString());
-                setTimeout(setupSignalR, 5000); // Retry connection
+                setTimeout(setupSignalR, 5000);
             });
     }
 

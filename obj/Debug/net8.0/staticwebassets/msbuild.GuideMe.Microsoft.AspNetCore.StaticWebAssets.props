@@ -642,8 +642,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>exrtlwexd7</Fingerprint>
-      <Integrity>XvjZX02mGMiNMNpaoOLSAWyaTF0VgokGuYlI9dqm0Yg=</Integrity>
+      <Fingerprint>kekip6j0i9</Fingerprint>
+      <Integrity>zPgho4vSG8NSg+ahLTGwoaQCFscQGsZAMgAvbc27T5s=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\location.css'))</OriginalItemSpec>
@@ -912,8 +912,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>7ecxucvhay</Fingerprint>
-      <Integrity>/3rfihTEvYFAO5bCZcpFyXeQmuvRTu5piQCw6/okyyE=</Integrity>
+      <Fingerprint>c5kc1slkyc</Fingerprint>
+      <Integrity>AC4olIDG7NH0KGup0Cktmf5kGYCenEllid8v9+GO3UU=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\weeklycontest.css'))</OriginalItemSpec>

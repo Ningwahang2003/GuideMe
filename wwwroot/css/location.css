@@ -43,83 +43,81 @@ h2 {
 }
 
 .side-recommendations {
-    position: fixed;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 250px;
+    width: 100%;
+    margin-bottom: 30px;
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    z-index: 1000;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    padding: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.recommendation-panel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 15px;
 }
 
 .last-search {
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #eee;
-}
-
-.last-search-card {
+    grid-column: span 1;
     background: #f8f9fa;
-    padding: 12px;
-    border-radius: 6px;
+    border-radius: 15px;
     border-left: 4px solid #4CAF50;
-}
-
-.last-search-name {
-    font-weight: bold;
-    color: #2c3e50;
-    margin-bottom: 5px;
-}
-
-.last-search-time {
-    font-size: 0.9em;
-    color: #666;
-}
-
-.rec-card.highlight {
-    border-left: 4px solid #4CAF50;
-    background-color: #f0f7f0;
-}
-
-
-.recommendation-panel {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
+    padding: 20px;
 }
 
 .rec-card {
     background: white;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
 }
 
     .rec-card:hover {
-        transform: translateY(-2px);
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        border-color: #4CAF50;
     }
 
-.rec-name {
-    font-weight: bold;
-    margin-bottom: 5px;
+    .rec-card.highlight {
+        border-left: 4px solid #4CAF50;
+        background-color: #f0f7f0;
+    }
+
+.last-search-name, .rec-name {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
 }
 
-.rec-distance {
+.last-search-time, .rec-distance, .rec-stats {
     color: #666;
-    font-size: 0.9em;
-    margin-bottom: 5px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 5px;
 }
 
-.rec-stats {
-    color: #888;
-    font-size: 0.8em;
+.recommendation-panel h4 {
+    grid-column: span 3;
+    color: #2c3e50;
+    font-size: 1.2rem;
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
+
+    .recommendation-panel h4 i {
+        color: #4CAF50;
+    }
 
 
 /* Form styling */

@@ -35,7 +35,7 @@
     <h1> Current Weekly Contest</h1>
 </div>
 <div class="contest-section">
-    @if (Model.Winner != null && contest != null && (today - contest.EndDate.Date).TotalDays <= 1 && today > contest.EndDate.Date)
+    @if (Model.Winner != null && contest != null && contest.ContestPhase == "Completed" && (today - contest.EndDate.Date).TotalDays <= 1)
     {
         <div class="winner-announcement mb-4">
             <h2>Last Week's Contest Winner! 🏆</h2>
@@ -61,10 +61,10 @@
         {
             <div class="contest-details">
                 <h5 class="card-title">@contest.ContestType</h5>
+                <p><strong>Status:</strong> @contest.ContestPhase</p>
                 <p><strong>Start Date:</strong> @contest.StartDate.ToString("MM/dd/yyyy")</p>
                 <p><strong>End Date:</strong> @contest.EndDate.ToString("MM/dd/yyyy")</p>
                 <p><strong>Instructions:</strong> @contest.Instructions</p>
-
 
                 @if (Model.ContestEntries?.Any() == true)
                 {
@@ -87,26 +87,26 @@
                 }
 
 
-                @{
-                    var daysSinceStart = (Model.CurrentDate - contest.StartDate).TotalDays;
-                }
-                @if (daysSinceStart <= 1 && User.Identity.IsAuthenticated)
+                @if (contest.ContestPhase == "Participation" && User.Identity.IsAuthenticated)
                 {
                     <a href="@Url.Action("ParticipateContest", "Home", new { contestId = contest.ContestId })"
-                    class="btn btn-primary">Participate</a>
+                       class="btn btn-primary">Participate</a>
+                }
+                else if (contest.ContestPhase == "Voting")
+                {
+                    <a href="@Url.Action("ViewContest", "Home", new { contestId = contest.ContestId })"
+                       class="btn btn-primary">Vote Now</a>
                 }
                 else
                 {
-                    <p class="alert alert-info">Participation period has ended</p>
+                    <p class="alert alert-info">
+                        @(contest.ContestPhase == "Completed" ? "Contest has ended" : "Participation period has ended")
+                    </p>
                 }
-                <a href="@Url.Action("ViewContest", "Home", new { contestId = contest.ContestId })"
-                class="btn btn-secondary">View Entries</a>
 
+                <a href="@Url.Action("ViewContest", "Home", new { contestId = contest.ContestId })"
+                   class="btn btn-secondary">View Entries</a>
             </div>
-        }
-        else
-        {
-            <p>No active contests currently.</p>
         }
 
     }

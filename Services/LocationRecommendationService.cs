@@ -17,7 +17,6 @@ namespace GuideMe.Services
 
         public async Task<List<Location>> GetRecommendations(int? userId)
         {
-            // If no user is logged in, return most searched locations
             if (!userId.HasValue)
             {
                 return await _context.Locations
@@ -26,7 +25,6 @@ namespace GuideMe.Services
                     .ToListAsync();
             }
 
-            // Get user's most recent searched location
             var userLastLocation = await _context.Locations
                 .Where(l => l.UserId == userId)
                 .OrderByDescending(l => l.LocationCreatedAt)
@@ -40,7 +38,7 @@ namespace GuideMe.Services
                     .ToListAsync();
             }
 
-            // Find K nearest locations based on geographical distance
+            // Find nearest locations based on geographical distance
             var allLocations = await _context.Locations.ToListAsync();
             var nearestLocations = allLocations
                 .Where(l => l.LocationId != userLastLocation.LocationId)

@@ -298,14 +298,31 @@ namespace GuideMe.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteContest(int id)
         {
-            var contest = await _context.WeeklyContests.FindAsync(id);
-            if (contest != null)
+            try
             {
-                _context.WeeklyContests.Remove(contest);
-                await _context.SaveChangesAsync();
-                TempData["SuccessMessage"] = "Contest deleted successfully";
+                var contest = await _context.WeeklyContests.Include(c => c.ContestEntries).ThenInclude(ce => ce.UserVotes).FirstOrDefaultAsync(c => c.ContestId == id);
+
+                if (contest != null)
+                {
+                    foreach (var entry in contest.ContestEntries)
+                    {
+                        _context.UserVotes.RemoveRange(entry.UserVotes);
+                    }
+
+                    _context.ContestEntries.RemoveRange(contest.ContestEntries);
+
+                    _context.WeeklyContests.Remove(contest);
+                    await _context.SaveChangesAsync();
+
+                    TempData["SuccessMessage"] = "Contest deleted successfully";
+                }
+                return RedirectToAction(nameof(ViewWeeklyContest));
             }
-            return RedirectToAction(nameof(ViewWeeklyContest));
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Unable to delete contest. Please ensure it has no active participants.";
+                return RedirectToAction(nameof(ViewWeeklyContest));
+            }
         }
 
 
