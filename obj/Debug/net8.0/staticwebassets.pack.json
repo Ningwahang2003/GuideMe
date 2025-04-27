@@ -513,22 +513,6 @@
       "PackagePath": "staticwebassets\\UserFile\\default-profile.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Desktop\\Temp\\wwwroot\\Video\\homeevent.mp4",
-      "PackagePath": "staticwebassets\\Video\\homeevent.mp4"
-    },
-    {
-      "Id": "C:\\Users\\acer\\Desktop\\Temp\\wwwroot\\Video\\search.mp4",
-      "PackagePath": "staticwebassets\\Video\\search.mp4"
-    },
-    {
-      "Id": "C:\\Users\\acer\\Desktop\\Temp\\wwwroot\\Videos\\map.mp4",
-      "PackagePath": "staticwebassets\\Videos\\map.mp4"
-    },
-    {
-      "Id": "C:\\Users\\acer\\Desktop\\Temp\\wwwroot\\Videos\\weather.mp4",
-      "PackagePath": "staticwebassets\\Videos\\weather.mp4"
-    },
-    {
       "Id": "C:\\Users\\acer\\Desktop\\Temp\\wwwroot\\css\\AddEvent.css",
       "PackagePath": "staticwebassets\\css\\AddEvent.css"
     },
