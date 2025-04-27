@@ -36,8 +36,6 @@ namespace GuideMe.Controllers
                     CurrentDate = today
                 };
 
-
-                // Handle weekly contests
                 var activeContest = _context.WeeklyContests
                     .Include(c => c.ContestEntries)
                     .ThenInclude(e => e.User)
@@ -45,10 +43,9 @@ namespace GuideMe.Controllers
 
                 if (activeContest != null)
                 {
-                    // Checking if contest has ended (after 6 days)
+
                     if (today.Date > activeContest.EndDate.Date)
                     {
-                        // Determine winner
                         if (activeContest.WinnerUserId == null)
                         {
                             var winningEntry = activeContest.ContestEntries
@@ -61,7 +58,6 @@ namespace GuideMe.Controllers
                                 activeContest.ContestPhase = "Completed";
                                 homeViewModel.Winner = winningEntry.User;
 
-                                // Create notification for winner
                                 var notification = new Notification
                                 {
                                     UserId = winningEntry.UserId,
@@ -73,11 +69,9 @@ namespace GuideMe.Controllers
                             }
                         }
 
-                        // Set current contest to inactive
                         activeContest.Status = "Inactive";
                         _context.SaveChanges();
 
-                        // Find and activate next contest
                         var nextContest = _context.WeeklyContests
                             .FirstOrDefault(c => c.Status == "Inactive" && c.ContestPhase != "Completed");
 
@@ -92,7 +86,6 @@ namespace GuideMe.Controllers
                         }
                         else
                         {
-                            // If no new contests, reset completed contests for next cycle
                             var allCompletedContests = _context.WeeklyContests
                                 .Where(c => c.ContestPhase == "Completed")
                                 .OrderBy(c => c.ContestId)
@@ -115,14 +108,12 @@ namespace GuideMe.Controllers
                     homeViewModel.ContestEntries = activeContest.ContestEntries.ToList();
                 }
 
-                // Load upcoming events
                 homeViewModel.UpcomingEvents = _context.Events
                     .Where(e => e.EventStartDate >= today && e.IsAdded && !e.IsExpired)
                             .OrderBy(e => e.EventStartDate)
                             .Take(4)
                             .ToList();
 
-                // Load user posts with related data
                 homeViewModel.UserPosts = _context.UserPosts
                     .Include(p => p.User)
                     .Include(p => p.PostLikes)
@@ -307,7 +298,6 @@ namespace GuideMe.Controllers
                 return RedirectToAction("Index");
             }
 
-            // Check if participation is still open (within 1 day of start)
             var daysSinceStart = (DateTime.UtcNow.Date - contest.StartDate.Date).TotalDays;
             if (daysSinceStart > 1)
             {

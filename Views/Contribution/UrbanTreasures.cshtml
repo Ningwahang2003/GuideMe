@@ -1,7 +1,6 @@
 ﻿@using System.Security.Claims
 @model GuideMe.Models.UrbanTreasureEdit
 
-<!-- Include Font Awesome for Icons -->
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="~/css/urbantreasure.css" asp-append-version="true" />
@@ -35,7 +34,6 @@
         </div>
     </h2>
 
-    <!-- Contribution Form (Initially Hidden) -->
     <div id="contribution-form" class="urban-form-overlay d-none">
         <div class="urban-form">
             <button class="close-btn" onclick="toggleContributionForm()">
@@ -106,7 +104,6 @@
     </div>
 </div>
 
-<!-- JavaScript for Form Toggle and Image Upload -->
 <script>
     function toggleContributionForm() {
         const formOverlay = document.getElementById("contribution-form");

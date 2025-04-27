@@ -22,7 +22,6 @@ namespace GuideMe.Controllers
         {
             var currentUserId = int.Parse(User.FindFirstValue(ClaimTypes.Name));
 
-            // Get users with chat history
             var usersWithMessages = await _context.PrivateMessages
                 .Where(m => m.SenderId == currentUserId || m.ReceiverId == currentUserId)
                 .Select(m => m.SenderId == currentUserId ? m.ReceiverId : m.SenderId)
@@ -107,7 +106,6 @@ namespace GuideMe.Controllers
                     ? $"/UserFile/{sender.UserImage}"
                     : "/UserFile/default-profile.png";
 
-                // Send to both sender and receiver
                 await _hubContext.Clients.Users(new[] { senderId.ToString(), receiverId.ToString() })
                     .SendAsync("ReceivePrivateMessage",
                         senderId,

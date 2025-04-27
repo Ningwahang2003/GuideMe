@@ -66,10 +66,8 @@ namespace GuideMe.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            // Retain the existing password if none is provided
             string updatedPassword = string.IsNullOrEmpty(l.Password) ? existingUser.Password : l.Password;
 
-            // Retain existing role if not provided
             string updatedRole = string.IsNullOrEmpty(l.Role) ? existingUser.Role : l.Role;
 
             existingUser.Name = l.Name;
@@ -152,10 +150,7 @@ namespace GuideMe.Controllers
                     return NotFound();
                 }
 
-                // Delete urban treasures
                 _context.UrbanTreasures.RemoveRange(province.UrbanTreasures);
-
-                // Finally delete the province
                 _context.Provinces.Remove(province);
                 _context.SaveChanges();
 
@@ -338,13 +333,10 @@ namespace GuideMe.Controllers
 
             if (post != null)
             {
-                // Removing related likes
                 _context.PostLikes.RemoveRange(post.PostLikes);
 
-                // Removing related comments
                 _context.UserComments.RemoveRange(post.UserComments);
 
-                // Creating notification for the user
                 var notification = new Notification
                 {
                     UserId = post.UserId,

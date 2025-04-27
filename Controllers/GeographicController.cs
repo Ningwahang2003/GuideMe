@@ -42,7 +42,6 @@ namespace GuideMe.Controllers
 
             if (string.IsNullOrWhiteSpace(search))
             {
-                // Get last location for display even when no search
                 if (userId.HasValue)
                 {
                     ViewBag.UserLocation = await _context.Locations
@@ -100,7 +99,6 @@ namespace GuideMe.Controllers
                 }
                 await _context.SaveChangesAsync();
 
-                // Get updated last location after saving
                 if (userId.HasValue)
                 {
                     ViewBag.UserLocation = await _context.Locations.Where(l => l.UserId == userId).OrderByDescending(l => l.LocationCreatedAt).FirstOrDefaultAsync();
@@ -111,7 +109,6 @@ namespace GuideMe.Controllers
                 ModelState.AddModelError("", "Could not find the entered location.");
             }
 
-            // Get recommendations after updating locations
             ViewBag.Recommendations = await _recommendationService.GetRecommendations(userId);
 
             var distinctLocations = locations?.GroupBy(l => new { l.LocationName, l.Latitude, l.Longitude }).Select(g => g.First()).ToList();

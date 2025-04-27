@@ -48,7 +48,6 @@ namespace GuideMe
                 options.MultipartBodyLengthLimit = 1_000_000_000; // 1GB
             });
 
-            // Configure Kestrel to allow large request body sizes
             builder.WebHost.ConfigureKestrel(serverOptions =>
             {
                 serverOptions.Limits.MaxRequestBodySize = 1_000_000_000; // 1GB
@@ -87,13 +86,6 @@ namespace GuideMe
                 pattern: "{controller=Static}/{action=Index}/{id?}");
 
             app.MapHub<ChatHub>("/chathub");
-
-            /*using (var scope = app.Services.CreateScope())
-            {
-                var context = scope.ServiceProvider.GetRequiredService<GuideMeContext>();
-                RatingSample.RatingData(context);
-                RatingSample.ExportRatingsToCSV(context);
-            }*/
 
             app.Run();
         }

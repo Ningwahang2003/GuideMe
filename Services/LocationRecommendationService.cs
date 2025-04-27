@@ -8,7 +8,7 @@ namespace GuideMe.Services
     public class LocationRecommendationService
     {
         private readonly GuideMeContext _context;
-        private const int K = 3; // Number of nearest neighbors to recommend
+        private const int K = 3;
 
         public LocationRecommendationService(GuideMeContext context)
         {
@@ -38,7 +38,7 @@ namespace GuideMe.Services
                     .ToListAsync();
             }
 
-            // Find nearest locations based on geographical distance
+            // Finding nearest locations based on geographical distance
             var allLocations = await _context.Locations.ToListAsync();
             var nearestLocations = allLocations
                 .Where(l => l.LocationId != userLastLocation.LocationId)
@@ -61,7 +61,7 @@ namespace GuideMe.Services
 
         private double CalculateDistance(double lat1, double lon1, double lat2, double lon2)
         {
-            // Simple Euclidean distance calculation
+            //Euclidean distance calculation
             var latDiff = lat1 - lat2;
             var lonDiff = lon1 - lon2;
             return Math.Sqrt(latDiff * latDiff + lonDiff * lonDiff);

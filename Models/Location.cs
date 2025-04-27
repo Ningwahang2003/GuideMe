@@ -28,13 +28,12 @@ public partial class Location
             !other.Latitude.HasValue || !other.Longitude.HasValue)
             return double.MaxValue;
 
-        // Simple distance calculation using Pythagorean theorem
-        // Note: This is less accurate but easier to understand
+        // Distance calculation using Pythagorean theorem
         double latDiff = (other.Latitude.Value - Latitude.Value) * 111; // 1 degree ≈ 111 km
         double lonDiff = (other.Longitude.Value - Longitude.Value) * 111 *
-                         Math.Cos(Latitude.Value * Math.PI / 180); // Adjust for Earth's curvature
+                         Math.Cos(Latitude.Value * Math.PI / 180); // Adjusting for Earth's curvature
 
-        // Calculate straight-line distance
+        // Calculating straight-line distance
         return Math.Sqrt(latDiff * latDiff + lonDiff * lonDiff);
     }
 }

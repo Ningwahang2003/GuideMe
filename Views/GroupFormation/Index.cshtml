@@ -107,7 +107,6 @@
 
     body {
         font-family: 'Poppins', sans-serif;
-        background-image: url('@Url.Content("~/Image/grouptravel.jpg")') !important;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -123,7 +122,7 @@
         align-items: center;
         font-size: 3rem;
         margin-bottom: 30px;
-        color: white;
+        color: black;
         text-transform: uppercase;
         letter-spacing: 2px;
         border: none;
@@ -728,7 +727,6 @@
         const chatBox = document.getElementById(`chatMessages-${groupId}`);
         if (!chatBox) return;
 
-        // Ensure proper handling of image URL for received messages
         let userImage;
         if (imageUrl && imageUrl.trim() !== '') {
             userImage = imageUrl.includes('UserFile')

@@ -120,7 +120,6 @@ h2 {
     }
 
 
-/* Form styling */
 form {
     display: flex;
     justify-content: center;
@@ -157,7 +156,6 @@ button {
         background-color: #45a049;
     }
 
-/* Results section styling */
 .results {
     margin-top: 40px;
 }
@@ -190,9 +188,6 @@ button {
     font-style: italic;
 }
 
-
-
-/* Responsive design for smaller screens */
 @media (max-width: 768px) {
     .location-container {
         margin: 20px;

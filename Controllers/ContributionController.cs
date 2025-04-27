@@ -163,7 +163,6 @@ namespace GuideMe.Controllers
                 return View();
             }
 
-            // Check for any pending unapproved request
             var pendingRequest = _context.Events.FirstOrDefault(e => e.UserId == userId &&e.IsAdded == false &&e.IsApproved == false);
 
             if (pendingRequest != null)
@@ -186,7 +185,6 @@ namespace GuideMe.Controllers
                 return View(request);
             }
 
-            // Check if the user already submitted a request
             var existingRequest = _context.Events.FirstOrDefault(e => e.UserId == userId && e.IsApproved == false);
             if (existingRequest != null)
             {
@@ -271,7 +269,6 @@ namespace GuideMe.Controllers
                 return RedirectToAction("RequestEvent");
             }
 
-            // Check only for approved but unused requests
             var approvedRequest = _context.Events.FirstOrDefault(e => e.UserId == userId &&e.IsApproved == true &&e.IsAdded == false);
 
             if (approvedRequest != null)

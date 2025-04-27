@@ -1,4 +1,4 @@
-﻿using GuideMe.Models; // Assuming your User model is in this namespace
+﻿using GuideMe.Models;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -58,8 +58,6 @@ namespace GuideMe.Hubs
             }
         }
 
-
-        // Join a group for real-time messaging
         public async Task JoinGroup(int groupId)
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, groupId.ToString());

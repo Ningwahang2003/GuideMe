@@ -1,17 +1,14 @@
-﻿/* General Body Styles */
-body {
+﻿body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
 }
 
-/* Container Styles */
 .container {
     margin-top: 50px;
 }
 
-/* Left Sidebar: User Search & Chat History */
 #searchUser {
     border-radius: 20px;
     padding: 10px 15px;
@@ -51,7 +48,6 @@ body {
             font-weight: 600;
         }
 
-/* Right Side: Chat Box */
 #chatBox {
     background-color: #fff;
     border-radius: 10px;
@@ -107,7 +103,6 @@ body {
         background-color: #007cc3;
     }
 
-/* Icons Styling */
 #attachment {
     background-image: url('https://img.icons8.com/ios/50/000000/attach.png');
     background-size: cover;
@@ -124,7 +119,6 @@ body {
         background-image: url('https://img.icons8.com/ios/50/ffffff/sent.png');
     }
 
-/* Search Button Styling */
 #searchUser + button {
     background-color: #0095f6;
     color: white;
@@ -140,7 +134,6 @@ body {
         background-color: #007cc3;
     }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .container {
         margin-top: 20px;

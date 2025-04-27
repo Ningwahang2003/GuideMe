@@ -244,7 +244,6 @@
             commentSection.toggleClass('active');
         });
 
-        // Initialize media container scroll behavior
         $('.media-container').each(function() {
             const container = $(this);
             const mediaItems = container.find('.media-item');
@@ -252,7 +251,6 @@
             if (mediaItems.length > 1) {
                 container.scrollLeft(0);
 
-                // Optional: Add navigation indicators
                 const indicators = $('<div class="media-indicators"></div>');
                 mediaItems.each((index) => {
                     indicators.append(`<span class="indicator ${index === 0 ? 'active' : ''}"></span>`);
@@ -261,7 +259,6 @@
             }
         });
 
-        // Update indicators on scroll
         $('.media-container').on('scroll', function() {
             const container = $(this);
             const scrollPosition = container.scrollLeft();

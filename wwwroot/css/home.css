@@ -96,7 +96,6 @@ body {
     letter-spacing: 2px;
 }
 
-/* Contest Section */
 .contest-section {
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/Image/weeklycontest.jpg');
     background-size: cover;
@@ -265,7 +264,7 @@ body {
 }
 
 
-/* User Posts Section */
+/* User Posts */
 .usercontent {
     max-width: 1200px;
     margin: 0 auto;
@@ -317,7 +316,6 @@ body {
     margin: 0;
 }
 
-/* Media Container Styles */
 .media-container {
     display: flex;
     overflow-x: auto;
@@ -355,7 +353,6 @@ body {
     border-radius: 8px;
 }
 
-/* Post Actions */
 .post-actions {
     display: flex;
     gap: 10px;
@@ -404,7 +401,6 @@ body {
         background: rgba(0, 0, 0, 0.05);
     }
 
-/* Comment Section */
 .comment-section {
     display: none;
     margin-top: 15px;
@@ -443,7 +439,6 @@ body {
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
 
-/* Media Indicators */
 .media-indicators {
     display: flex;
     justify-content: center;

@@ -6,7 +6,6 @@
 
 <div class="container-fluid mt-4">
     <div class="row">
-        <!-- Left sidebar -->
         <div class="col-md-5">
             <!-- Search box -->
             <div class="search-container">
@@ -66,7 +65,6 @@
                     <h5 id="selectedUserName" class="mb-0"></h5>
                 </div>
                 <div id="messageArea" class="messages-area">
-                    <!-- Messages will be loaded here -->
                 </div>
                 <div class="chat-input-area">
                     <div class="d-flex align-items-center">
@@ -195,7 +193,6 @@
         const messageClass = isReceived ? 'received' : 'sent';
         const alignClass = isReceived ? 'justify-content-start' : 'justify-content-end';
 
-        // Only user image per message
         const messageHtml = `
             <div class="message-row d-flex ${alignClass} mb-2">
                 ${isReceived ? `<img src="${userImage}" class="rounded-circle mr-2" style="width: 30px; height: 30px; object-fit: cover;">` : ''}
@@ -259,12 +256,10 @@
             sendMessage();
         });
 
-        // Adding handler for close button
         $(document).on('click', '.close-search', function(e) {
             e.stopPropagation();
             $(this).closest('.user-item').remove();
 
-            // Hiding the container if no  user
             if ($('#searchResults .user-item').length === 0) {
                 $('#searchResults').empty();
             }

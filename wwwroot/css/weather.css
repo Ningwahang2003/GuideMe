@@ -1,7 +1,6 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
 
-/* Video background styles */
 #background-video {
     position: fixed;
     right: 0;
@@ -16,7 +15,7 @@
 }
 
 body.has-results #background-video {
-    height: 40vh; /* Reduced height when showing results */
+    height: 40vh;
 }
 
 .main-container {
@@ -24,8 +23,8 @@ body.has-results #background-video {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.2); /* Increased transparency */
-    backdrop-filter: blur(8px); /* Adds a blur effect to the background */
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1;
@@ -47,7 +46,6 @@ h1 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Alert Styles */
 .alert {
     max-width: 600px;
     margin: 10px auto;
@@ -70,8 +68,6 @@ h1 {
     border: none;
 }
 
-/* Form Styles */
-/* Form Styles */
 form {
     max-width: 400px;
     margin: 40px auto;
@@ -144,8 +140,8 @@ form {
 
 .weather-cards {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 columns for 5 days */
-    gap: 30px; /* Increased spacing between cards */
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px; 
     padding: 20px;
     margin-top: 30px;
 }
@@ -191,7 +187,6 @@ form {
     margin-top: 10px;
 }
 
-/* Weather Icons */
 .weather-icon {
     font-size: 2.5rem;
     margin: 10px 0;
@@ -214,7 +209,6 @@ form {
     color: #2c3e50;
 }
 
-/* Responsive layout for smaller screens */
 @media (max-width: 1200px) {
     .weather-cards {
         grid-template-columns: repeat(3, 1fr);

@@ -23,12 +23,10 @@ namespace GuideMe.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        // GET: GetUserPosts - Displays posts of the current user
         [HttpGet]
-        [AllowAnonymous]  // Temporarily allow access for debugging
+        [AllowAnonymous]
         public IActionResult GetUserPosts()
         {
-            // Debugging: Check if user is authenticated
             if (!User.Identity.IsAuthenticated)
             {
                 Console.WriteLine("❌ User is NOT authenticated!");
@@ -55,14 +53,12 @@ namespace GuideMe.Controllers
             return View(userPosts);
         }
 
-        // GET: Create a New Post
         [HttpGet]
         public IActionResult CreatePost()
         {
             return View();
         }
 
-        // POST: Create a New Post
         [HttpPost]
         public async Task<IActionResult> CreatePost(List<IFormFile> mediaFiles, string caption)
         {
@@ -113,7 +109,6 @@ namespace GuideMe.Controllers
             return RedirectToAction("GetUserPosts");
         }
 
-        // POST: Delete a Post
         [HttpPost]
         public async Task<IActionResult> DeletePost(int id)
         {
@@ -134,11 +129,9 @@ namespace GuideMe.Controllers
                 return Unauthorized();
             }
 
-            // Load related PostLikes
             var postLikes = _context.PostLikes.Where(pl => pl.PostId == id);
             _context.PostLikes.RemoveRange(postLikes);
 
-            // Load related UserComments
             var postComments = _context.UserComments.Where(pc => pc.PostId == id);
             _context.UserComments.RemoveRange(postComments);
 

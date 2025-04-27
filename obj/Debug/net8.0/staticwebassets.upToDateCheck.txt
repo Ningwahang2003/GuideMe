@@ -267,6 +267,6 @@ wwwroot\UserFile\UserFilee41ce310-63fc-474b-be0b-423693a45da2.jpg
 wwwroot\UserFile\UserFilee48c0e0e-5c56-496c-ad43-9815de7779fa.png
 wwwroot\UserFile\UserFilee9bea978-4866-4f81-acdb-c457c1c3c8e2.png
 wwwroot\Video\homeevent.mp4
-wwwroot\Video\map.mp4
 wwwroot\Video\search.mp4
-wwwroot\Video\weather.mp4
+wwwroot\Videos\map.mp4
+wwwroot\Videos\weather.mp4

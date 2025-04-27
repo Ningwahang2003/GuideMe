@@ -30,7 +30,6 @@ namespace GuideMe.Controllers
             if (!int.TryParse(userIdString, out int userId))
                 return BadRequest("Invalid User ID.");
 
-            // Get all groups the user is a member of
             var joinedgroups = await _context.GroupMembers.Where(m => m.UserId == userId).Select(m => m.GroupId).ToListAsync();
             ViewData["JoinedGroups"] = joinedgroups;
 
@@ -44,15 +43,12 @@ namespace GuideMe.Controllers
             return View();
         }
 
-
-        // Create a new group
         [HttpPost]
         public async Task<IActionResult> Create(Group gc)
         {
             var userIdString = User.FindFirstValue(ClaimTypes.Name);
             if (userIdString == null) return Unauthorized();
 
-            // Convert string UserId to int
             if (!int.TryParse(userIdString, out int userId))
             {
                 return BadRequest("Invalid User ID.");
@@ -63,7 +59,6 @@ namespace GuideMe.Controllers
 
             string userName = user.Name;
 
-            // Check if user is already in a group
             bool isInGroup = await _context.GroupMembers.AnyAsync(m => m.UserId == userId);
             if (isInGroup)
             {
@@ -188,7 +183,6 @@ namespace GuideMe.Controllers
                 return View(updatedGroup);
             }
 
-            // Ensure the user is a member before allowing editing
             var isMember = await _context.GroupMembers.AnyAsync(m => m.GroupId == groupId && m.UserId == userId);
             if (!isMember)
             {
@@ -304,7 +298,6 @@ namespace GuideMe.Controllers
                     }
                 }
 
-                // Create and save the chat message to database
                 var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
                 if (user == null) return NotFound("User not found");
 
@@ -320,12 +313,10 @@ namespace GuideMe.Controllers
                 _context.ChatMessages.Add(chatMessage);
                 await _context.SaveChangesAsync();
 
-                // Get user image URL
                 string imageUrl = !string.IsNullOrEmpty(user.UserImage)
                     ? $"/UserFile/{user.UserImage}"
                     : "/UserFile/default-profile.png";
 
-                // Send the message through SignalR
                 await _hubContext.Clients.Group(groupId.ToString()).SendAsync("ReceiveMessage",
                     groupId,
                     user.Name,
@@ -352,7 +343,7 @@ namespace GuideMe.Controllers
         {
             var messages = await _context.ChatMessages
                 .Where(m => m.GroupId == groupId)
-                .Include(m => m.User)  // Include the User navigation property
+                .Include(m => m.User)
                 .OrderBy(m => m.SentAt)
                 .Select(m => new
                 {
