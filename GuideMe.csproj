@@ -34,6 +34,7 @@
     <Folder Include="wwwroot\usercontent\" />
     <Folder Include="wwwroot\ProvinceImages\" />
     <Folder Include="wwwroot\UrbanImage\" />
+    <Folder Include="wwwroot\Video\" />
   </ItemGroup>
 
 </Project>

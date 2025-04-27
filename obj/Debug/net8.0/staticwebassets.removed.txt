@@ -1,2 +1,4 @@
-C:\Users\acer\Desktop\Temp\wwwroot\Video\map.mp4
-C:\Users\acer\Desktop\Temp\wwwroot\Video\weather.mp4
+C:\Users\acer\Desktop\Temp\wwwroot\Video\homeevent.mp4
+C:\Users\acer\Desktop\Temp\wwwroot\Video\search.mp4
+C:\Users\acer\Desktop\Temp\wwwroot\Videos\map.mp4
+C:\Users\acer\Desktop\Temp\wwwroot\Videos\weather.mp4
